@@ -1,9 +1,12 @@
 #include "Escenario.h"
 #include "Personaje.h"
+#include "Enemigo.h"
+#include "ListaEnemigos.h"
 class Mundo
 {
 private: 
 	Personaje personaje;
+	ListaEnemigos enemigos;
 	Escenario escenario;	
 public:
 	void Tecla(unsigned char key);
