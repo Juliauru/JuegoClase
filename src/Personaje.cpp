@@ -2,21 +2,22 @@
 #include "glut.h"
 #include <math.h>
 
+//Inicializacion vida
+int Personaje::vida = 3;
+
 Personaje::Personaje(float a)
 {
 	if (a < 0.1) {
-		altura = 1;
+		Long_caracteristica = 1;
 	}
 	else {
-		altura = a;
+		Long_caracteristica = a;
 	}
 	posicion.x = posicion.y = 0.75f;
 	aceleracion.x = 0;
 	aceleracion.y = -10.0f;
 	velocidad.x = 0;
 	velocidad.y = 0;
-	vinicial = 0;
-	Long_caracteristica = altura/2; //Se debe hacer de otra forma 
 	
 }
 Personaje::~Personaje()
@@ -26,7 +27,7 @@ void Personaje::Dibuja()
 {
 	glColor3b(120, 40, 30);
 	glTranslatef(posicion.x, posicion.y, 1.5);
-	glutSolidSphere((altura / 2), 20, 30);
+	glutSolidSphere((Long_caracteristica / 2), 20, 30);
 	glTranslatef(-posicion.x, -posicion.y, -1.5);
 }
 void Personaje::Mueve(float t, bool p) {
@@ -44,7 +45,7 @@ void Personaje::Mueve(float t, bool p) {
 	
 	
 }
-void Personaje::Salto() { //Poner límtes al salto
+void Personaje::Salto() { //Poner lÃ­mtes al salto
 	if (fabsf(velocidad.y) < 0.5 && velocidad.y >= 0) {
 		vinicial = velocidad.y = 12.0f;
 		posinicial = posicion.y;
