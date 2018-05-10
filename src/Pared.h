@@ -1,14 +1,15 @@
 #pragma once
 #include "Objeto.h"
 #include "Vector2D.h"
-class Pared : public Objeto
+class Pared : public virtual Objeto
 {
 protected:
-	Vector2D vertices[4];
+	Vector2D limite; //El primer límite es la posicion del objeto y el segundo es limite
 public:
 	Pared();
 	~Pared();
 	void Dibuja();
-	void SetVertices(float v1x, float v1y, float v2x, float v2y);
+	void setLimites(float v1x, float v1y, float v2x, float v2y);
+	float Distancia(Vector2D punto, Vector2D *direccion = 0);
 };
 
