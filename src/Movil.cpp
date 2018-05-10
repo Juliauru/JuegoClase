@@ -4,6 +4,8 @@
 
 Movil::Movil()
 {
+	posinicial=0;
+	vinicial=0;
 }
 
 
