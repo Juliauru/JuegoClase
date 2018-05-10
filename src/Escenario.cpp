@@ -59,7 +59,7 @@ void Escenario::Dibuja() {
 	for (int i = 0; i < 4; i++) {
 		limites[i].Dibuja();
 	}
-	
+
 }
 void Escenario::Reorientar() {
 	gluLookAt(10, 7.5, 25,  // posicion del ojo 0-10-20 x_ojo=0 y=5 z=30
