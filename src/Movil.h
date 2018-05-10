@@ -6,7 +6,9 @@ class Movil:public Objeto
 protected:
 	Vector2D velocidad;
 	Vector2D aceleracion;
-	float Long_caracteristica;	
+	float Long_caracteristica;
+	float posinicial;
+	float vinicial;
 public:
 	Movil();
 	~Movil();
