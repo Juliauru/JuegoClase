@@ -6,34 +6,35 @@ using  ETSIDI::getTexture;
 Escenario::~Escenario()
 {
 }
-
 Escenario::Escenario()
 {
 	p_inicio.setLargo(20);
 	p_inicio.getPosicion().setValor(0, 0);
-plat = new Plataforma[Plataforma::get_nplataformas()];
-for (int i = 0; i < Plataforma::get_nplataformas(); i++) {
-	plat[i].setLargo(rand() % 10 + 1);
-}
-plat[0].getPosicion().setValor(5, 1);
-plat[1].getPosicion().setValor(3, 6);
-plat[2].getPosicion().setValor(0, 4);
-plat[3].getPosicion().setValor(10, 6);
-plat[4].getPosicion().setValor(10, 16);
-plat[5].getPosicion().setValor(6, 15);
-plat[6].getPosicion().setValor(10, 7);
+	plat = new Plataforma[Plataforma::get_nplataformas()]; //Primero siempre posicion antes que longitud de las parede
 
-//Limites caja
-limites[0].SetVertices(0, 0, 0, 50);
-limites[1].SetVertices(0, 50, 20, 50);
-limites[2].SetVertices(20, 50, 20, 0);
-limites[3].SetVertices(20, 0, 0, 0);
+	plat[0].getPosicion().setValor(5, 1);
+	plat[1].getPosicion().setValor(3, 6);
+	plat[2].getPosicion().setValor(0, 4);
+	plat[3].getPosicion().setValor(10, 6);
+	plat[4].getPosicion().setValor(10, 16);
+	plat[5].getPosicion().setValor(6, 15);
+	plat[6].getPosicion().setValor(10, 7);
+	for (int i = 0; i < Plataforma::get_nplataformas(); i++) {
+		plat[i].setLargo(rand() % 10 + 1);
+		plat[i].getColor().SetColor(153, 255, 51);
+	}
 
-//limites pared trasera
-vertices[0].setValor(0, 0);
-vertices[1].setValor(0, 50);
-vertices[2].setValor(20, 50);
-vertices[3].setValor(20, 0);
+	//Limites caja
+	limites[0].setLimites(0, 0, 0, 50);
+	limites[1].setLimites(0, 50, 20, 50);
+	limites[2].setLimites(20, 50, 20, 0);
+	limites[3].setLimites(20, 0, 0, 0);
+
+	//limites pared trasera
+	vertices[0].setValor(0, 0);
+	vertices[1].setValor(0, 50);
+	vertices[2].setValor(20, 50);
+	vertices[3].setValor(20, 0);
 
 }
 void Escenario::Dibuja() {
