@@ -3,15 +3,16 @@
 class Personaje:public Movil
 {
 private:
-	float altura;
-	float posinicial;
-	float vinicial;
+	static int vida;
 public:
 	void Dibuja();
 	Personaje(float a=1);
 	~Personaje();	
 	void Mueve(float t,bool p=false);
 	void Salto();
-	/*friend class Interaccion;*/
+	static int GetVida() {
+		return vida;
+	}
+	//friend class Interaccion;
 };
 
