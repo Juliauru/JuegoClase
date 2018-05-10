@@ -10,7 +10,7 @@ protected:
 public:
 	Movil();
 	~Movil();
-	void Mover();
+	void Mueve(float t);
 	Vector2D& getVelocidad();
 	Vector2D& getAceleracion();
 	float get_LCaract();
