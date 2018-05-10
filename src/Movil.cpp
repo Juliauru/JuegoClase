@@ -11,8 +11,18 @@ Movil::~Movil()
 {
 }
 void Movil::Mueve(float t) {
-	velocidad = velocidad + (0.5*aceleracion.y*t*t);
-	posicion = posicion + velocidad*t;
+	if(vinicial*vinicial + 2 * aceleracion.y*(posicion.y - posinicial)>0){ 
+		velocidad.y = sqrt(vinicial*vinicial + 2 * aceleracion.y*(posicion.y - posinicial));
+		posicion = posicion + velocidad*t;
+		aux = posicion.y+0.001;
+	}
+	
+	else {
+		vinicial = 0;
+		posinicial = 0;
+		posicion = posicion + velocidad * t + aceleracion * (0.5f*t*t);
+		velocidad = velocidad + aceleracion * t;
+	}
 }
 Vector2D& Movil::getVelocidad() {
 	return velocidad;
