@@ -1,5 +1,5 @@
 #include "Movil.h"
-
+#include <math.h>
 
 
 Movil::Movil()
@@ -15,8 +15,7 @@ Movil::~Movil()
 void Movil::Mueve(float t) {
 	if(vinicial*vinicial + 2 * aceleracion.y*(posicion.y - posinicial)>0){ 
 		velocidad.y = sqrt(vinicial*vinicial + 2 * aceleracion.y*(posicion.y - posinicial));
-		posicion = posicion + velocidad*t;
-		aux = posicion.y+0.001;
+		posicion = posicion + velocidad*t;		
 	}
 	
 	else {

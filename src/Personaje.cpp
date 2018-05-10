@@ -7,7 +7,7 @@ int Personaje::vida = 3;
 
 Personaje::Personaje(float a)
 {
-	if (a < 0.1) {
+	if (a < 1) {
 		Long_caracteristica = 1;
 	}
 	else {
@@ -27,24 +27,24 @@ void Personaje::Dibuja()
 {
 	glColor3b(120, 40, 30);
 	glTranslatef(posicion.x, posicion.y, 1.5);
-	glutSolidSphere((Long_caracteristica / 2), 20, 30);
+	glutSolidSphere((Long_caracteristica), 20, 30);
 	glTranslatef(-posicion.x, -posicion.y, -1.5);
 }
-void Personaje::Mueve(float t, bool p) {
+//void Personaje::Mueve(float t, bool p) {
+//	
+//	if(vinicial*vinicial + 2 * aceleracion.y*(posicion.y - posinicial)>0){
+//		velocidad.y = sqrt(vinicial*vinicial + 2 * aceleracion.y*(posicion.y - posinicial));
+//		posicion = posicion + velocidad*t;
+//		}
+//	else {
+//		vinicial = 0;
+//		posinicial = 0;
+//		posicion = posicion + velocidad * t + aceleracion * (0.5f*t*t);
+//		velocidad = velocidad + aceleracion * t;
+//	}
 	
-	if(vinicial*vinicial + 2 * aceleracion.y*(posicion.y - posinicial)>0){
-		velocidad.y = sqrt(vinicial*vinicial + 2 * aceleracion.y*(posicion.y - posinicial));
-		posicion = posicion + velocidad*t;
-		}
-	else {
-		vinicial = 0;
-		posinicial = 0;
-		posicion = posicion + velocidad * t + aceleracion * (0.5f*t*t);
-		velocidad = velocidad + aceleracion * t;
-	}
 	
-	
-}
+
 void Personaje::Salto() { //Poner límtes al salto
 	if (fabsf(velocidad.y) < 0.5 && velocidad.y >= 0) {
 		vinicial = velocidad.y = 12.0f;

@@ -12,9 +12,11 @@ Interaccion::~Interaccion()
 }
 bool Interaccion::Contacto(Movil &m, Plataforma &p) {
 	Vector2D dir;
-	float dif = p.Distancia(m.posicion, &dir) - m.Long_caracteristica-0.25/2;
+	float dif = p.Distancia(m.posicion, &dir) - m.Long_caracteristica;
 	if (dif <= 0.0f)
-	{		
+	{
+			m.vinicial = 0;
+			m.posinicial = 0;
 			Vector2D v_inicial = m.velocidad;
 			m.velocidad = v_inicial - dir * 2.0*(v_inicial*dir);
 			m.posicion = m.posicion - dir * dif;
@@ -39,8 +41,8 @@ bool Interaccion::Rebote(Personaje  &p, Enemigo &e)
 	//estática que será vidas que comenzarán valiendo 3 y en está función irán disminuyendo. En la función bonus aumentarán.
 	//Introduzco friend class en Personaje, tambien función getVida();
 	//ya que cuando se apoyen en las plataformas tendran el mismo punto y, volver a cambiar el if()
-	//Volver a cambiar ((p.posicion.x + (p.altura / 1.5f) > e.posicion.x) && (p.posicion.x - (p.altura / 1.5f) < e.posicion.x) && p.posicion.y == e.posicion.y)
-	if ((p.posicion.x + (p.altura / 1.5f) > e.posicion.x) && (p.posicion.y - (p.altura / 1.5f) < e.posicion.y) && (p.posicion.y + (p.altura / 1.5f) > e.posicion.y) && (p.posicion.x - (p.altura / 1.5f) < e.posicion.x)) {
+	//Volver a cambiar ((p.posicion.x + (p.Long_caracteristica / 1.5f) > e.posicion.x) && (p.posicion.x - (p.Long_caracteristica / 1.5f) < e.posicion.x) && p.posicion.y == e.posicion.y)
+	if ((p.posicion.x + (p.Long_caracteristica / 1.5f) > e.posicion.x) && (p.posicion.y - (p.Long_caracteristica / 1.5f) < e.posicion.y) && (p.posicion.y + (p.Long_caracteristica / 1.5f) > e.posicion.y) && (p.posicion.x - (p.Long_caracteristica / 1.5f) < e.posicion.x)) {
 		p.vida -= 1;
 		//Esto de las velocidades es una prueba para comprobar visualmente que chocan
 		e.velocidad.x = -e.velocidad.x;

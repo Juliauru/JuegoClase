@@ -1,7 +1,7 @@
+#include <math.h>
 #include "Mundo.h"
 #include "glut.h"
 #include "Interaccion.h"
-#include <math.h>
 
 void Mundo::RotarOjo()
 {
@@ -25,10 +25,7 @@ void Mundo::Dibuja()
 
 void Mundo::Mueve() {
 	
-	for (int i = 0; i < 7; i++) {
-		Interaccion::Contacto(personaje, escenario.plat[i]);
-	}
-	personaje.Mueve(0.025f, x);
+		personaje.Mueve(0.025f);
 		enemigos.Mueve(0.025f);
 	for (int i = 0; i < 7; i++) {
 		Interaccion::Contacto(personaje, escenario.plat[i]);
@@ -37,23 +34,21 @@ void Mundo::Mueve() {
 		enemigos.Rebote(personaje);
 		enemigos.Rebote();
 }
-}
-
 void Mundo::Inicializa()
 {
 	x_ojo=0;
 	y_ojo=10;
 	z_ojo=20;
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < 2; i++) {
 		Enemigo *aux = new Enemigo;
 		aux->SetPos(i, 1 + 3*i);
-		aux->setAltura(1+i*0.1);
+		aux->setAltura(0.8);
 		enemigos.Agregar(aux);
 	}
-	for (int i = 0; i < 8; i++) {
+	for (int i = 0; i < 3; i++) {
 		Enemigo *aux = new Enemigo;
 		aux->SetPos(i+2, 1 + 3 * i);
-		aux->setAltura(1 + i*0.1);
+		aux->setAltura(0.8);
 		enemigos.Agregar(aux);
 	}
 }
