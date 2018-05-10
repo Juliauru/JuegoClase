@@ -19,16 +19,24 @@ void Mundo::Dibuja()
 	glDisable(GL_LIGHTING);
 	escenario.Dibuja();
 	personaje.Dibuja();
+	enemigos.Dibuja();
 	glEnable(GL_LIGHTING);
 }
 
 void Mundo::Mueve() {
-	bool x=false;
 	
 	for (int i = 0; i < 7; i++) {
-		x= Interaccion::Contacto(personaje, escenario.plat[i]);
+		Interaccion::Contacto(personaje, escenario.plat[i]);
 	}
 	personaje.Mueve(0.025f, x);
+		enemigos.Mueve(0.025f);
+	for (int i = 0; i < 7; i++) {
+		Interaccion::Contacto(personaje, escenario.plat[i]);
+		enemigos.Rebote(escenario.plat[i]);
+	}
+		enemigos.Rebote(personaje);
+		enemigos.Rebote();
+}
 }
 
 void Mundo::Inicializa()
@@ -36,6 +44,18 @@ void Mundo::Inicializa()
 	x_ojo=0;
 	y_ojo=10;
 	z_ojo=20;
+	for (int i = 0; i < 5; i++) {
+		Enemigo *aux = new Enemigo;
+		aux->SetPos(i, 1 + 3*i);
+		aux->setAltura(1+i*0.1);
+		enemigos.Agregar(aux);
+	}
+	for (int i = 0; i < 8; i++) {
+		Enemigo *aux = new Enemigo;
+		aux->SetPos(i+2, 1 + 3 * i);
+		aux->setAltura(1 + i*0.1);
+		enemigos.Agregar(aux);
+	}
 }
 
 void Mundo::Tecla(unsigned char key)
