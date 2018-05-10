@@ -13,6 +13,6 @@ public:
 	static int GetVida() {
 		return vida;
 	}
-	//friend class Interaccion;
+	friend class Interaccion;
 };
 
