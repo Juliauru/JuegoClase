@@ -1,7 +1,7 @@
 #pragma once
 #include "Movil.h"
-#include "Pared.h"
-class Plataforma:public Movil
+#include "Pared.h" 
+class Plataforma:public Movil //Cambiar a paredes
 {
 protected:
 	Pared bases[2];

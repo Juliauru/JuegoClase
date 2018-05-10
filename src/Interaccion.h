@@ -6,6 +6,6 @@ class Interaccion abstract //no se si se usa así
 public:
 	Interaccion();
 	~Interaccion();
-	static void Contacto(Movil &pers, Plataforma &p);
+	static bool Contacto(Movil &pers, Plataforma &p);
 };
 

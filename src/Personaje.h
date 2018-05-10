@@ -6,12 +6,11 @@ private:
 	float altura;
 	float posinicial;
 	float vinicial;
-	float aux;
 public:
 	void Dibuja();
 	Personaje(float a=1);
 	~Personaje();	
-	void Mueve(float t);
+	void Mueve(float t,bool p=false);
 	void Salto();
 	/*friend class Interaccion;*/
 };

@@ -5,8 +5,6 @@
 Objeto::Objeto()
 {
 }
-
-
 Objeto::~Objeto()
 {
 }

@@ -23,11 +23,12 @@ void Mundo::Dibuja()
 }
 
 void Mundo::Mueve() {
-	bool x;
-	personaje.Mueve(0.025f);
+	bool x=false;
+	
 	for (int i = 0; i < 7; i++) {
-		Interaccion::Contacto(personaje, escenario.plat[i]);
+		x= Interaccion::Contacto(personaje, escenario.plat[i]);
 	}
+	personaje.Mueve(0.025f, x);
 }
 
 void Mundo::Inicializa()

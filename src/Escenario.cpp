@@ -15,13 +15,13 @@ plat = new Plataforma[Plataforma::get_nplataformas()];
 for (int i = 0; i < Plataforma::get_nplataformas(); i++) {
 	plat[i].setLargo(rand() % 10 + 1);
 }
-plat[0].getPosicion().setValor(1, 1);
-plat[1].getPosicion().setValor(3, 2);
+plat[0].getPosicion().setValor(5, 1);
+plat[1].getPosicion().setValor(3, 6);
 plat[2].getPosicion().setValor(0, 4);
 plat[3].getPosicion().setValor(10, 6);
 plat[4].getPosicion().setValor(10, 16);
-plat[5].getPosicion().setValor(3, 15);
-plat[6].getPosicion().setValor(10, 1);
+plat[5].getPosicion().setValor(6, 15);
+plat[6].getPosicion().setValor(10, 7);
 
 //Limites caja
 limites[0].SetVertices(0, 0, 0, 50);
