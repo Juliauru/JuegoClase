@@ -4,7 +4,7 @@
 #include "Pared.h"
 #include "Interaccion.h"
 #include "Personaje.h"
-class ListaEnemigos:public Enemigo
+class ListaEnemigos :public Enemigo
 {
 public:
 	ListaEnemigos();
@@ -20,10 +20,9 @@ public:
 	void Rebote(Plataforma p);
 
 	void Rebote(Escenario e);
-	
 
 private:
-	Enemigo *lista[MAX_ENEMIGOS];
+	Enemigo * lista[MAX_ENEMIGOS];
 	int numero;
 
 	friend class Interaccion;

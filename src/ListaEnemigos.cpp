@@ -22,7 +22,7 @@ bool ListaEnemigos::Agregar(Enemigo * e)
 		}
 		else
 			e->getVelocidad().setValor(-2.5f, 0);
-		
+
 	}
 	else {
 		return false;
@@ -53,22 +53,21 @@ void ListaEnemigos::Rebote() {
 }
 void ListaEnemigos::Rebote(Personaje &p) {
 	for (int i = 0; i < numero; i++) {
-		Interaccion::Rebote(p,*(lista[i]));
+		Interaccion::Rebote(p, *(lista[i]));
 	}
 }
 void ListaEnemigos::Rebote(Plataforma p) {
 	for (int i = 0; i < numero; i++) {
 		/*if (Interaccion::Contacto(*(lista[i]), p)) {*/
-			Interaccion::Contacto(*(lista[i]), p);
-			/*	Vector2D pos = p.getPosicion();
-			(*lista[i]).SetPos(pos.x, pos.y);
-			(*lista[i]).SetVel(3.0f, 0.0f);*/
-		}
+		Interaccion::Contacto(*(lista[i]), p);
+		/*	Vector2D pos = p.getPosicion();
+		(*lista[i]).SetPos(pos.x, pos.y);
+		(*lista[i]).SetVel(3.0f, 0.0f);*/
 	}
+}
 
 void ListaEnemigos::Rebote(Escenario e) {
 	for (int i = 0; i < numero; i++) {
-
+		Interaccion::Rebote(*(lista[i]), e);
 	}
-
 }

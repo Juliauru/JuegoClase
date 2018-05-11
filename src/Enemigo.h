@@ -3,7 +3,7 @@
 #include "Movil.h"
 #include "Escenario.h"
 #include "Interaccion.h"
-class Enemigo:public Movil
+class Enemigo :public Movil
 {
 private:
 	float Long_caracteristica; //O lo de la clase movil de long_caracteristica??_P
@@ -18,7 +18,7 @@ public:
 	//Vector2D& getPosicion();
 	//Vector2D& getVelocidad();
 	//PARA PROBAR FUNCIONAMIENTO
-	void SetPos(float px,float py) {
+	void SetPos(float px, float py) {
 		posicion.x = px;
 		posicion.y = py;
 	}

@@ -42,17 +42,17 @@ void Enemigo::Caida(float t) {
 }
 /*void Enemigo::Mueve(float t)
 {
-	velocidad =velocidad +(0.5*aceleracion.y*t*t);
-	posicion= posicion + velocidad*t;
-	/*for (int i = 0; i < Plataforma::get_nplataformas(); i++){
-		if (Interaccion::Contacto(*this, Escenario::*(plat[i])) {
-	//Prueba por el momento para que no se vaya al infinito
-	if (posicion.x>20) {
-		velocidad.x = -velocidad.x;
-	}
-	else if (posicion.x < 0) {
-		velocidad.x = -velocidad.x;
-	}
-	//Interación con los límites de la caja del juego hará que la velocidad varíe de signo y se de la vuelta
+velocidad =velocidad +(0.5*aceleracion.y*t*t);
+posicion= posicion + velocidad*t;
+/*for (int i = 0; i < Plataforma::get_nplataformas(); i++){
+if (Interaccion::Contacto(*this, Escenario::*(plat[i])) {
+//Prueba por el momento para que no se vaya al infinito
+if (posicion.x>20) {
+velocidad.x = -velocidad.x;
+}
+else if (posicion.x < 0) {
+velocidad.x = -velocidad.x;
+}
+//Interación con los límites de la caja del juego hará que la velocidad varíe de signo y se de la vuelta
 }*/
 

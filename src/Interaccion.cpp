@@ -15,18 +15,18 @@ bool Interaccion::Contacto(Movil &m, Plataforma &p) {
 	float dif = p.Distancia(m.posicion, &dir) - m.Long_caracteristica;
 	if (dif <= 0.0f)
 	{
-			if (m.velocidad.y <= 0)
+		if (m.velocidad.y <= 0)
 			m.velocidad.y = 0;
-			m.vinicial = 0;
-			m.posinicial = 0;
-			Vector2D v_inicial = m.velocidad;
-			m.velocidad = v_inicial - dir * 2.0*(v_inicial*dir);
-			m.posicion = m.posicion - dir * dif;
-			
-		
+		m.vinicial = 0;
+		m.posinicial = 0;
+		Vector2D v_inicial = m.velocidad;
+		m.velocidad = v_inicial - dir * 2.0*(v_inicial*dir);
+		m.posicion = m.posicion - dir * dif;
+
+
 		return true;
 	}
-	
+
 	return false;
 }
 
@@ -65,4 +65,10 @@ void Interaccion::Rebote(Movil & m, Escenario e)
 	if (m.posicion.x > xmin) m.posicion.x = xmin;
 
 
+}
+void Interaccion::Rebote(Enemigo &ene, Escenario e) {
+	float xmin = e.limites[3].posicion.x;
+	float xmax = e.limites[3].limite.x;
+	if (ene.posicion.x < xmax) ene.velocidad.x = -ene.velocidad.x;
+	if (ene.posicion.x > xmin) ene.velocidad.x = -ene.velocidad.x;
 }
