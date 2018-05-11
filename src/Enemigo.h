@@ -13,7 +13,7 @@ public:
 	~Enemigo();
 	void Dibuja();
 	void setAltura(float a);
-	void Caida(float t);
+	//void Caida(float t);
 	//void Mueve(float t);
 	//Vector2D& getPosicion();
 	//Vector2D& getVelocidad();

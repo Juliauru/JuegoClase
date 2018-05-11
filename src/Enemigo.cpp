@@ -5,7 +5,7 @@
 
 Enemigo::Enemigo()
 {
-	Long_caracteristica = 0.25;
+	Long_caracteristica = TAMANIO / 2.0f;
 	posicion.x = 0;
 	velocidad.x = 0.0f;
 	velocidad.y = 0.0;
@@ -27,7 +27,7 @@ void Enemigo::Dibuja()
 	glTranslatef(-posicion.x, -posicion.y, -1.5);
 }
 
-void Enemigo::setAltura(float a)
+void Enemigo::setAltura(float a) //ESTA FUNCION LA ELIMINARIA PARA NO PODER VARIAR EL TAMAÑO O NO LA USARIA EN MUNDO
 {
 	if (a<0.01) {
 		Long_caracteristica = 0.25;
@@ -36,10 +36,10 @@ void Enemigo::setAltura(float a)
 		Long_caracteristica = a;
 	}
 }
-void Enemigo::Caida(float t) {
+/*void Enemigo::Caida(float t) {
 	velocidad.y = velocidad.y - (0.5*aceleracion.y*t*t);
 	posicion.y = posicion.y + velocidad.y*t;
-}
+}*/
 /*void Enemigo::Mueve(float t)
 {
 velocidad =velocidad +(0.5*aceleracion.y*t*t);
