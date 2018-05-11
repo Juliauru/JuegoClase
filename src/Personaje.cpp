@@ -7,17 +7,17 @@ Personaje::Personaje(float a)
 {
 	vida = 3;
 	if (a < 0.5) {
-		Long_caracteristica = 0.5;
+		Long_caracteristica = TAMANIO;
 	}
 	else {
 		Long_caracteristica = a;
-	}
+	}//Creo que habria que quitarlo porque sino ya no cumple la proporcion
 	posicion.x = posicion.y = 0.75f;
 	aceleracion.x = 0;
 	aceleracion.y = -10.0f;
 	velocidad.x = 0;
 	velocidad.y = 0;
-	
+
 }
 Personaje::~Personaje()
 {
@@ -41,8 +41,8 @@ void Personaje::Dibuja()
 //		posicion = posicion + velocidad * t + aceleracion * (0.5f*t*t);
 //		velocidad = velocidad + aceleracion * t;
 //	}
-	
-	
+
+
 
 void Personaje::Salto() { //Poner límtes al salto
 	if (fabsf(velocidad.y) < 0.5 && velocidad.y >= 0) {

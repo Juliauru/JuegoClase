@@ -1,17 +1,34 @@
 #include "Escenario.h"
 #include <stdlib.h>
+#include <iostream>
+#include <fstream>
 #include "glut.h"
 #include "ETSIDI.h"
+using namespace std;
 using  ETSIDI::getTexture;
 Escenario::~Escenario()
 {
 }
 Escenario::Escenario()
 {
+	 char caracter[10];
+	 char caracter2[10];
 	p_inicio.getPosicion().setValor(0, 0);
 	p_inicio.setLargo(20);	
 	plat = new Plataforma[Plataforma::get_nplataformas()]; //Primero siempre posicion antes que longitud de las parede
-
+	ifstream fichero("Example.txt");
+	if (!fichero)
+		cout << "No se puede abrir el fichero" << endl;
+	else{
+		fichero >> caracter;
+		while (!fichero.eof()) {
+			cout << caracter << " ";
+			fichero >> caracter2;
+			cout << caracter2 << "\n";
+			fichero >> caracter;
+		}
+	}
+	fichero.close();
 	plat[0].getPosicion().setValor(5, 1);
 	plat[1].getPosicion().setValor(3, 6);
 	plat[2].getPosicion().setValor(0, 4);

@@ -18,10 +18,10 @@ bool ListaEnemigos::Agregar(Enemigo * e)
 	if (numero < MAX_ENEMIGOS) {
 		lista[numero++] = e;
 		if ((rand() % 2) == 0) {
-			e->getVelocidad().setValor(2.5f, 0);
+			e->getVelocidad().setValor(2.0f, 0);
 		}
 		else
-			e->getVelocidad().setValor(-2.5f, 0);
+			e->getVelocidad().setValor(-2.0f, 0);
 		e->getPosicion().setValor(rand() % 20 + 1, rand() % 20 + 1);
 
 	}
