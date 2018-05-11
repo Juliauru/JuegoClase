@@ -66,3 +66,9 @@ void Interaccion::Rebote(Movil & m, Escenario e)
 
 
 }
+void Interaccion::Rebote(Enemigo &ene, Escenario e) {
+	float xmin = e.limites[3].posicion.x;
+	float xmax = e.limites[3].limite.x;
+	if (ene.posicion.x < xmax) ene.velocidad.x = -ene.velocidad.x;
+	if (ene.posicion.x > xmin) ene.velocidad.x = -ene.velocidad.x;
+}

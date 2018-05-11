@@ -34,6 +34,8 @@ void Mundo::Mueve() {
 		enemigos.Rebote(personaje);
 		enemigos.Rebote();
 		Interaccion::Rebote(personaje, escenario);
+		enemigos.Rebote(escenario);
+}
 }
 void Mundo::Inicializa()
 {

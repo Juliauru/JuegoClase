@@ -68,7 +68,6 @@ void ListaEnemigos::Rebote(Plataforma p) {
 
 void ListaEnemigos::Rebote(Escenario e) {
 	for (int i = 0; i < numero; i++) {
-
+		Interaccion::Rebote(*(lista[i]), e);
 	}
-
 }

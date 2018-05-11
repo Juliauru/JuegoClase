@@ -20,6 +20,7 @@ public:
 	void Rebote(Plataforma p);
 
 	void Rebote(Escenario e);
+
 	
 
 private:
