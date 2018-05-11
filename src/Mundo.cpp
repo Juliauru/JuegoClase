@@ -31,10 +31,17 @@ void Mundo::Mueve() {
 		Interaccion::Contacto(personaje, escenario.plat[i]);
 		enemigos.Rebote(escenario.plat[i]);
 	}
+<<<<<<< HEAD
 	enemigos.Rebote(personaje);
 	enemigos.Rebote();
 	Interaccion::Rebote(personaje, escenario);
 	enemigos.Rebote(escenario);
+=======
+		enemigos.Rebote(personaje);
+		enemigos.Rebote();
+		Interaccion::Rebote(personaje, escenario);
+		enemigos.Rebote(escenario);
+>>>>>>> 3754c2bc5e77db04903937f7bf3f446fb87c2795
 }
 }
 void Mundo::Inicializa()

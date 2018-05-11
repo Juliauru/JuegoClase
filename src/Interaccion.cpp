@@ -71,4 +71,8 @@ void Interaccion::Rebote(Enemigo &ene, Escenario e) {
 	float xmax = e.limites[3].limite.x;
 	if (ene.posicion.x < xmax) ene.velocidad.x = -ene.velocidad.x;
 	if (ene.posicion.x > xmin) ene.velocidad.x = -ene.velocidad.x;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 3754c2bc5e77db04903937f7bf3f446fb87c2795
