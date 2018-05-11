@@ -43,16 +43,16 @@ void Mundo::Inicializa()
 	x_ojo = 0;
 	y_ojo = 10;
 	z_ojo = 20;
-	for (int i = 0; i < 2; i++) {
+	for (int i = 0; i < 5; i++) {
 		Enemigo *aux = new Enemigo;
 		aux->SetPos(i, 1 + 3 * i);
-		aux->setAltura(0.25);
+		//aux->setAltura(0.25);
 		enemigos.Agregar(aux);
 	}
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < 8; i++) {
 		Enemigo *aux = new Enemigo;
 		aux->SetPos(i + 2, 1 + 3 * i);
-		aux->setAltura(0.25);
+		//aux->setAltura(0.25);
 		enemigos.Agregar(aux);
 	}
 }

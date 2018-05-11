@@ -55,9 +55,19 @@ bool Interaccion::Contacto(Enemigo &ene, Plataforma &p) { //arreglar con polimor
 
 void Interaccion::Rebote(Enemigo & e, Enemigo & e1)
 {
-	if (e.posicion.x == e1.posicion.x && e.posicion.y == e1.posicion.y) {
+	/*if (e.posicion.x == e1.posicion.x && e.posicion.y == e1.posicion.y) {
 		e.velocidad.x = -e.velocidad.x;
 		e1.velocidad.x = -e1.velocidad.x;
+	}*/
+	if (e.posicion.y == e1.posicion.y) {
+		float dist = e.posicion.x - e1.posicion.x;
+		if (dist < 0)dist = -dist;
+		//if (dist == 0)dist = 0.0001f; intento para que se separaran las que vibran, but no
+		float r = e.Long_caracteristica + e1.Long_caracteristica;
+		if (r >= dist) {
+			e.velocidad.x = -e.velocidad.x;
+			e1.velocidad.x = -e1.velocidad.x;
+		}
 	}
 }
 
@@ -69,7 +79,7 @@ bool Interaccion::Rebote(Personaje  &p, Enemigo &e)
 	//Introduzco friend class en Personaje, tambien función getVida();
 	//ya que cuando se apoyen en las plataformas tendran el mismo punto y, volver a cambiar el if()
 	//Volver a cambiar ((p.posicion.x + (p.Long_caracteristica / 1.5f) > e.posicion.x) && (p.posicion.x - (p.Long_caracteristica / 1.5f) < e.posicion.x) && p.posicion.y == e.posicion.y)
-	if ((p.posicion.x + (p.Long_caracteristica / 1.5f) > e.posicion.x) && (p.posicion.y - (p.Long_caracteristica / 1.5f) < e.posicion.y) && (p.posicion.y + (p.Long_caracteristica / 1.5f) > e.posicion.y) && (p.posicion.x - (p.Long_caracteristica / 1.5f) < e.posicion.x)) {
+	if ((p.posicion.x + (p.Long_caracteristica) > e.posicion.x - e.Long_caracteristica) && (p.posicion.y - (p.Long_caracteristica) < e.posicion.y + e.Long_caracteristica) && (p.posicion.y + (p.Long_caracteristica) > e.posicion.y - e.Long_caracteristica) && (p.posicion.x - (p.Long_caracteristica) < e.posicion.x + e.Long_caracteristica)) {
 		p.vida -= 1;
 		//Esto de las velocidades es una prueba para comprobar visualmente que chocan
 		e.velocidad.x = -e.velocidad.x;
