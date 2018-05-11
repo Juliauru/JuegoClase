@@ -11,8 +11,9 @@ Escenario::~Escenario()
 }
 Escenario::Escenario()
 {
+	p_ojo_y = 7.5;
 	int n,l,i=0;
-	float x,y;
+	float x, y, long_x, long_y;
 	 char caracter[10];
 	 char caracter2[10];
 	p_inicio.getPosicion().setValor(0, 0);
@@ -23,6 +24,16 @@ Escenario::Escenario()
 		cout << "No se puede abrir el fichero" << endl;
 	else{
 		fichero >> n;
+		fichero >> long_x;
+		fichero >> long_y;
+		vertices[0].setValor(0, 0);
+		vertices[1].setValor(0, long_y);
+		vertices[2].setValor(long_x, long_y);
+		vertices[3].setValor(long_x,0);
+		limites[0].setLimites(0, 0, 0, long_y);
+		limites[1].setLimites(0, long_y, long_x, long_y);
+		limites[2].setLimites(20, long_y, long_x, 0);
+		limites[3].setLimites(0, 0, long_x, 0);
 		Plataforma::set_nplataformas(n);
 		plat = new Plataforma[Plataforma::get_nplataformas()];//Primero siempre posicion antes que longitud de las paredes
 		cout << Plataforma::get_nplataformas()<<"\n";
@@ -40,16 +51,10 @@ Escenario::Escenario()
 	}
 	fichero.close();
 	//Limites caja
-	limites[0].setLimites(0, 0, 0, 50);
-	limites[1].setLimites(0, 50, 20, 50);
-	limites[2].setLimites(20, 50, 20, 0);
-	limites[3].setLimites(0, 0, 20, 0);
+	
 
 	//limites pared trasera
-	vertices[0].setValor(0, 0);
-	vertices[1].setValor(0, 50);
-	vertices[2].setValor(20, 50);
-	vertices[3].setValor(20, 0);
+	
 
 }
 void Escenario::Dibuja() {
@@ -76,7 +81,7 @@ void Escenario::Dibuja() {
 	}
 	}
 void Escenario::Reorientar() {
-	gluLookAt(10, 7.5, 25,  // posicion del ojo 0-10-20 x_ojo=0 y=5 z=30
-		10, 7.5, -100,      // hacia que punto mira  (0,0,0) 
+	gluLookAt(10, p_ojo_y, 25,  // posicion del ojo 0-10-20 x_ojo=0 y=5 z=30
+		10, p_ojo_y, -100,      // hacia que punto mira  (0,0,0) 
 		0.0, 1.0, 0.0);      // definimos hacia arriba (eje Y)
 }

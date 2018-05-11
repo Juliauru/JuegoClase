@@ -16,7 +16,7 @@ public:
 
 	static bool Rebote(Personaje &p, Enemigo &e);
 
-	static void Rebote(Movil &m, Escenario e);
+	static void Rebote(Movil &m, Escenario &e);
 
 	static void Rebote(Enemigo &ene, Escenario e);
 	static void Rebote(Enemigo &ene, Plataforma &p);

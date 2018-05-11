@@ -1,13 +1,11 @@
 #include "Movil.h"
 #include <math.h>
 
-
 Movil::Movil()
 {
 	posinicial=0;
 	vinicial=0;
 }
-
 
 Movil::~Movil()
 {

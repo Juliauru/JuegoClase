@@ -72,9 +72,13 @@ void Interaccion::Rebote(Enemigo & e, Enemigo & e1)
 			}
 			else {
 				if (e.velocidad.x < 0)
-					e.velocidad.x = -e.velocidad.x + 1;
+					e.velocidad.x =  2.5;
 				else
-					e.velocidad.x = -e.velocidad.x - 1;
+					e.velocidad.x = - 2.5;
+				if (e1.velocidad.x < 0)
+					e1.velocidad.x =  2.5;
+				else
+					e1.velocidad.x = - 2.5;
 			}
 		}	
 
@@ -100,12 +104,16 @@ bool Interaccion::Rebote(Personaje  &p, Enemigo &e)
 	return false;
 }
 
-void Interaccion::Rebote(Movil &m, Escenario e)
+void Interaccion::Rebote(Movil &m, Escenario &e) //Intentar hacer poco a poco, no se como quedará
 {
 	float xmin = e.p_inicio.posicion.x;
 	float xmax = e.p_inicio.limite.x;
 	if (m.posicion.x >= xmax) m.posicion.x = xmax;
 	if (m.posicion.x <= xmin) m.posicion.x = xmin;
+	if (m.posicion.y > 2* e.p_ojo_y)
+		e.p_ojo_y = e.p_ojo_y+7.5;
+	if (m.posicion.y <(e.p_ojo_y-7.5))
+		e.p_ojo_y = e.p_ojo_y -7.5;
 }
 void Interaccion::Rebote(Enemigo &ene, Escenario e) {
 	float xmin = e.limites[3].posicion.x; 
