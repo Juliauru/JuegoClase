@@ -4,11 +4,12 @@
 class Plataforma :public Movil, public Pared //Cambiar a paredes
 {
 protected:
-	static 	int n_plataformas;
+	static int n_plataformas;
 public:
 	Plataforma(int l = 2);
 	virtual ~Plataforma();
 	static int get_nplataformas();
+	static void set_nplataformas(int n);
 	void setLargo(int l = 2);
 };
 

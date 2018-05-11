@@ -1,6 +1,6 @@
 #include "Plataforma.h"
 #include "glut.h"
-int Plataforma::n_plataformas = 7;
+int Plataforma::n_plataformas = 0;
 Plataforma::Plataforma(int l)
 {
 	if (l < 2) { //Hacer 
@@ -29,6 +29,9 @@ Plataforma::~Plataforma()
 //}
 int Plataforma::get_nplataformas() {
 	return n_plataformas;
+}
+void Plataforma::set_nplataformas(int n) {
+	n_plataformas = n;
 }
 void Plataforma::setLargo(int l) {
 	if (l < 2) { //Hacer 

@@ -27,7 +27,7 @@ void Mundo::Mueve() {
 
 	personaje.Mueve(0.025f);
 	enemigos.Mueve(0.025f);
-	for (int i = 0; i < 7; i++) {
+	for (int i = 0; i < Plataforma::get_nplataformas(); i++) {
 		Interaccion::Contacto(personaje, escenario.plat[i]);
 		enemigos.Rebote(escenario.plat[i]);
 	}

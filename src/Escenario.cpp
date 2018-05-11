@@ -11,36 +11,34 @@ Escenario::~Escenario()
 }
 Escenario::Escenario()
 {
+	int n,l,i=0;
+	float x,y;
 	 char caracter[10];
 	 char caracter2[10];
 	p_inicio.getPosicion().setValor(0, 0);
 	p_inicio.setLargo(20);	
-	plat = new Plataforma[Plataforma::get_nplataformas()]; //Primero siempre posicion antes que longitud de las parede
+	 
 	ifstream fichero("Example.txt");
 	if (!fichero)
 		cout << "No se puede abrir el fichero" << endl;
 	else{
-		fichero >> caracter;
-		while (!fichero.eof()) {
-			cout << caracter << " ";
-			fichero >> caracter2;
-			cout << caracter2 << "\n";
-			fichero >> caracter;
+		fichero >> n;
+		Plataforma::set_nplataformas(n);
+		plat = new Plataforma[Plataforma::get_nplataformas()];//Primero siempre posicion antes que longitud de las paredes
+		cout << Plataforma::get_nplataformas()<<"\n";
+		fichero >> x;
+		while (!fichero.eof()&& i<Plataforma::get_nplataformas()) {
+			fichero >> y;
+			fichero >> l;
+			plat[i].getPosicion().setValor(x, y);
+			cout << plat[i].getPosicion().x << " " << plat[i].getPosicion().y<<"\n";
+			plat[i].setLargo(l);
+			plat[i].getColor().SetColor(153, 255, 51);
+			fichero >> x;
+			i++;
 		}
 	}
 	fichero.close();
-	plat[0].getPosicion().setValor(5, 1);
-	plat[1].getPosicion().setValor(3, 6);
-	plat[2].getPosicion().setValor(0, 4);
-	plat[3].getPosicion().setValor(10, 6);
-	plat[4].getPosicion().setValor(10, 16);
-	plat[5].getPosicion().setValor(6, 15);
-	plat[6].getPosicion().setValor(10, 7);
-	for (int i = 0; i < Plataforma::get_nplataformas(); i++) {
-		plat[i].setLargo(rand() % 10 + 1);
-		plat[i].getColor().SetColor(153, 255, 51);
-	}
-
 	//Limites caja
 	limites[0].setLimites(0, 0, 0, 50);
 	limites[1].setLimites(0, 50, 20, 50);

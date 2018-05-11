@@ -1,4 +1,5 @@
 #include "Interaccion.h"
+#include <math.h>
 
 
 
@@ -61,32 +62,41 @@ void Interaccion::Rebote(Enemigo & e, Enemigo & e1)
 	}*/
 	if (e.posicion.y == e1.posicion.y) {
 		float dist = e.posicion.x - e1.posicion.x;
-		if (dist < 0)dist = -dist;
+		if (dist < 0) dist = -dist;
 		//if (dist == 0)dist = 0.0001f; intento para que se separaran las que vibran, but no
 		float r = e.Long_caracteristica + e1.Long_caracteristica;
 		if (r >= dist) {
-			e.velocidad.x = -e.velocidad.x;
-			e1.velocidad.x = -e1.velocidad.x;
-		}
+			if (fabsf(e.velocidad.x) > 1 && fabsf(e1.velocidad.x) > 1) {
+				e.velocidad.x = -e.velocidad.x;
+				e1.velocidad.x = -e1.velocidad.x;
+			}
+			else {
+				if (e.velocidad.x < 0)
+					e.velocidad.x = -e.velocidad.x + 1;
+				else
+					e.velocidad.x = -e.velocidad.x - 1;
+			}
+		}	
+
 	}
 }
 
 bool Interaccion::Rebote(Personaje  &p, Enemigo &e)
 {
-	//IDEA PARA LAS VIDAS
-	//En esta función, si se produce el choque, las vidas del personaje disminuirán en 1. Por tanto, en personaje se creará una variable
-	//estática que será vidas que comenzarán valiendo 3 y en está función irán disminuyendo. En la función bonus aumentarán.
-	//Introduzco friend class en Personaje, tambien función getVida();
-	//ya que cuando se apoyen en las plataformas tendran el mismo punto y, volver a cambiar el if()
-	//Volver a cambiar ((p.posicion.x + (p.Long_caracteristica / 1.5f) > e.posicion.x) && (p.posicion.x - (p.Long_caracteristica / 1.5f) < e.posicion.x) && p.posicion.y == e.posicion.y)
-	if ((p.posicion.x + (p.Long_caracteristica) > e.posicion.x - e.Long_caracteristica) && (p.posicion.y - (p.Long_caracteristica) < e.posicion.y + e.Long_caracteristica) && (p.posicion.y + (p.Long_caracteristica) > e.posicion.y - e.Long_caracteristica) && (p.posicion.x - (p.Long_caracteristica) < e.posicion.x + e.Long_caracteristica)) {
-		p.vida -= 1;
-		//Esto de las velocidades es una prueba para comprobar visualmente que chocan
-		e.velocidad.x = -e.velocidad.x;
-		return true;
-		//Indicaría que pierde una vida y vuelve a empezar el nivel por el que iba (si la vida es distinta de 0)
-		//Si la vida llega a 0 el programa se acabaría y comenzaría la pantalla principal.
-	}
+	////IDEA PARA LAS VIDAS
+	////En esta función, si se produce el choque, las vidas del personaje disminuirán en 1. Por tanto, en personaje se creará una variable
+	////estática que será vidas que comenzarán valiendo 3 y en está función irán disminuyendo. En la función bonus aumentarán.
+	////Introduzco friend class en Personaje, tambien función getVida();
+	////ya que cuando se apoyen en las plataformas tendran el mismo punto y, volver a cambiar el if()
+	////Volver a cambiar ((p.posicion.x + (p.Long_caracteristica / 1.5f) > e.posicion.x) && (p.posicion.x - (p.Long_caracteristica / 1.5f) < e.posicion.x) && p.posicion.y == e.posicion.y)
+	//if ((p.posicion.x + (p.Long_caracteristica) > e.posicion.x - e.Long_caracteristica) && (p.posicion.y - (p.Long_caracteristica) < e.posicion.y + e.Long_caracteristica) && (p.posicion.y + (p.Long_caracteristica) > e.posicion.y - e.Long_caracteristica) && (p.posicion.x - (p.Long_caracteristica) < e.posicion.x + e.Long_caracteristica)) {
+	//	p.vida -= 1;
+	//	//Esto de las velocidades es una prueba para comprobar visualmente que chocan
+	//	e.velocidad.x = -e.velocidad.x;
+	//	return true;
+	//	//Indicaría que pierde una vida y vuelve a empezar el nivel por el que iba (si la vida es distinta de 0)
+	//	//Si la vida llega a 0 el programa se acabaría y comenzaría la pantalla principal.
+	//}
 	return false;
 }
 
