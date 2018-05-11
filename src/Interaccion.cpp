@@ -29,6 +29,29 @@ bool Interaccion::Contacto(Movil &m, Plataforma &p) {
 
 	return false;
 }
+bool Interaccion::Contacto(Enemigo &ene, Plataforma &p) { //arreglar con polimorfismo creo 
+	Vector2D dir;
+	float dif = p.Distancia(ene.posicion, &dir) - ene.Long_caracteristica;
+	if (dif <= 0.0f)
+	{
+		float xmin = p.posicion.x;
+		float xmax = p.limite.x;
+		if (ene.posicion.x >= xmax) ene.velocidad.x = -ene.velocidad.x;
+		if (ene.posicion.x <= xmin) ene.velocidad.x = -ene.velocidad.x;
+		if (ene.velocidad.y <= 0)
+			ene.velocidad.y = 0;
+		ene.vinicial = 0;
+		ene.posinicial = 0;
+		Vector2D v_inicial = ene.velocidad;
+		ene.velocidad = v_inicial - dir * 2.0*(v_inicial*dir);
+		ene.posicion = ene.posicion - dir * dif;
+		return true;
+	}
+	
+	return false;	
+	}
+
+
 
 void Interaccion::Rebote(Enemigo & e, Enemigo & e1)
 {
@@ -57,22 +80,18 @@ bool Interaccion::Rebote(Personaje  &p, Enemigo &e)
 	return false;
 }
 
-void Interaccion::Rebote(Movil & m, Escenario e)
+void Interaccion::Rebote(Movil &m, Escenario e)
 {
-	float xmin = e.limites[3].posicion.x;
-	float xmax = e.limites[3].limite.x;
-	if (m.posicion.x < xmax) m.posicion.x = xmax;
-	if (m.posicion.x > xmin) m.posicion.x = xmin;
-
-
+	float xmin = e.p_inicio.posicion.x;
+	float xmax = e.p_inicio.limite.x;
+	if (m.posicion.x >= xmax) m.posicion.x = xmax;
+	if (m.posicion.x <= xmin) m.posicion.x = xmin;
 }
 void Interaccion::Rebote(Enemigo &ene, Escenario e) {
-	float xmin = e.limites[3].posicion.x;
+	float xmin = e.limites[3].posicion.x; 
 	float xmax = e.limites[3].limite.x;
-	if (ene.posicion.x < xmax) ene.velocidad.x = -ene.velocidad.x;
-	if (ene.posicion.x > xmin) ene.velocidad.x = -ene.velocidad.x;
-<<<<<<< HEAD
+	if (ene.posicion.x >= xmax) ene.velocidad.x = -ene.velocidad.x;
+	if (ene.posicion.x <= xmin) ene.velocidad.x = -ene.velocidad.x;
 }
-=======
-}
->>>>>>> 3754c2bc5e77db04903937f7bf3f446fb87c2795
+
+

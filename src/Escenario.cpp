@@ -8,8 +8,8 @@ Escenario::~Escenario()
 }
 Escenario::Escenario()
 {
-	p_inicio.setLargo(20);
 	p_inicio.getPosicion().setValor(0, 0);
+	p_inicio.setLargo(20);	
 	plat = new Plataforma[Plataforma::get_nplataformas()]; //Primero siempre posicion antes que longitud de las parede
 
 	plat[0].getPosicion().setValor(5, 1);
@@ -28,7 +28,7 @@ Escenario::Escenario()
 	limites[0].setLimites(0, 0, 0, 50);
 	limites[1].setLimites(0, 50, 20, 50);
 	limites[2].setLimites(20, 50, 20, 0);
-	limites[3].setLimites(20, 0, 0, 0);
+	limites[3].setLimites(0, 0, 20, 0);
 
 	//limites pared trasera
 	vertices[0].setValor(0, 0);
@@ -59,8 +59,7 @@ void Escenario::Dibuja() {
 	for (int i = 0; i < 4; i++) {
 		limites[i].Dibuja();
 	}
-
-}
+	}
 void Escenario::Reorientar() {
 	gluLookAt(10, 7.5, 25,  // posicion del ojo 0-10-20 x_ojo=0 y=5 z=30
 		10, 7.5, -100,      // hacia que punto mira  (0,0,0) 

@@ -5,7 +5,7 @@
 
 Enemigo::Enemigo()
 {
-	Long_caracteristica = 0.8;
+	Long_caracteristica = 0.25;
 	posicion.x = 0;
 	velocidad.x = 0.0f;
 	velocidad.y = 0.0;
@@ -23,14 +23,14 @@ void Enemigo::Dibuja()
 {
 	glColor3b(0, 40, 30);
 	glTranslatef(posicion.x, posicion.y, 1.5);
-	glutSolidSphere((Long_caracteristica / 2), 20, 30);
+	glutSolidSphere((Long_caracteristica), 20, 30);
 	glTranslatef(-posicion.x, -posicion.y, -1.5);
 }
 
 void Enemigo::setAltura(float a)
 {
 	if (a<0.01) {
-		Long_caracteristica = 0.8;
+		Long_caracteristica = 0.25;
 	}
 	else {
 		Long_caracteristica = a;

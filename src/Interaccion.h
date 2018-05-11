@@ -9,7 +9,8 @@ class Interaccion //abstract //no se si se usa así
 public:
 	Interaccion();
 	~Interaccion();
-	static bool Contacto(Movil &pers, Plataforma &p);//BOOL CAMBIADO POR PAULA
+	static bool Contacto(Movil &pers, Plataforma &p);
+	static bool Contacto(Enemigo &enem, Plataforma &p);//BOOL CAMBIADO POR PAULA
 
 	static void Rebote(Enemigo &e, Enemigo &e1);
 
@@ -18,5 +19,7 @@ public:
 	static void Rebote(Movil &m, Escenario e);
 
 	static void Rebote(Enemigo &ene, Escenario e);
+	static void Rebote(Enemigo &ene, Plataforma &p);
+
 };
 

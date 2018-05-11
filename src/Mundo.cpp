@@ -31,18 +31,12 @@ void Mundo::Mueve() {
 		Interaccion::Contacto(personaje, escenario.plat[i]);
 		enemigos.Rebote(escenario.plat[i]);
 	}
-<<<<<<< HEAD
+	Interaccion::Contacto(personaje, escenario.p_inicio);
+	enemigos.Rebote(escenario.p_inicio);
 	enemigos.Rebote(personaje);
 	enemigos.Rebote();
 	Interaccion::Rebote(personaje, escenario);
 	enemigos.Rebote(escenario);
-=======
-		enemigos.Rebote(personaje);
-		enemigos.Rebote();
-		Interaccion::Rebote(personaje, escenario);
-		enemigos.Rebote(escenario);
->>>>>>> 3754c2bc5e77db04903937f7bf3f446fb87c2795
-}
 }
 void Mundo::Inicializa()
 {
@@ -52,13 +46,13 @@ void Mundo::Inicializa()
 	for (int i = 0; i < 2; i++) {
 		Enemigo *aux = new Enemigo;
 		aux->SetPos(i, 1 + 3 * i);
-		aux->setAltura(0.8);
+		aux->setAltura(0.25);
 		enemigos.Agregar(aux);
 	}
 	for (int i = 0; i < 3; i++) {
 		Enemigo *aux = new Enemigo;
 		aux->SetPos(i + 2, 1 + 3 * i);
-		aux->setAltura(0.8);
+		aux->setAltura(0.25);
 		enemigos.Agregar(aux);
 	}
 }
