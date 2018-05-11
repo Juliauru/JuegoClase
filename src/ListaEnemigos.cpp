@@ -1,7 +1,5 @@
 #include "ListaEnemigos.h"
-
-
-
+#include <stdlib.h>
 ListaEnemigos::ListaEnemigos()
 {
 	numero = 0;
@@ -19,6 +17,12 @@ bool ListaEnemigos::Agregar(Enemigo * e)
 {
 	if (numero < MAX_ENEMIGOS) {
 		lista[numero++] = e;
+		if ((rand() % 2) == 0) {
+			e->getVelocidad().setValor(2.5f, 0);
+		}
+		else
+			e->getVelocidad().setValor(-2.5f, 0);
+		
 	}
 	else {
 		return false;
@@ -53,12 +57,18 @@ void ListaEnemigos::Rebote(Personaje &p) {
 	}
 }
 void ListaEnemigos::Rebote(Plataforma p) {
-	//Volver a hacer
 	for (int i = 0; i < numero; i++) {
-		if (Interaccion::Contacto(*(lista[i]), p)) {
-			Vector2D pos = p.getPosicion();
+		/*if (Interaccion::Contacto(*(lista[i]), p)) {*/
+			Interaccion::Contacto(*(lista[i]), p);
+			/*	Vector2D pos = p.getPosicion();
 			(*lista[i]).SetPos(pos.x, pos.y);
-			(*lista[i]).SetVel(3.0f, 0.0f);
+			(*lista[i]).SetVel(3.0f, 0.0f);*/
 		}
 	}
+
+void ListaEnemigos::Rebote(Escenario e) {
+	for (int i = 0; i < numero; i++) {
+
+	}
+
 }

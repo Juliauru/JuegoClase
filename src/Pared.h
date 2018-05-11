@@ -9,7 +9,9 @@ public:
 	Pared();
 	~Pared();
 	void Dibuja();
+	Vector2D& getLimites();
 	void setLimites(float v1x, float v1y, float v2x, float v2y);
 	float Distancia(Vector2D punto, Vector2D *direccion = 0);
+	friend class Interaccion;
 };
 

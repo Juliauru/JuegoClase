@@ -26,6 +26,10 @@ void Pared::Dibuja() {
 	glEnd();
 
 }
+Vector2D& Pared::getLimites()
+{
+	return limite;
+}
 float Pared::Distancia(Vector2D punto, Vector2D *direccion) {
 	Vector2D u = (punto - posicion);
 	Vector2D v = (limite - posicion).unitario();

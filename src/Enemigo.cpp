@@ -7,11 +7,11 @@ Enemigo::Enemigo()
 {
 	Long_caracteristica = 0.8;
 	posicion.x = 0;
-	velocidad.x = 0.5f;
+	velocidad.x = 0.0f;
 	velocidad.y = 0.0;
 	posicion.y = 1;
 	aceleracion.x = 0;
-	aceleracion.y = 0.0f;
+	aceleracion.y = -10.0f;
 }
 
 

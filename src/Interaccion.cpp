@@ -15,14 +15,18 @@ bool Interaccion::Contacto(Movil &m, Plataforma &p) {
 	float dif = p.Distancia(m.posicion, &dir) - m.Long_caracteristica;
 	if (dif <= 0.0f)
 	{
+			if (m.velocidad.y <= 0)
+			m.velocidad.y = 0;
 			m.vinicial = 0;
 			m.posinicial = 0;
 			Vector2D v_inicial = m.velocidad;
 			m.velocidad = v_inicial - dir * 2.0*(v_inicial*dir);
 			m.posicion = m.posicion - dir * dif;
+			
 		
 		return true;
 	}
+	
 	return false;
 }
 
@@ -51,4 +55,14 @@ bool Interaccion::Rebote(Personaje  &p, Enemigo &e)
 		//Si la vida llega a 0 el programa se acabaría y comenzaría la pantalla principal.
 	}
 	return false;
+}
+
+void Interaccion::Rebote(Movil & m, Escenario e)
+{
+	float xmin = e.limites[3].posicion.x;
+	float xmax = e.limites[3].limite.x;
+	if (m.posicion.x < xmax) m.posicion.x = xmax;
+	if (m.posicion.x > xmin) m.posicion.x = xmin;
+
+
 }

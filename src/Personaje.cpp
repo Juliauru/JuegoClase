@@ -2,13 +2,12 @@
 #include "glut.h"
 #include <math.h>
 
-//Inicializacion vida
-int Personaje::vida = 3;
 
 Personaje::Personaje(float a)
 {
-	if (a < 1) {
-		Long_caracteristica = 1;
+	vida = 3;
+	if (a < 0.5) {
+		Long_caracteristica = 0.5;
 	}
 	else {
 		Long_caracteristica = a;

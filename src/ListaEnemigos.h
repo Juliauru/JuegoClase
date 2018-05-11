@@ -19,7 +19,8 @@ public:
 
 	void Rebote(Plataforma p);
 
-
+	void Rebote(Escenario e);
+	
 
 private:
 	Enemigo *lista[MAX_ENEMIGOS];

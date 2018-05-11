@@ -4,13 +4,13 @@ class Personaje:public Movil
 {
 private:
 	//Longitud característica radio esfera, hasta que tengamos una altura, luego cambiar
-	static int vida;
+	int vida;
 public:
 	void Dibuja();
-	Personaje(float a=1);
+	Personaje(float a=0.5);
 	~Personaje();	
 	void Salto();
-	static int GetVida() {
+	int GetVida() {
 		return vida;
 	}
 	friend class Interaccion;

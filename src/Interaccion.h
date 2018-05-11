@@ -1,7 +1,8 @@
 #pragma once
-#include "Personaje.h"
+#include "Personaje.h" //vidas personaje normal, mpersonaje siempre el mismo
 #include "Plataforma.h"
 #include "Enemigo.h"
+#include "Escenario.h"
 class Enemigo;
 class Interaccion //abstract //no se si se usa así 
 {
@@ -13,5 +14,7 @@ public:
 	static void Rebote(Enemigo &e, Enemigo &e1);
 
 	static bool Rebote(Personaje &p, Enemigo &e);
+	
+	static void Rebote(Movil &m, Escenario e);
 };
 

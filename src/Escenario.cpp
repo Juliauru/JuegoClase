@@ -53,7 +53,6 @@ void Escenario::Dibuja() {
 	glDisable(GL_TEXTURE_2D);
 	glEnable(GL_LIGHT0);
 	p_inicio.Dibuja();
-	base.Dibuja();
 	for (int i = 0; i < Plataforma::get_nplataformas(); i++) {
 		plat[i].Dibuja();
 	}
