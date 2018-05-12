@@ -20,6 +20,8 @@ void Mundo::Dibuja()
 	escenario.Dibuja();
 	personaje.Dibuja();
 	enemigos.Dibuja();
+	llave.Dibuja();
+	cajas.Dibuja();
 	glEnable(GL_LIGHTING);
 }
 
@@ -55,6 +57,7 @@ void Mundo::Inicializa()
 		//aux->setAltura(0.25);
 		enemigos.Agregar(aux);
 	}
+	cajas.CreaCajas();
 }
 
 void Mundo::Tecla(unsigned char key)
