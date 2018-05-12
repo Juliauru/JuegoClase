@@ -83,10 +83,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Box.cpp" />
     <ClCompile Include="src\Enemigo.cpp" />
     <ClCompile Include="src\Escenario.cpp" />
     <ClCompile Include="src\Interaccion.cpp" />
+    <ClCompile Include="src\ListaCajas.cpp" />
     <ClCompile Include="src\ListaEnemigos.cpp" />
+    <ClCompile Include="src\Llave.cpp" />
     <ClCompile Include="src\Movil.cpp" />
     <ClCompile Include="src\Mundo.cpp" />
     <ClCompile Include="src\Objeto.cpp" />
@@ -95,13 +98,17 @@
     <ClCompile Include="src\Personaje.cpp" />
     <ClCompile Include="src\Plataforma.cpp" />
     <ClCompile Include="src\Tono.cpp" />
+    <ClCompile Include="src\Transportable.cpp" />
     <ClCompile Include="src\Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Box.h" />
     <ClInclude Include="src\Enemigo.h" />
     <ClInclude Include="src\Escenario.h" />
     <ClInclude Include="src\Interaccion.h" />
+    <ClInclude Include="src\ListaCajas.h" />
     <ClInclude Include="src\ListaEnemigos.h" />
+    <ClInclude Include="src\Llave.h" />
     <ClInclude Include="src\Movil.h" />
     <ClInclude Include="src\Mundo.h" />
     <ClInclude Include="src\Objeto.h" />
@@ -109,6 +116,7 @@
     <ClInclude Include="src\Personaje.h" />
     <ClInclude Include="src\Plataforma.h" />
     <ClInclude Include="src\Tono.h" />
+    <ClInclude Include="src\Transportable.h" />
     <ClInclude Include="src\Vector2D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

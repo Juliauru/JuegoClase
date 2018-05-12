@@ -6,5 +6,6 @@ public:
 	Box();
 	~Box();
 	void Dibuja();
+	void CambiaEstado();
 };
 

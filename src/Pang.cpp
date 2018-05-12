@@ -62,7 +62,7 @@ void OnKeyboardDown(unsigned char key, int x_t, int y_t)
 }
 void OnSpecialKeyboardDown(int key, int x, int y)
 {	
-	bool izq = false, der = false;
+	bool izq = false, der = false, coge=false;
 	switch (key)
 	{
 	case GLUT_KEY_LEFT:
@@ -72,8 +72,10 @@ void OnSpecialKeyboardDown(int key, int x, int y)
 	case GLUT_KEY_RIGHT:
 		der = true;
 		break;
+	case GLUT_KEY_UP:
+		coge = true;
 	}
-	mundo.TeclaEspecial(izq,der);	
+	mundo.TeclaEspecial(izq,der,coge);	
 	glutPostRedisplay();
 }
 void OnTimer(int value)

@@ -3,6 +3,7 @@
 class Transportable:public Movil
 {
 public:
+	bool moviendose;
 	Transportable();
 	~Transportable();
 

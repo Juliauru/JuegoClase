@@ -1,7 +1,9 @@
+#include <stdlib.h>
+#include <iostream>
+#include <fstream>
 #include "Box.h"
 #include "glut.h"
-
-
+using namespace std;
 Box::Box()
 {
 	Long_caracteristica = TAMANIO*1.6f;
@@ -20,3 +22,9 @@ void Box::Dibuja()
 	glutSolidCube(Long_caracteristica);
 	glTranslatef(-posicion.x, -posicion.y, -1.5);
 }
+void Box::CambiaEstado() {
+	if (moviendose == true) moviendose = false;
+	else moviendose = true;
+	cout << moviendose;
+}
+

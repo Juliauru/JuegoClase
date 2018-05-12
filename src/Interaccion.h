@@ -3,6 +3,7 @@
 #include "Plataforma.h"
 #include "Enemigo.h"
 #include "Escenario.h"
+#include "Box.h"
 class Enemigo;
 class Interaccion //abstract //no se si se usa así 
 {
@@ -19,7 +20,7 @@ public:
 	static void Rebote(Movil &m, Escenario &e);
 
 	static void Rebote(Enemigo &ene, Escenario e);
-	static void Rebote(Enemigo &ene, Plataforma &p);
-
+	//static void Rebote(Enemigo &ene, Plataforma &p);
+	static void Coger(Personaje &p, Box &c);
 };
 

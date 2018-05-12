@@ -61,8 +61,8 @@ void Interaccion::Rebote(Enemigo & e, Enemigo & e1)
 		e1.velocidad.x = -e1.velocidad.x;
 	}*/
 	if (e.posicion.y == e1.posicion.y) {
-		float dist = e.posicion.x - e1.posicion.x;
-		if (dist < 0) dist = -dist;
+		float dist = fabs(e.posicion.x - e1.posicion.x);
+		
 		//if (dist == 0)dist = 0.0001f; intento para que se separaran las que vibran, but no
 		float r = e.Long_caracteristica + e1.Long_caracteristica;
 		if (r >= dist) {
@@ -121,5 +121,25 @@ void Interaccion::Rebote(Enemigo &ene, Escenario e) {
 	if (ene.posicion.x >= xmax) ene.velocidad.x = -ene.velocidad.x;
 	if (ene.posicion.x <= xmin) ene.velocidad.x = -ene.velocidad.x;
 }
+void Interaccion::Coger(Personaje &p, Box &c) { //No funciona del todo bien faltan detalles
+	Vector2D dir;
+	float dist = p.Distancia(c.posicion, &dir);
+	float r = p.Long_caracteristica + c.Long_caracteristica / 2;
+	
+	if (c.moviendose == false) {
+		if (r >= dist) {
+			p.velocidad.x = 0;
+			c.posicion.x = p.posicion.x + p.Long_caracteristica + c.Long_caracteristica / 2;
+			c.posicion.y = p.posicion.y;
+		}
+	}
+	if (c.moviendose == true) {
+			c.posicion.x = p.posicion.x;
+			c.posicion.y = p.posicion.y + p.Long_caracteristica + c.Long_caracteristica / 2;
+		}
+	}
+
+	
+
 
 

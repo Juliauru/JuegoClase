@@ -10,9 +10,8 @@ public:
 	Personaje(float a=0.5);
 	~Personaje();	
 	void Salto();
-	int GetVida() {
-		return vida;
-	}
+	int GetVida() {	return vida;}
+	float Distancia(Vector2D centro, Vector2D *direccion);
 	friend class Interaccion;
 };
 

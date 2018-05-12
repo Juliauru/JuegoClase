@@ -1,5 +1,6 @@
 #pragma once
 #include "Box.h"
+#include "Personaje.h"
 class ListaCajas:public Box
 {
 private:
@@ -14,6 +15,7 @@ public:
 	void CreaCajas();
 
 	void Dibuja();
+	void Coger(Personaje &pers);
 
 
 };

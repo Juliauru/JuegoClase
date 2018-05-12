@@ -22,17 +22,19 @@ void Mundo::Dibuja()
 	enemigos.Dibuja();
 	llave.Dibuja();
 	cajas.Dibuja();
+	caja1.Dibuja();
 	glEnable(GL_LIGHTING);
 }
 
 void Mundo::Mueve() {
 
 	personaje.Mueve(0.025f);
-	enemigos.Mueve(0.025f);
+	enemigos.Mueve(0.025f);	
 	for (int i = 0; i < Plataforma::get_nplataformas(); i++) {
 		Interaccion::Contacto(personaje, escenario.plat[i]);
 		enemigos.Rebote(escenario.plat[i]);
 	}
+	Interaccion::Coger(personaje, caja1);
 	Interaccion::Contacto(personaje, escenario.p_inicio);
 	enemigos.Rebote(escenario.p_inicio);
 	enemigos.Rebote(personaje);
@@ -58,6 +60,8 @@ void Mundo::Inicializa()
 		enemigos.Agregar(aux);
 	}
 	cajas.CreaCajas();
+	caja1.getPosicion().setValor(4, 0.5);
+
 }
 
 void Mundo::Tecla(unsigned char key)
@@ -67,8 +71,9 @@ void Mundo::Tecla(unsigned char key)
 		personaje.Salto();
 	}
 }
-void Mundo::TeclaEspecial(bool izq, bool der)
+void Mundo::TeclaEspecial(bool izq, bool der,bool coge)
 {
 	if (izq == true) personaje.getVelocidad().x = -2.5;
 	if (der == true) personaje.getVelocidad().x = 2.5;
+	if (coge == true)caja1.CambiaEstado();
 }

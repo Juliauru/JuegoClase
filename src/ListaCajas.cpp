@@ -1,4 +1,5 @@
 #include "ListaCajas.h"
+#include "Interaccion.h"
 #include <stdlib.h>
 #include <iostream>
 #include <fstream>
@@ -59,5 +60,10 @@ void ListaCajas::Dibuja()
 {
 	for (int i = 0; i < n_cajas; i++) {
 		lista[i].Dibuja();
+	}
+}
+void ListaCajas::Coger(Personaje &pers) {
+	for (int i = 0; i < n_cajas; i++) {
+		Interaccion::Coger(pers, (lista[i]));
 	}
 }

@@ -50,3 +50,10 @@ void Personaje::Salto() { //Poner límtes al salto
 		posinicial = posicion.y;
 	}
 }
+float Personaje::Distancia(Vector2D centro, Vector2D *direccion) {
+	//Posicion u = (punto - limite1);
+	Vector2D dir = (posicion - centro).unitario();
+	float distancia = (posicion - centro).modulo();
+	*direccion = dir;
+	return distancia;
+}
