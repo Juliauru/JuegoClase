@@ -1,8 +1,8 @@
 #include "Interaccion.h"
 #include <math.h>
-
-
-
+#include <iostream>
+#include <fstream>
+using namespace std;
 Interaccion::Interaccion()
 {
 }
@@ -121,12 +121,13 @@ void Interaccion::Rebote(Enemigo &ene, Escenario e) {
 	if (ene.posicion.x >= xmax) ene.velocidad.x = -ene.velocidad.x;
 	if (ene.posicion.x <= xmin) ene.velocidad.x = -ene.velocidad.x;
 }
-void Interaccion::Coger(Personaje &p, Box &c) { //No funciona del todo bien faltan detalles
+void Interaccion::Mover(Personaje &p, Box &c) { //No funciona del todo bien faltan detalles
 	Vector2D dir;
 	float dist = p.Distancia(c.posicion, &dir);	
 	float r = p.Long_caracteristica + c.Long_caracteristica / 2;
-	if (r >= dist) {
-		if (c.moviendose == false) {
+	
+	if (c.moviendose == false) {
+		if (r >= dist && fabsf(p.posicion.y-c.posicion.y)<0.1) {
 			p.velocidad.x = 0;
 			if (c.posicion.x > p.posicion.x) {
 				c.posicion.x = p.posicion.x + p.Long_caracteristica + c.Long_caracteristica / 2;
@@ -137,10 +138,28 @@ void Interaccion::Coger(Personaje &p, Box &c) { //No funciona del todo bien falt
 				c.posicion.y = p.posicion.y;
 			}
 		}
+	}
 		if (c.moviendose == true) {
 			c.posicion.x = p.posicion.x;
 			c.posicion.y = p.posicion.y + p.Long_caracteristica + c.Long_caracteristica / 2;
 
+		}
+	}
+
+void Interaccion::Coger(Personaje &p, Box &c) {
+	Vector2D dir;
+	float dist = p.Distancia(c.posicion, &dir);
+	float r = p.Long_caracteristica + (c.Long_caracteristica / 2)+0.01;
+	if (r >= dist) {
+		cout << "entra";
+		c.CambiaEstado();
+		if (c.moviendose == false) {
+			if (r >= dist /*&& fabsf(p.velocidad.y) < 0.1 && p.velocidad.y >= 0*/) {
+				p.velocidad.x = 0;				
+				c.posicion.x = p.posicion.x + p.Long_caracteristica + c.Long_caracteristica / 2;
+				c.posicion.y = p.posicion.y;
+								
+			}
 		}
 	}
 }

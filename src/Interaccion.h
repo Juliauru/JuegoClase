@@ -22,5 +22,6 @@ public:
 	static void Rebote(Enemigo &ene, Escenario e);
 	//static void Rebote(Enemigo &ene, Plataforma &p);
 	static void Coger(Personaje &p, Box &c);
+	static void Mover(Personaje &p, Box &c);
 };
 

@@ -45,7 +45,7 @@ void Personaje::Dibuja()
 
 
 void Personaje::Salto() { //Poner límtes al salto
-	if (fabsf(velocidad.y) < 0.5 && velocidad.y >= 0) {
+	if (fabsf(velocidad.y) < 0.1 && velocidad.y >= 0) {
 		vinicial = velocidad.y = 10.0f;
 		posinicial = posicion.y;
 	}
