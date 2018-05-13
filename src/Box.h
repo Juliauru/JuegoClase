@@ -1,5 +1,6 @@
 #pragma once
 #include "Transportable.h"
+#include "Personaje.h"
 class Box:public Transportable
 {
 public:
@@ -7,5 +8,6 @@ public:
 	~Box();
 	void Dibuja();
 	void CambiaEstado();
+	void Mueve(Personaje &pers);
 };
 

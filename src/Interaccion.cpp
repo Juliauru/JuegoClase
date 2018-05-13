@@ -123,21 +123,28 @@ void Interaccion::Rebote(Enemigo &ene, Escenario e) {
 }
 void Interaccion::Coger(Personaje &p, Box &c) { //No funciona del todo bien faltan detalles
 	Vector2D dir;
-	float dist = p.Distancia(c.posicion, &dir);
+	float dist = p.Distancia(c.posicion, &dir);	
 	float r = p.Long_caracteristica + c.Long_caracteristica / 2;
-	
-	if (c.moviendose == false) {
-		if (r >= dist) {
+	if (r >= dist) {
+		if (c.moviendose == false) {
 			p.velocidad.x = 0;
-			c.posicion.x = p.posicion.x + p.Long_caracteristica + c.Long_caracteristica / 2;
-			c.posicion.y = p.posicion.y;
+			if (c.posicion.x > p.posicion.x) {
+				c.posicion.x = p.posicion.x + p.Long_caracteristica + c.Long_caracteristica / 2;
+				c.posicion.y = p.posicion.y;
+			}
+			else {
+				c.posicion.x = p.posicion.x - p.Long_caracteristica - c.Long_caracteristica / 2;
+				c.posicion.y = p.posicion.y;
+			}
 		}
-	}
-	if (c.moviendose == true) {
+		if (c.moviendose == true) {
 			c.posicion.x = p.posicion.x;
 			c.posicion.y = p.posicion.y + p.Long_caracteristica + c.Long_caracteristica / 2;
+
 		}
 	}
+}
+	
 
 	
 
