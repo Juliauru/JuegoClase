@@ -72,3 +72,36 @@ void ListaEnemigos::Rebote(Escenario e) {
 		Interaccion::Rebote(*(lista[i]), e);
 	}
 }
+
+void ListaEnemigos::Eliminar(int ind)
+{
+	if (ind < 0 || ind >= numero) {
+		return;
+	}
+	delete lista[ind];
+	numero--;
+	for (int i = ind; i < numero; i++) {
+		lista[i] = lista[i + 1];
+	}
+}
+
+int ListaEnemigos::Colision(Personaje p)
+{
+	for (int i = 0; i < numero; i++) {
+		if (Interaccion::Colision(*(lista[i]), p)) {
+			return i;
+		}
+	}
+	return -1;
+}
+
+void ListaEnemigos::Choque(ListaCajas c)//No funciona bien
+{
+	for (int i = 0; i < numero; i++) {
+		if (Interaccion::Choque(c, *(lista[i]))) {
+			float aux = lista[i]->getVelocidad().x;
+			float aux1 = lista[i]->getVelocidad().y;
+			lista[i]->getVelocidad().setValor(-aux, aux1);
+		}
+	}
+}

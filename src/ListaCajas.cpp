@@ -67,3 +67,20 @@ void ListaCajas::Coger(Personaje &pers) {
 		Interaccion::Coger(pers, (lista[i]));
 	}
 }
+
+void ListaCajas::Contacto(Personaje & pers)
+{
+	for (int i = 0; i < n_cajas; i++) {
+		Interaccion::Contacto(pers, (lista[i]));
+	}
+}
+
+void ListaCajas::Mover(Personaje & pers)
+{
+	for (int i = 0; i < n_cajas; i++) {
+		Interaccion::Mover(pers, (lista[i]));
+		for (int j = i + 1; j <= n_cajas - 1; j++) {
+			Interaccion::Mover((lista[i]), (lista[j]));
+		}
+	}
+}

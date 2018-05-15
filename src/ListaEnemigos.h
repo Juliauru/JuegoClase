@@ -6,11 +6,19 @@
 #include "Personaje.h"
 class ListaEnemigos :public Enemigo
 {
+private:
+	Enemigo * lista[MAX_ENEMIGOS];
+	int numero;
+
 public:
 	ListaEnemigos();
+
 	~ListaEnemigos();
+
 	bool Agregar(Enemigo *e);
+
 	void Dibuja();
+
 	void Mueve(float);
 
 	void Rebote();
@@ -21,9 +29,11 @@ public:
 
 	void Rebote(Escenario e);
 
-private:
-	Enemigo * lista[MAX_ENEMIGOS];
-	int numero;
+	void Eliminar(int ind);
+
+	int Colision(Personaje p);
+
+	void Choque(ListaCajas c);
 
 	friend class Interaccion;
 };

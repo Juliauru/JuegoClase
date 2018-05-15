@@ -30,6 +30,29 @@ bool Interaccion::Contacto(Movil &m, Plataforma &p) {
 
 	return false;
 }
+
+void Interaccion::Contacto(Movil &m, Box &c) {
+	Plataforma p;
+	p.setLimites((c.getPosicion().x - (c.Long_caracteristica / 2)), (c.getPosicion().y + (c.Long_caracteristica / 2)), (c.getPosicion().x + (c.Long_caracteristica / 2)), (c.getPosicion().y + (c.Long_caracteristica / 2)));
+	Vector2D dir;
+	float dif = p.Distancia(m.posicion, &dir) - m.Long_caracteristica;
+	if (dif <= 0.0f)
+	{
+		if (m.velocidad.y <= 0)
+			m.velocidad.y = 0;
+		m.vinicial = 0;
+		m.posinicial = 0;
+		Vector2D v_inicial = m.velocidad;
+		m.velocidad = v_inicial - dir * 2.0*(v_inicial*dir);
+		m.posicion = m.posicion - dir * dif;
+
+
+		//return true;
+	}
+
+	//return false;
+}
+
 bool Interaccion::Contacto(Enemigo &ene, Plataforma &p) { //arreglar con polimorfismo creo 
 	Vector2D dir;
 	float dif = p.Distancia(ene.posicion, &dir) - ene.Long_caracteristica;
@@ -163,6 +186,53 @@ void Interaccion::Coger(Personaje &p, Box &c) {
 		}
 	}
 }
+
+void Interaccion::Mover(Box & c, Box & c1)
+{
+	Vector2D dir;
+	float dist = c.posicion.x - c1.posicion.x;
+	float r = c.Long_caracteristica / 2 + c1.Long_caracteristica / 2;
+
+	if (c1.moviendose == false) {
+		if (r >= dist && fabsf(c.posicion.y - c1.posicion.y) < 0.1) {
+			c.velocidad.x = 0;
+			if (c1.posicion.x > c.posicion.x) {
+				c1.posicion.x = c.posicion.x + c.Long_caracteristica / 2 + c1.Long_caracteristica / 2;
+				c1.posicion.y = c.posicion.y;
+			}
+			else {
+				c1.posicion.x = c.posicion.x - c.Long_caracteristica / 2 - c1.Long_caracteristica / 2;
+				c1.posicion.y = c.posicion.y;
+			}
+		}
+	}
+	if (c1.moviendose == true) {
+		c1.posicion.x = c.posicion.x;
+		c1.posicion.y = c.posicion.y + c.Long_caracteristica / 2 + c1.Long_caracteristica / 2;
+
+	}
+}
+
+bool Interaccion::Colision(Enemigo e, Personaje p)
+{
+	if (p.posicion.x <= (e.posicion.x + p.Long_caracteristica) && p.posicion.x >= (e.posicion.x - p.Long_caracteristica) && p.posicion.y <= (e.posicion.y + e.Long_caracteristica + p.Long_caracteristica) && p.posicion.y > (e.posicion.y + e.Long_caracteristica + p.Long_caracteristica / 2)) {
+		return true;
+	}
+	return false;
+}
+
+bool Interaccion::Choque(ListaCajas c, Enemigo & e)
+{
+	for (int i = 0; i < c.n_cajas; i++) {
+		float dist = c.lista[i].posicion.x - e.posicion.x;
+		float r = c.lista[i].Long_caracteristica / 2 + e.Long_caracteristica;
+		if (fabsf(c.lista[i].posicion.y - e.posicion.y) < 0.5 && r >= dist) {
+			return true;
+		}
+	}
+	return false;
+}
+
 	
 
 	

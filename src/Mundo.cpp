@@ -23,6 +23,8 @@ void Mundo::Dibuja()
 	llave.Dibuja();
 	cajas.Dibuja();
 	caja1.Dibuja();
+	//DIBUJO DE LAS VIDAS
+	personaje.DibujaVidas(escenario.vertices[1].y, escenario.p_ojo_y);
 	glEnable(GL_LIGHTING);
 }
 
@@ -41,6 +43,10 @@ void Mundo::Mueve() {
 	enemigos.Rebote();
 	Interaccion::Rebote(personaje, escenario);
 	enemigos.Rebote(escenario);
+	cajas.Contacto(personaje);
+	cajas.Mover(personaje);
+	enemigos.Eliminar(enemigos.Colision(personaje));
+	enemigos.Choque(cajas);
 }
 void Mundo::Inicializa()
 {
@@ -75,5 +81,5 @@ void Mundo::TeclaEspecial(bool izq, bool der,bool coge)
 {
 	if (izq == true) personaje.getVelocidad().x = -2.5;
 	if (der == true) personaje.getVelocidad().x = 2.5;
-	if (coge == true) Interaccion::Coger(personaje, caja1);
+	if (coge == true) cajas.Coger(personaje);//Interaccion::Coger(personaje, caja1);
 }
