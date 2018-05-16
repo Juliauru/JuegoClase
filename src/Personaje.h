@@ -1,5 +1,6 @@
 #pragma once
 #include "Movil.h"
+#include "Escenario.h"
 class Personaje:public Movil
 {
 private:
@@ -9,7 +10,7 @@ public:
 	Personaje(float a=0.5);
 	~Personaje();	
 	void Dibuja();
-	void DibujaVidas(float y, float inc);
+	void DibujaVidas(float y,float inc);
 	void Salto();
 	int GetVida() {	return vida;}
 	float Distancia(Vector2D centro, Vector2D *direccion);

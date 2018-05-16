@@ -21,9 +21,11 @@ public:
 	void Contacto(Personaje &pers);
 
 	void Mover(Personaje &pers);
-
+	
 	friend class Interaccion;
 
+	//PRUEBA
+	//void Mover();
 
 };
 

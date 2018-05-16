@@ -24,7 +24,7 @@ void Mundo::Dibuja()
 	cajas.Dibuja();
 	caja1.Dibuja();
 	//DIBUJO DE LAS VIDAS
-	personaje.DibujaVidas(escenario.vertices[1].y, escenario.p_ojo_y);
+	personaje.DibujaVidas(escenario.vertices[1].y,escenario.p_ojo_y);
 	glEnable(GL_LIGHTING);
 }
 

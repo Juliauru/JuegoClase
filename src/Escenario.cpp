@@ -62,6 +62,7 @@ void Escenario::Dibuja() {
 	glDisable(GL_LIGHTING);
 	//glColor3ub(colorPared.rojo, colorPared.verde, colorPared.azul);
 	glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("Textures/Sun.png").id);
+	//glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("Sun.png").id);//Para que se me dibuje a mi bien cuando compile
 	glBegin(GL_POLYGON);
 	glColor3f(1, 1, 1);
 	glTexCoord2d(0, 0); glVertex3d(vertices[0].x, vertices[0].y, 0);
@@ -79,6 +80,8 @@ void Escenario::Dibuja() {
 	for (int i = 0; i < 4; i++) {
 		limites[i].Dibuja();
 	}
+	
+
 	}
 void Escenario::Reorientar() {
 	gluLookAt(10, p_ojo_y, 25,  // posicion del ojo 0-10-20 x_ojo=0 y=5 z=30

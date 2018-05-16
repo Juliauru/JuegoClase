@@ -30,7 +30,6 @@ bool Interaccion::Contacto(Movil &m, Plataforma &p) {
 
 	return false;
 }
-
 void Interaccion::Contacto(Movil &m, Box &c) {
 	Plataforma p;
 	p.setLimites((c.getPosicion().x - (c.Long_caracteristica / 2)), (c.getPosicion().y + (c.Long_caracteristica / 2)), (c.getPosicion().x + (c.Long_caracteristica / 2)), (c.getPosicion().y + (c.Long_caracteristica / 2)));
@@ -52,7 +51,6 @@ void Interaccion::Contacto(Movil &m, Box &c) {
 
 	//return false;
 }
-
 bool Interaccion::Contacto(Enemigo &ene, Plataforma &p) { //arreglar con polimorfismo creo 
 	Vector2D dir;
 	float dif = p.Distancia(ene.posicion, &dir) - ene.Long_caracteristica;
@@ -108,7 +106,7 @@ void Interaccion::Rebote(Enemigo & e, Enemigo & e1)
 	}
 }
 
-bool Interaccion::Rebote(Personaje  &p, Enemigo &e)
+void Interaccion::Rebote(Personaje  &p, Enemigo &e)
 {
 	////IDEA PARA LAS VIDAS
 	////En esta función, si se produce el choque, las vidas del personaje disminuirán en 1. Por tanto, en personaje se creará una variable
@@ -116,15 +114,18 @@ bool Interaccion::Rebote(Personaje  &p, Enemigo &e)
 	////Introduzco friend class en Personaje, tambien función getVida();
 	////ya que cuando se apoyen en las plataformas tendran el mismo punto y, volver a cambiar el if()
 	////Volver a cambiar ((p.posicion.x + (p.Long_caracteristica / 1.5f) > e.posicion.x) && (p.posicion.x - (p.Long_caracteristica / 1.5f) < e.posicion.x) && p.posicion.y == e.posicion.y)
-	//if ((p.posicion.x + (p.Long_caracteristica) > e.posicion.x - e.Long_caracteristica) && (p.posicion.y - (p.Long_caracteristica) < e.posicion.y + e.Long_caracteristica) && (p.posicion.y + (p.Long_caracteristica) > e.posicion.y - e.Long_caracteristica) && (p.posicion.x - (p.Long_caracteristica) < e.posicion.x + e.Long_caracteristica)) {
-	//	p.vida -= 1;
-	//	//Esto de las velocidades es una prueba para comprobar visualmente que chocan
-	//	e.velocidad.x = -e.velocidad.x;
-	//	return true;
-	//	//Indicaría que pierde una vida y vuelve a empezar el nivel por el que iba (si la vida es distinta de 0)
-	//	//Si la vida llega a 0 el programa se acabaría y comenzaría la pantalla principal.
-	//}
-	return false;
+	if ((p.posicion.x + (p.Long_caracteristica) > e.posicion.x - e.Long_caracteristica) && (p.posicion.y - (p.Long_caracteristica) >= e.posicion.y - e.Long_caracteristica) && (p.posicion.y - (p.Long_caracteristica) < e.posicion.y) && (p.posicion.x - (p.Long_caracteristica) < e.posicion.x + e.Long_caracteristica)) {
+		p.vida -= 1;
+		p.posicion.x = p.Long_caracteristica;
+		p.posicion.y = p.Long_caracteristica;
+	}
+		//	//Esto de las velocidades es una prueba para comprobar visualmente que chocan
+		//	e.velocidad.x = -e.velocidad.x;
+		//	return true;
+		//	//Indicaría que pierde una vida y vuelve a empezar el nivel por el que iba (si la vida es distinta de 0)
+		//	//Si la vida llega a 0 el programa se acabaría y comenzaría la pantalla principal.
+		//}
+		//return false;
 }
 
 void Interaccion::Rebote(Movil &m, Escenario &e) //Intentar hacer poco a poco, no se como quedará
@@ -134,7 +135,7 @@ void Interaccion::Rebote(Movil &m, Escenario &e) //Intentar hacer poco a poco, n
 	if (m.posicion.x >= xmax) m.posicion.x = xmax;
 	if (m.posicion.x <= xmin) m.posicion.x = xmin;
 	if (m.posicion.y > 2* e.p_ojo_y)
-		e.p_ojo_y = e.p_ojo_y+7.5;
+		e.p_ojo_y = e.p_ojo_y+7.5; //Si se cambia el 7.5 hay que cambiarlo tambien en el metodo dibuja vidas de personaje
 	if (m.posicion.y <(e.p_ojo_y-7.5))
 		e.p_ojo_y = e.p_ojo_y -7.5;
 }
@@ -169,53 +170,35 @@ void Interaccion::Mover(Personaje &p, Box &c) { //No funciona del todo bien falt
 		}
 	}
 
-void Interaccion::Coger(Personaje &p, Box &c) {
-	Vector2D dir;
-	float dist = p.Distancia(c.posicion, &dir);
-	float r = p.Long_caracteristica + (c.Long_caracteristica / 2)+0.01;
-	if (r >= dist) {
-		cout << "entra";
-		c.CambiaEstado();
-		if (c.moviendose == false) {
-			if (r >= dist /*&& fabsf(p.velocidad.y) < 0.1 && p.velocidad.y >= 0*/) {
-				p.velocidad.x = 0;				
-				c.posicion.x = p.posicion.x + p.Long_caracteristica + c.Long_caracteristica / 2;
-				c.posicion.y = p.posicion.y;
-								
-			}
-		}
-	}
-}
-
 void Interaccion::Mover(Box & c, Box & c1)
 {
 	Vector2D dir;
-	float dist = c.posicion.x - c1.posicion.x;
-	float r = c.Long_caracteristica / 2 + c1.Long_caracteristica / 2;
+		float dist = c.posicion.x - c1.posicion.x;
+		float r = c.Long_caracteristica / 2 + c1.Long_caracteristica / 2;
 
-	if (c1.moviendose == false) {
-		if (r >= dist && fabsf(c.posicion.y - c1.posicion.y) < 0.1) {
-			c.velocidad.x = 0;
-			if (c1.posicion.x > c.posicion.x) {
-				c1.posicion.x = c.posicion.x + c.Long_caracteristica / 2 + c1.Long_caracteristica / 2;
-				c1.posicion.y = c.posicion.y;
-			}
-			else {
-				c1.posicion.x = c.posicion.x - c.Long_caracteristica / 2 - c1.Long_caracteristica / 2;
-				c1.posicion.y = c.posicion.y;
+		if (c1.moviendose == false) {
+			if (r >= dist && fabsf(c.posicion.y - c1.posicion.y) < 0.1) {
+				c.velocidad.x = 0;
+				if (c1.posicion.x > c.posicion.x) {
+					c1.posicion.x = c.posicion.x + c.Long_caracteristica / 2 + c1.Long_caracteristica / 2;
+					c1.posicion.y = c.posicion.y;
+				}
+				else {
+					c1.posicion.x = c.posicion.x - c.Long_caracteristica / 2 - c1.Long_caracteristica / 2;
+					c1.posicion.y = c.posicion.y;
+				}
 			}
 		}
-	}
-	if (c1.moviendose == true) {
-		c1.posicion.x = c.posicion.x;
-		c1.posicion.y = c.posicion.y + c.Long_caracteristica / 2 + c1.Long_caracteristica / 2;
+		if (c1.moviendose == true) {
+			c1.posicion.x = c.posicion.x;
+			c1.posicion.y = c.posicion.y + c.Long_caracteristica / 2 + c1.Long_caracteristica / 2;
 
-	}
+		}
 }
 
 bool Interaccion::Colision(Enemigo e, Personaje p)
 {
-	if (p.posicion.x <= (e.posicion.x + p.Long_caracteristica) && p.posicion.x >= (e.posicion.x - p.Long_caracteristica) && p.posicion.y <= (e.posicion.y + e.Long_caracteristica + p.Long_caracteristica) && p.posicion.y > (e.posicion.y + e.Long_caracteristica + p.Long_caracteristica / 2)) {
+	if (p.posicion.x <= (e.posicion.x + p.Long_caracteristica) && p.posicion.x >= (e.posicion.x - p.Long_caracteristica) && p.posicion.y <= (e.posicion.y + e.Long_caracteristica + p.Long_caracteristica)&& p.posicion.y > (e.posicion.y + e.Long_caracteristica + p.Long_caracteristica/2)) {
 		return true;
 	}
 	return false;
@@ -233,6 +216,23 @@ bool Interaccion::Choque(ListaCajas c, Enemigo & e)
 	return false;
 }
 
+void Interaccion::Coger(Personaje &p, Box &c) {
+	Vector2D dir;
+	float dist = p.Distancia(c.posicion, &dir);
+	float r = p.Long_caracteristica + (c.Long_caracteristica / 2)+0.01;
+	if (r >= dist) {
+		cout << "entra";
+		c.CambiaEstado();
+		if (c.moviendose == false) {
+			if (r >= dist /*&& fabsf(p.velocidad.y) < 0.1 && p.velocidad.y >= 0*/) {
+				p.velocidad.x = 0;				
+				c.posicion.x = p.posicion.x + p.Long_caracteristica + c.Long_caracteristica / 2;
+				c.posicion.y = p.posicion.y;
+								
+			}
+		}
+	}
+}
 	
 
 	

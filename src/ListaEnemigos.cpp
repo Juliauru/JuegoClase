@@ -87,7 +87,7 @@ void ListaEnemigos::Eliminar(int ind)
 
 int ListaEnemigos::Colision(Personaje p)
 {
-	for (int i = 0; i < numero; i++) {
+	for (int i = 0; i < numero;i++){
 		if (Interaccion::Colision(*(lista[i]), p)) {
 			return i;
 		}

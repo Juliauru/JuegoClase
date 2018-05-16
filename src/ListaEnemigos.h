@@ -4,6 +4,7 @@
 #include "Pared.h"
 #include "Interaccion.h"
 #include "Personaje.h"
+#include "ListaCajas.h"
 class ListaEnemigos :public Enemigo
 {
 private:
@@ -12,7 +13,6 @@ private:
 
 public:
 	ListaEnemigos();
-
 	~ListaEnemigos();
 
 	bool Agregar(Enemigo *e);

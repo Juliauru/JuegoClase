@@ -5,7 +5,7 @@
 
 Enemigo::Enemigo()
 {
-	Long_caracteristica = TAMANIO / 2.0f;
+	Long_caracteristica = TAMANIO / 1.5f;
 	posicion.x = 0;
 	velocidad.x = 0.0f;
 	velocidad.y = 0.0;

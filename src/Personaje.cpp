@@ -29,18 +29,18 @@ void Personaje::Dibuja()
 	glutSolidSphere((Long_caracteristica), 20, 30);
 	glTranslatef(-posicion.x, -posicion.y, -1.5);
 }
-
-void Personaje::DibujaVidas(float y, float inc)
+void Personaje::DibujaVidas(float y,float inc)
 {
-	float l = 0, plus = inc - 7.5;
+	float l = 0, plus=inc-7.5;
 	for (int i = 0; i < vida; i++) {
 		glColor3b(255, 0, 0);
-		glTranslatef(((TAMANIO / 3) + l), (((int)y / 3) + plus), 0);
+		glTranslatef(((TAMANIO/3)+l),(((int)y/3)+plus), 0);
 		glutSolidSphere((TAMANIO / 3), 20, 30);
-		glTranslatef(-((TAMANIO / 3) + l), -(((int)y / 3) + plus), 0);
+		glTranslatef(-((TAMANIO / 3)+l), -(((int)y / 3) + plus), 0);
 		l = l + TAMANIO;
 	}
 }
+
 //void Personaje::Mueve(float t, bool p) {
 //	
 //	if(vinicial*vinicial + 2 * aceleracion.y*(posicion.y - posinicial)>0){
