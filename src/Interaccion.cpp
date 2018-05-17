@@ -189,35 +189,35 @@ void Interaccion::Mover(Personaje &p, Box &c) { //No funciona del todo bien falt
 		}
 	}
 
-void Interaccion::Mover(Box &caja1, Box &caja2, Personaje &p)
+void Interaccion::Mover(Box &caja1, Box &caja2, Personaje &p) //Se han quitado los /2, no compila por eso 
 {
 	bool t = Tocando(p, caja1);
 	bool s = Tocando(p, caja2);
 	Box& c1 = caja2;
 	Box& c = caja1;
-	/*float dist = fabsf(c.posicion.x - c1.posicion.x);
-	float r= c.Long_caracteristica / 2 + c1.Long_caracteristica / 2;*/
+	float dist = fabsf(c.posicion.x - c1.posicion.x);
+	float r= c.Long_caracteristica + c1.Long_caracteristica;
 
 	if (c1.trans == false && c.trans == false) {
-		if (t && fabsf(c.posicion.y - c1.posicion.y) < 0.1) {
+		if (dist<=r && t && fabsf(c.posicion.y - c1.posicion.y) < 0.1) {
 
 			if (c1.posicion.x > c.posicion.x) {
-				c1.posicion.x = c.posicion.x + c.Long_caracteristica / 2 + c1.Long_caracteristica / 2;
+				c1.posicion.x = c.posicion.x + c.Long_caracteristica+ c1.Long_caracteristica;
 				c1.posicion.y = c.posicion.y;
 			}
 			else {
-				c1.posicion.x = c.posicion.x - c.Long_caracteristica / 2 - c1.Long_caracteristica / 2;
+				c1.posicion.x = c.posicion.x - c.Long_caracteristica - c1.Long_caracteristica;
 				c1.posicion.y = c.posicion.y;
 			}
 		}
-		if (s && fabsf(c.posicion.y - c1.posicion.y) < 0.1) {
+		if (dist <= r && s && fabsf(c.posicion.y - c1.posicion.y) < 0.1) {
 
 			if (c.posicion.x > c1.posicion.x) {
-				c.posicion.x = c1.posicion.x + c.Long_caracteristica / 2 + c1.Long_caracteristica / 2;
+				c.posicion.x = c1.posicion.x + c.Long_caracteristica+ c1.Long_caracteristica;
 				c.posicion.y = c1.posicion.y;
 			}
 			else {
-				c.posicion.x = c1.posicion.x - c.Long_caracteristica / 2 - c1.Long_caracteristica / 2;
+				c.posicion.x = c1.posicion.x - c.Long_caracteristica - c1.Long_caracteristica;
 				c.posicion.y = c1.posicion.y;
 			}
 		}
@@ -255,10 +255,10 @@ void Interaccion::Coger(Personaje &p, Box &c) {
 		}
 	}
 
-bool Interaccion::Tocando(Personaje &p, Box &c) {
+bool Interaccion::Tocando(Personaje &p, Box &c) { //Se han quitado los /2, no compila por eso 
 	Vector2D dir;
 	float dist = p.Distancia(c.posicion, &dir);
-	float r = p.Long_caracteristica + c.Long_caracteristica / 2;
+	float r = p.Long_caracteristica + c.Long_caracteristica;
 	if (r >= dist)
 		return true;
 	return false;
