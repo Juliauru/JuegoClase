@@ -20,7 +20,9 @@ public:
 
 	void Contacto(Personaje &pers);
 
-	void Mover(Personaje &pers);
+	void Mover(Personaje &pers)
+
+	void Caida(Plataforma p);
 	
 	friend class Interaccion;
 

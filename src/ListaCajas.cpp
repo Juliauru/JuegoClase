@@ -85,5 +85,10 @@ void ListaCajas::Mover(Personaje & pers)
 	}
 }
 
+void ListaCajas::Caida(Plataforma p) {
+	for (int i = 0; i < n_cajas; i++) {
+		Interaccion::Contacto((lista[i]), p);
+	}
+}
 
 

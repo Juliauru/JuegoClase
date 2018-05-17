@@ -32,7 +32,7 @@ bool Interaccion::Contacto(Movil &m, Plataforma &p) {
 }
 void Interaccion::Contacto(Movil &m, Box &c) {
 	Plataforma p;
-	p.setLimites((c.getPosicion().x - (c.Long_caracteristica / 2)), (c.getPosicion().y + (c.Long_caracteristica / 2)), (c.getPosicion().x + (c.Long_caracteristica / 2)), (c.getPosicion().y + (c.Long_caracteristica / 2)));
+	p.setLimites((c.getPosicion().x - (c.Long_caracteristica)), (c.getPosicion().y + (c.Long_caracteristica)), (c.getPosicion().x + (c.Long_caracteristica)), (c.getPosicion().y + (c.Long_caracteristica)));
 	Vector2D dir;
 	float dif = p.Distancia(m.posicion, &dir) - m.Long_caracteristica;
 	if (dif <= 0.0f)
@@ -54,7 +54,7 @@ void Interaccion::Contacto(Movil &m, Box &c) {
 void Interaccion::Contacto(Enemigo &e, ListaCajas c) {
 	for (int i = 0; i < c.n_cajas; i++) {
 		Plataforma p;
-		p.setLimites((c.lista[i].posicion.x - (c.lista[i].Long_caracteristica / 2)), (c.lista[i].posicion.y + (c.lista[i].Long_caracteristica / 2)), (c.lista[i].posicion.x + (c.Long_caracteristica / 2)), (c.lista[i].posicion.y + (c.lista[i].Long_caracteristica / 2)));
+		p.setLimites((c.lista[i].posicion.x - (c.lista[i].Long_caracteristica)), (c.lista[i].posicion.y + (c.lista[i].Long_caracteristica)), (c.lista[i].posicion.x + (c.Long_caracteristica)), (c.lista[i].posicion.y + (c.lista[i].Long_caracteristica)));
 		Vector2D dir;
 		float dif = p.Distancia(e.posicion, &dir) - e.Long_caracteristica;
 		if (dif <= 0.0f)
@@ -168,26 +168,29 @@ void Interaccion::Rebote(Enemigo &ene, Escenario e) {
 	if (ene.posicion.x <= xmin) ene.velocidad.x = -ene.velocidad.x;
 }
 void Interaccion::Mover(Personaje &p, Box &c) { //No funciona del todo bien faltan detalles
-	bool t= Tocando(p, c);
-	if (c.trans == false) {
-		if (t==true && fabsf(p.posicion.y-c.posicion.y)<0.1) {
+	Vector2D dir;
+	float dist = p.Distancia(c.posicion, &dir);
+	float r = p.Long_caracteristica + c.Long_caracteristica;
+
+	if (c.trans == false) {//LA he liado, creo que aqui habias puesto trans
+		if (r >= dist && fabsf(p.posicion.y - c.posicion.y)<0.1) {
 			p.velocidad.x = 0;
 			if (c.posicion.x > p.posicion.x) {
-				c.posicion.x = p.posicion.x + p.Long_caracteristica + c.Long_caracteristica / 2;
+				c.posicion.x = p.posicion.x + p.Long_caracteristica + c.Long_caracteristica;
 				c.posicion.y = p.posicion.y;
 			}
 			else {
-				c.posicion.x = p.posicion.x - p.Long_caracteristica - c.Long_caracteristica / 2;
+				c.posicion.x = p.posicion.x - p.Long_caracteristica - c.Long_caracteristica;
 				c.posicion.y = p.posicion.y;
 			}
 		}
 	}
-		if (c.trans == true) {
-			c.posicion.x = p.posicion.x;
-			c.posicion.y = p.posicion.y + p.Long_caracteristica + c.Long_caracteristica / 2;
+	if (c.trans == true) {
+		c.posicion.x = p.posicion.x;
+		c.posicion.y = p.posicion.y + p.Long_caracteristica + c.Long_caracteristica;
 
-		}
 	}
+}
 
 void Interaccion::Mover(Box &caja1, Box &caja2, Personaje &p) //Se han quitado los /2, no compila por eso 
 {
@@ -235,7 +238,7 @@ bool Interaccion::Choque(ListaCajas c, Enemigo & e)
 {
 	for (int i = 0; i < c.n_cajas; i++) {
 		float dist = fabsf(c.lista[i].posicion.x - e.posicion.x);
-		float r = c.lista[i].Long_caracteristica / 2 + e.Long_caracteristica;
+		float r = c.lista[i].Long_caracteristica/*HE quitado aqui un entre 2*/ + e.Long_caracteristica;
 		if (fabsf(c.lista[i].posicion.y - e.posicion.y) < 0.5 && r >= dist) {
 			return true;
 		}
@@ -249,7 +252,7 @@ void Interaccion::Coger(Personaje &p, Box &c) {
 		c.CambiaEstado();
 		if (c.trans == false) {
 			p.velocidad.x = 0;				
-			c.posicion.x = p.posicion.x + p.Long_caracteristica + c.Long_caracteristica / 2;
+			c.posicion.x = p.posicion.x + p.Long_caracteristica + c.Long_caracteristica;
 			c.posicion.y = p.posicion.y;			
 			}
 		}
