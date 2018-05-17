@@ -3,7 +3,7 @@
 class Transportable:public Movil
 {
 public:
-	bool moviendose;
+	bool trans; //Se está transportando??
 	Transportable();
 	~Transportable();
 

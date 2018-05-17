@@ -97,7 +97,7 @@ bool Interaccion::Contacto(Enemigo &ene, Plataforma &p) { //arreglar con polimor
 
 
 
-void Interaccion::Rebote(Enemigo & e, Enemigo & e1)
+void Interaccion::Rebote(Enemigo & e, Enemigo & e1) //No vibración
 {
 	/*if (e.posicion.x == e1.posicion.x && e.posicion.y == e1.posicion.y) {
 		e.velocidad.x = -e.velocidad.x;
@@ -168,12 +168,9 @@ void Interaccion::Rebote(Enemigo &ene, Escenario e) {
 	if (ene.posicion.x <= xmin) ene.velocidad.x = -ene.velocidad.x;
 }
 void Interaccion::Mover(Personaje &p, Box &c) { //No funciona del todo bien faltan detalles
-	Vector2D dir;
-	float dist = p.Distancia(c.posicion, &dir);	
-	float r = p.Long_caracteristica + c.Long_caracteristica / 2;
-	
-	if (c.moviendose == false) {
-		if (r >= dist && fabsf(p.posicion.y-c.posicion.y)<0.1) {
+	bool t= Tocando(p, c);
+	if (c.trans == false) {
+		if (t==true && fabsf(p.posicion.y-c.posicion.y)<0.1) {
 			p.velocidad.x = 0;
 			if (c.posicion.x > p.posicion.x) {
 				c.posicion.x = p.posicion.x + p.Long_caracteristica + c.Long_caracteristica / 2;
@@ -185,39 +182,47 @@ void Interaccion::Mover(Personaje &p, Box &c) { //No funciona del todo bien falt
 			}
 		}
 	}
-		if (c.moviendose == true) {
+		if (c.trans == true) {
 			c.posicion.x = p.posicion.x;
 			c.posicion.y = p.posicion.y + p.Long_caracteristica + c.Long_caracteristica / 2;
 
 		}
 	}
 
-void Interaccion::Mover(Box & c, Box & c1)
+void Interaccion::Mover(Box &caja1, Box &caja2, Personaje &p)
 {
-	Vector2D dir;
-		float dist = c.posicion.x - c1.posicion.x;
-		float r = c.Long_caracteristica / 2 + c1.Long_caracteristica / 2;
+	bool t = Tocando(p, caja1);
+	bool s = Tocando(p, caja2);
+	Box& c1 = caja2;
+	Box& c = caja1;
+	/*float dist = fabsf(c.posicion.x - c1.posicion.x);
+	float r= c.Long_caracteristica / 2 + c1.Long_caracteristica / 2;*/
 
-		if (c1.moviendose == false) {
-			if (r >= dist && fabsf(c.posicion.y - c1.posicion.y) < 0.1) {
-				c.velocidad.x = 0;
-				if (c1.posicion.x > c.posicion.x) {
-					c1.posicion.x = c.posicion.x + c.Long_caracteristica / 2 + c1.Long_caracteristica / 2;
-					c1.posicion.y = c.posicion.y;
-				}
-				else {
-					c1.posicion.x = c.posicion.x - c.Long_caracteristica / 2 - c1.Long_caracteristica / 2;
-					c1.posicion.y = c.posicion.y;
-				}
+	if (c1.trans == false && c.trans == false) {
+		if (t && fabsf(c.posicion.y - c1.posicion.y) < 0.1) {
+
+			if (c1.posicion.x > c.posicion.x) {
+				c1.posicion.x = c.posicion.x + c.Long_caracteristica / 2 + c1.Long_caracteristica / 2;
+				c1.posicion.y = c.posicion.y;
+			}
+			else {
+				c1.posicion.x = c.posicion.x - c.Long_caracteristica / 2 - c1.Long_caracteristica / 2;
+				c1.posicion.y = c.posicion.y;
 			}
 		}
-		if (c1.moviendose == true) {
-			c1.posicion.x = c.posicion.x;
-			c1.posicion.y = c.posicion.y + c.Long_caracteristica / 2 + c1.Long_caracteristica / 2;
+		if (s && fabsf(c.posicion.y - c1.posicion.y) < 0.1) {
 
+			if (c.posicion.x > c1.posicion.x) {
+				c.posicion.x = c1.posicion.x + c.Long_caracteristica / 2 + c1.Long_caracteristica / 2;
+				c.posicion.y = c1.posicion.y;
+			}
+			else {
+				c.posicion.x = c1.posicion.x - c.Long_caracteristica / 2 - c1.Long_caracteristica / 2;
+				c.posicion.y = c1.posicion.y;
+			}
 		}
+	}
 }
-
 bool Interaccion::Colision(Enemigo e, Personaje p)
 {
 	if (p.posicion.x <= (e.posicion.x + p.Long_caracteristica) && p.posicion.x >= (e.posicion.x - p.Long_caracteristica) && p.posicion.y <= (e.posicion.y + e.Long_caracteristica + p.Long_caracteristica)&& p.posicion.y > (e.posicion.y + e.Long_caracteristica + p.Long_caracteristica/2)) {
@@ -239,20 +244,24 @@ bool Interaccion::Choque(ListaCajas c, Enemigo & e)
 }
 
 void Interaccion::Coger(Personaje &p, Box &c) {
-	Vector2D dir;
-	float dist = p.Distancia(c.posicion, &dir);
-	float r = p.Long_caracteristica + (c.Long_caracteristica / 2)+0.01;
-	if (r >= dist) {
+	bool t = Tocando(p, c);
+	if (t==true && fabsf(p.velocidad.y) < 0.1) {
 		c.CambiaEstado();
-		if (c.moviendose == false) {
-			if (r >= dist) {
-				p.velocidad.x = 0;				
-				c.posicion.x = p.posicion.x + p.Long_caracteristica + c.Long_caracteristica / 2;
-				c.posicion.y = p.posicion.y;
-								
+		if (c.trans == false) {
+			p.velocidad.x = 0;				
+			c.posicion.x = p.posicion.x + p.Long_caracteristica + c.Long_caracteristica / 2;
+			c.posicion.y = p.posicion.y;			
 			}
 		}
 	}
+
+bool Interaccion::Tocando(Personaje &p, Box &c) {
+	Vector2D dir;
+	float dist = p.Distancia(c.posicion, &dir);
+	float r = p.Long_caracteristica + c.Long_caracteristica / 2;
+	if (r >= dist)
+		return true;
+	return false;
 }
 	
 

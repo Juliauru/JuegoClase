@@ -6,12 +6,11 @@
 using namespace std;
 Box::Box()
 {
-	moviendose = false;
+	tocando = false;
+	trans = false;
 	Long_caracteristica = TAMANIO*2.0f;
 	posicion.x = posicion.y = 0 + Long_caracteristica / 2;
 }
-
-
 Box::~Box()
 {
 }
@@ -24,8 +23,8 @@ void Box::Dibuja()
 	glTranslatef(-posicion.x, -posicion.y, -1.5);
 }
 void Box::CambiaEstado() {
-	if (moviendose == true) moviendose = false;
-	else moviendose = true;	
+	if (trans == true) trans = false;
+	else trans = true;	
 }
 
 

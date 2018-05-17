@@ -1,7 +1,4 @@
 ﻿  Interaccion.cpp
 c:\users\user\documents\github\juegoclase\src\interaccion.cpp(160): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
 c:\users\user\documents\github\juegoclase\src\interaccion.cpp(162): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\user\documents\github\juegoclase\src\interaccion.cpp(244): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-  Box.cpp
-  Generando código...
   Pang.vcxproj -> C:\Users\user\Documents\GitHub\JuegoClase\bin\Pang.exe
