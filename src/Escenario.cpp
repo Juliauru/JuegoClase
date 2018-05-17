@@ -19,7 +19,7 @@ Escenario::Escenario()
 	p_inicio.getPosicion().setValor(0, 0);
 	p_inicio.setLargo(20);	
 	 
-	ifstream fichero("Example.txt");
+	ifstream fichero("Plataformas.txt");
 	if (!fichero)
 		cout << "No se puede abrir el fichero" << endl;
 	else{

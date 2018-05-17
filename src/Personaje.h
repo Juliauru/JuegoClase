@@ -1,4 +1,5 @@
 #pragma once
+#define POTENCIA_SALTO 8.0f
 #include "Movil.h"
 #include "Escenario.h"
 class Personaje:public Movil

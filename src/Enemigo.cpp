@@ -11,7 +11,7 @@ Enemigo::Enemigo()
 	velocidad.y = 0.0;
 	posicion.y = 1;
 	aceleracion.x = 0;
-	aceleracion.y = -10.0f;
+	aceleracion.y = -3.0f;
 }
 
 

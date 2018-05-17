@@ -5,6 +5,7 @@
 #include "Interaccion.h"
 #include "Personaje.h"
 #include "ListaCajas.h"
+#include "Movil.h"
 class ListaEnemigos :public Enemigo
 {
 private:
@@ -34,6 +35,8 @@ public:
 	int Colision(Personaje p);
 
 	void Choque(ListaCajas c);
+
+	void Contacto(ListaCajas c);
 
 	friend class Interaccion;
 };

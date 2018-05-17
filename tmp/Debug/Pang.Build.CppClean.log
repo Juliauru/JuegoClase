@@ -1,9 +1,12 @@
 c:\users\user\documents\github\juegoclase\tmp\debug\vc141.pdb
 c:\users\user\documents\github\juegoclase\tmp\debug\vc141.idb
+c:\users\user\documents\github\juegoclase\tmp\debug\box.obj
 c:\users\user\documents\github\juegoclase\tmp\debug\enemigo.obj
 c:\users\user\documents\github\juegoclase\tmp\debug\escenario.obj
 c:\users\user\documents\github\juegoclase\tmp\debug\interaccion.obj
+c:\users\user\documents\github\juegoclase\tmp\debug\listacajas.obj
 c:\users\user\documents\github\juegoclase\tmp\debug\listaenemigos.obj
+c:\users\user\documents\github\juegoclase\tmp\debug\llave.obj
 c:\users\user\documents\github\juegoclase\tmp\debug\movil.obj
 c:\users\user\documents\github\juegoclase\tmp\debug\mundo.obj
 c:\users\user\documents\github\juegoclase\tmp\debug\objeto.obj
@@ -12,6 +15,7 @@ c:\users\user\documents\github\juegoclase\tmp\debug\pared.obj
 c:\users\user\documents\github\juegoclase\tmp\debug\personaje.obj
 c:\users\user\documents\github\juegoclase\tmp\debug\plataforma.obj
 c:\users\user\documents\github\juegoclase\tmp\debug\tono.obj
+c:\users\user\documents\github\juegoclase\tmp\debug\transportable.obj
 c:\users\user\documents\github\juegoclase\tmp\debug\vector2d.obj
 c:\users\user\documents\github\juegoclase\bin\pang.exe
 c:\users\user\documents\github\juegoclase\bin\pang.ilk

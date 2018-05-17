@@ -51,6 +51,28 @@ void Interaccion::Contacto(Movil &m, Box &c) {
 
 	//return false;
 }
+void Interaccion::Contacto(Enemigo &e, ListaCajas c) {
+	for (int i = 0; i < c.n_cajas; i++) {
+		Plataforma p;
+		p.setLimites((c.lista[i].posicion.x - (c.lista[i].Long_caracteristica / 2)), (c.lista[i].posicion.y + (c.lista[i].Long_caracteristica / 2)), (c.lista[i].posicion.x + (c.Long_caracteristica / 2)), (c.lista[i].posicion.y + (c.lista[i].Long_caracteristica / 2)));
+		Vector2D dir;
+		float dif = p.Distancia(e.posicion, &dir) - e.Long_caracteristica;
+		if (dif <= 0.0f)
+		{
+			if (e.velocidad.y <= 0)
+				e.velocidad.y = 0;
+			e.vinicial = 0;
+			e.posinicial = 0;
+			Vector2D v_inicial = e.velocidad;
+			e.velocidad = v_inicial - dir * 2.0*(v_inicial*dir);
+			e.posicion = e.posicion - dir * dif;
+
+			//return true;
+		}
+
+		//return false;
+	}
+}
 bool Interaccion::Contacto(Enemigo &ene, Plataforma &p) { //arreglar con polimorfismo creo 
 	Vector2D dir;
 	float dif = p.Distancia(ene.posicion, &dir) - ene.Long_caracteristica;
@@ -66,7 +88,7 @@ bool Interaccion::Contacto(Enemigo &ene, Plataforma &p) { //arreglar con polimor
 		ene.posinicial = 0;
 		Vector2D v_inicial = ene.velocidad;
 		ene.velocidad = v_inicial - dir * 2.0*(v_inicial*dir);
-		ene.posicion = ene.posicion - dir * dif;
+		ene.posicion = ene.posicion - dir * dif;		
 		return true;
 	}
 	
@@ -81,13 +103,13 @@ void Interaccion::Rebote(Enemigo & e, Enemigo & e1)
 		e.velocidad.x = -e.velocidad.x;
 		e1.velocidad.x = -e1.velocidad.x;
 	}*/
-	if (e.posicion.y == e1.posicion.y) {
+	if (e.posicion.y==e1.posicion.y) {
 		float dist = fabs(e.posicion.x - e1.posicion.x);
 		
 		//if (dist == 0)dist = 0.0001f; intento para que se separaran las que vibran, but no
 		float r = e.Long_caracteristica + e1.Long_caracteristica;
 		if (r >= dist) {
-			if (fabsf(e.velocidad.x) > 1 && fabsf(e1.velocidad.x) > 1) {
+			if (fabsf(e.velocidad.x) >= 1.5 && fabsf(e1.velocidad.x) >= 1.5) {
 				e.velocidad.x = -e.velocidad.x;
 				e1.velocidad.x = -e1.velocidad.x;
 			}
@@ -207,7 +229,7 @@ bool Interaccion::Colision(Enemigo e, Personaje p)
 bool Interaccion::Choque(ListaCajas c, Enemigo & e)
 {
 	for (int i = 0; i < c.n_cajas; i++) {
-		float dist = c.lista[i].posicion.x - e.posicion.x;
+		float dist = fabsf(c.lista[i].posicion.x - e.posicion.x);
 		float r = c.lista[i].Long_caracteristica / 2 + e.Long_caracteristica;
 		if (fabsf(c.lista[i].posicion.y - e.posicion.y) < 0.5 && r >= dist) {
 			return true;
@@ -221,10 +243,9 @@ void Interaccion::Coger(Personaje &p, Box &c) {
 	float dist = p.Distancia(c.posicion, &dir);
 	float r = p.Long_caracteristica + (c.Long_caracteristica / 2)+0.01;
 	if (r >= dist) {
-		cout << "entra";
 		c.CambiaEstado();
 		if (c.moviendose == false) {
-			if (r >= dist /*&& fabsf(p.velocidad.y) < 0.1 && p.velocidad.y >= 0*/) {
+			if (r >= dist) {
 				p.velocidad.x = 0;				
 				c.posicion.x = p.posicion.x + p.Long_caracteristica + c.Long_caracteristica / 2;
 				c.posicion.y = p.posicion.y;

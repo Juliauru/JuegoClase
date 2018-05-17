@@ -6,6 +6,7 @@
 using namespace std;
 Box::Box()
 {
+	moviendose = false;
 	Long_caracteristica = TAMANIO*2.0f;
 	posicion.x = posicion.y = 0 + Long_caracteristica / 2;
 }
@@ -24,8 +25,7 @@ void Box::Dibuja()
 }
 void Box::CambiaEstado() {
 	if (moviendose == true) moviendose = false;
-	else moviendose = true;
-	cout << moviendose;
+	else moviendose = true;	
 }
 
 

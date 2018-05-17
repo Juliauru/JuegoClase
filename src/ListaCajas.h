@@ -24,8 +24,5 @@ public:
 	
 	friend class Interaccion;
 
-	//PRUEBA
-	//void Mover();
-
-};
+	};
 

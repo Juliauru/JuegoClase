@@ -12,8 +12,7 @@ private:
 	ListaEnemigos enemigos;
 	Escenario escenario;	
 	Llave llave;
-	ListaCajas cajas;
-	Box caja1;
+	ListaCajas cajas;	
 public:
 	void Tecla(unsigned char key);
 	void TeclaEspecial(bool izq=false, bool der=false,bool coge=false);

@@ -18,11 +18,11 @@ bool ListaEnemigos::Agregar(Enemigo * e)
 	if (numero < MAX_ENEMIGOS) {
 		lista[numero++] = e;
 		if ((rand() % 2) == 0) {
-			e->getVelocidad().setValor(2.0f, 0);
+			e->getVelocidad().setValor(2.0f, -2.0f);
 		}
 		else
-			e->getVelocidad().setValor(-2.0f, 0);
-		e->getPosicion().setValor(rand() % 20 + 1, rand() % 40 + 1);
+			e->getVelocidad().setValor(-2.0f, -2.0f);
+		e->getPosicion().setValor(rand() % 20 + 1, rand() % 20 + 1);
 
 	}
 	else {
@@ -103,5 +103,11 @@ void ListaEnemigos::Choque(ListaCajas c)//No funciona bien
 			float aux1 = lista[i]->getVelocidad().y;
 			lista[i]->getVelocidad().setValor(-aux, aux1);
 		}
+	}
+}
+void ListaEnemigos::Contacto(ListaCajas c)//No funciona bien
+{
+	for (int i = 0; i < numero; i++) {
+		Interaccion::Contacto(*(lista[i]),c);
 	}
 }

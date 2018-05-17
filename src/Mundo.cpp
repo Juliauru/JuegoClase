@@ -21,8 +21,7 @@ void Mundo::Dibuja()
 	personaje.Dibuja();
 	enemigos.Dibuja();
 	llave.Dibuja();
-	cajas.Dibuja();
-	caja1.Dibuja();
+	cajas.Dibuja();	
 	//DIBUJO DE LAS VIDAS
 	personaje.DibujaVidas(escenario.vertices[1].y,escenario.p_ojo_y);
 	glEnable(GL_LIGHTING);
@@ -36,7 +35,6 @@ void Mundo::Mueve() {
 		Interaccion::Contacto(personaje, escenario.plat[i]);
 		enemigos.Rebote(escenario.plat[i]);
 	}
-	Interaccion::Mover(personaje, caja1);
 	Interaccion::Contacto(personaje, escenario.p_inicio);
 	enemigos.Rebote(escenario.p_inicio);
 	enemigos.Rebote(personaje);
@@ -47,6 +45,7 @@ void Mundo::Mueve() {
 	cajas.Mover(personaje);
 	enemigos.Eliminar(enemigos.Colision(personaje));
 	enemigos.Choque(cajas);
+	enemigos.Contacto(cajas);
 }
 void Mundo::Inicializa()
 {
@@ -55,18 +54,11 @@ void Mundo::Inicializa()
 	z_ojo = 20;
 	for (int i = 0; i < 5; i++) {
 		Enemigo *aux = new Enemigo;
-		aux->SetPos(i, 1 + 3 * i);
-		//aux->setAltura(0.25);
-		enemigos.Agregar(aux);
-	}
-	for (int i = 0; i < 8; i++) {
-		Enemigo *aux = new Enemigo;
-		aux->SetPos(i + 2, 1 + 3 * i);
+		//aux->SetPos(i, 1 + 3 * i);
 		//aux->setAltura(0.25);
 		enemigos.Agregar(aux);
 	}
 	cajas.CreaCajas();
-	caja1.getPosicion().setValor(4, 0.5);
 
 }
 

@@ -13,9 +13,11 @@ public:
 	~Interaccion();
 	static bool Contacto(Movil &pers, Plataforma &p);
 
-	static void Contacto(Movil & m, Box &c);//La referencia en la caja maybe sobra
+	static void Contacto(Movil &m, Box &c);//La referencia en la caja maybe sobra
+	static void Contacto(Enemigo &e, ListaCajas c);//Solucion provisional, luego habrá que eliminarlo 
 
 	static bool Contacto(Enemigo &enem, Plataforma &p);//BOOL CAMBIADO POR PAULA
+													   //Solucion provisional, luego habrá que eliminarlo 
 
 	static void Rebote(Enemigo &e, Enemigo &e1);
 
