@@ -24,7 +24,6 @@ bool Interaccion::Contacto(Movil &m, Plataforma &p) {
 		m.velocidad = v_inicial - dir * 2.0*(v_inicial*dir);
 		m.posicion = m.posicion - dir * dif;
 
-
 		return true;
 	}
 
@@ -97,7 +96,7 @@ bool Interaccion::Contacto(Enemigo &ene, Plataforma &p) { //arreglar con polimor
 
 
 
-void Interaccion::Rebote(Enemigo & e, Enemigo & e1) //No vibración
+void Interaccion::Rebote(Enemigo & e, Enemigo & e1)
 {
 	/*if (e.posicion.x == e1.posicion.x && e.posicion.y == e1.posicion.y) {
 		e.velocidad.x = -e.velocidad.x;
@@ -169,11 +168,11 @@ void Interaccion::Rebote(Enemigo &ene, Escenario e) {
 }
 void Interaccion::Mover(Personaje &p, Box &c) { //No funciona del todo bien faltan detalles
 	Vector2D dir;
-	float dist = p.Distancia(c.posicion, &dir);
+	float dist = p.Distancia(c.posicion, &dir);	
 	float r = p.Long_caracteristica + c.Long_caracteristica;
-
-	if (c.trans == false) {//LA he liado, creo que aqui habias puesto trans
-		if (r >= dist && fabsf(p.posicion.y - c.posicion.y)<0.1) {
+	
+	if (c.trans == false) {
+		if (r >= dist && fabsf(p.posicion.y-c.posicion.y)<0.1) {
 			p.velocidad.x = 0;
 			if (c.posicion.x > p.posicion.x) {
 				c.posicion.x = p.posicion.x + p.Long_caracteristica + c.Long_caracteristica;
@@ -185,12 +184,12 @@ void Interaccion::Mover(Personaje &p, Box &c) { //No funciona del todo bien falt
 			}
 		}
 	}
-	if (c.trans == true) {
-		c.posicion.x = p.posicion.x;
-		c.posicion.y = p.posicion.y + p.Long_caracteristica + c.Long_caracteristica;
+		if (c.trans == true) {
+			c.posicion.x = p.posicion.x;
+			c.posicion.y = p.posicion.y + p.Long_caracteristica + c.Long_caracteristica;
 
+		}
 	}
-}
 
 void Interaccion::Mover(Box &caja1, Box &caja2, Personaje &p) //Se han quitado los /2, no compila por eso 
 {
@@ -199,13 +198,13 @@ void Interaccion::Mover(Box &caja1, Box &caja2, Personaje &p) //Se han quitado l
 	Box& c1 = caja2;
 	Box& c = caja1;
 	float dist = fabsf(c.posicion.x - c1.posicion.x);
-	float r= c.Long_caracteristica + c1.Long_caracteristica;
+	float r = c.Long_caracteristica + c1.Long_caracteristica;
 
 	if (c1.trans == false && c.trans == false) {
-		if (dist<=r && t && fabsf(c.posicion.y - c1.posicion.y) < 0.1) {
+		if (dist <= r && t && fabsf(c.posicion.y - c1.posicion.y) < 0.1) {
 
 			if (c1.posicion.x > c.posicion.x) {
-				c1.posicion.x = c.posicion.x + c.Long_caracteristica+ c1.Long_caracteristica;
+				c1.posicion.x = c.posicion.x + c.Long_caracteristica + c1.Long_caracteristica;
 				c1.posicion.y = c.posicion.y;
 			}
 			else {
@@ -216,7 +215,7 @@ void Interaccion::Mover(Box &caja1, Box &caja2, Personaje &p) //Se han quitado l
 		if (dist <= r && s && fabsf(c.posicion.y - c1.posicion.y) < 0.1) {
 
 			if (c.posicion.x > c1.posicion.x) {
-				c.posicion.x = c1.posicion.x + c.Long_caracteristica+ c1.Long_caracteristica;
+				c.posicion.x = c1.posicion.x + c.Long_caracteristica + c1.Long_caracteristica;
 				c.posicion.y = c1.posicion.y;
 			}
 			else {
@@ -248,15 +247,15 @@ bool Interaccion::Choque(ListaCajas c, Enemigo & e)
 
 void Interaccion::Coger(Personaje &p, Box &c) {
 	bool t = Tocando(p, c);
-	if (t==true && fabsf(p.velocidad.y) < 0.1) {
+	if (t == true && fabsf(p.velocidad.y) < 0.1) {
 		c.CambiaEstado();
 		if (c.trans == false) {
-			p.velocidad.x = 0;				
+			p.velocidad.x = 0;
 			c.posicion.x = p.posicion.x + p.Long_caracteristica + c.Long_caracteristica;
-			c.posicion.y = p.posicion.y;			
-			}
+			c.posicion.y = p.posicion.y;
 		}
 	}
+}
 
 bool Interaccion::Tocando(Personaje &p, Box &c) { //Se han quitado los /2, no compila por eso 
 	Vector2D dir;

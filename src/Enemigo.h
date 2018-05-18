@@ -6,8 +6,8 @@
 class Enemigo :public Movil
 {
 //private:
-//	float Long_caracteristica; //O lo de la clase movil de long_caracteristica??_P
-//
+	//float Long_caracteristica; //O lo de la clase movil de long_caracteristica??_P
+
 public:
 	Enemigo();
 	~Enemigo();

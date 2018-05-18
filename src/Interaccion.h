@@ -33,11 +33,12 @@ public:
 
 	static void Mover(Personaje &p, Box &c);
 
-	static void Mover(Box &c, Box &c1,Personaje &p);
+	static void Mover(Box &c, Box &c1, Personaje &p);
 
 	static bool Colision(Enemigo e, Personaje p);
 	
 	static bool Choque(ListaCajas c, Enemigo &e);
+
 	static bool Tocando(Personaje &p, Box &c);
 };
 

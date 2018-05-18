@@ -16,11 +16,13 @@ public:
 
 	void Dibuja();
 
+	void Mueve(float t);
+
 	void Coger(Personaje &pers);
 
 	void Contacto(Personaje &pers);
 
-	void Mover(Personaje &pers)
+	void Mover(Personaje &pers);
 
 	void Caida(Plataforma p);
 	

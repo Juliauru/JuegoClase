@@ -44,7 +44,7 @@ void ListaCajas::CreaCajas()
 		while (!fichero.eof() && i < n_cajas) {
 			fichero >> x;
 			fichero >> y;
-			lista[i].getPosicion().setValor(x, (y+(Long_caracteristica)/2));
+			lista[i].getPosicion().setValor(x, (y+(Long_caracteristica)));
 			lista[i].getColor().SetColor(145, 28, 226);
 			i++;
 		}
@@ -54,12 +54,19 @@ void ListaCajas::CreaCajas()
 			}
 		}*/ //IDEA si se reservan más memorias que numero de plataformas existan, poner ese puntero a 0 para que no se ejecute nada raro
 	}
+	fichero.close();
 }
 
 void ListaCajas::Dibuja()
 {
 	for (int i = 0; i < n_cajas; i++) {
 		lista[i].Dibuja();
+	}
+}
+void ListaCajas::Mueve(float t)
+{
+	for (int i = 0; i < n_cajas; i++) {
+		lista[i].Mueve(t);
 	}
 }
 void ListaCajas::Coger(Personaje &pers) {
@@ -84,10 +91,9 @@ void ListaCajas::Mover(Personaje & pers)
 		}
 	}
 }
-
 void ListaCajas::Caida(Plataforma p) {
 	for (int i = 0; i < n_cajas; i++) {
-		Interaccion::Contacto((lista[i]), p);
+		Interaccion::Contacto((lista[i]),p);
 	}
 }
 

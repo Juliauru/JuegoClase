@@ -13,6 +13,8 @@ Box::Box()
 	aceleracion.y = -10.0f;
 	aceleracion.x = 0.0f;
 }
+
+
 Box::~Box()
 {
 }
@@ -26,7 +28,7 @@ void Box::Dibuja()
 }
 void Box::CambiaEstado() {
 	if (trans == true) trans = false;
-	else trans = true;	
+	else trans = true;
 }
 
 
