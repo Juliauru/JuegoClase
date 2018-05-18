@@ -3,14 +3,14 @@
 #include "glut.h"
 #include "Interaccion.h"
 
-void Mundo::RotarOjo()
-{
-	float dist = sqrt(x_ojo*x_ojo + z_ojo * z_ojo);
-	float ang = atan2(z_ojo, x_ojo);
-	ang += 0.05f;
-	x_ojo = dist * cos(ang);
-	z_ojo = dist * sin(ang);
-}
+//void Mundo::RotarOjo()
+//{
+//	float dist = sqrt(x_ojo*x_ojo + z_ojo * z_ojo);
+//	float ang = atan2(z_ojo, x_ojo);
+//	ang += 0.05f;
+//	x_ojo = dist * cos(ang);
+//	z_ojo = dist * sin(ang);
+//}
 void Mundo::Dibuja()
 {
 	escenario.Reorientar();
@@ -51,9 +51,6 @@ void Mundo::Mueve() {
 }
 void Mundo::Inicializa()
 {
-	x_ojo = 0;
-	y_ojo = 10;
-	z_ojo = 20;
 	for (int i = 0; i < 5; i++) {
 		Enemigo *aux = new Enemigo;
 		//aux->SetPos(i, 1 + 3 * i);

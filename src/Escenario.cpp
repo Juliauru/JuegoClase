@@ -11,7 +11,7 @@ Escenario::~Escenario()
 }
 Escenario::Escenario()
 {
-	p_ojo_y = 7.5;
+	p_ojo_y = 8.0f;
 	int n,l,i=0;
 	float x, y, long_x, long_y;
 	 char caracter[10];

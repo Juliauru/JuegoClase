@@ -17,10 +17,7 @@ public:
 	void Tecla(unsigned char key);
 	void TeclaEspecial(bool izq=false, bool der=false,bool coge=false);
 	void Inicializa();
-	void RotarOjo();
+	//void RotarOjo();
 	void Mueve();
 	void Dibuja();	
-	float x_ojo;
-	float y_ojo;
-	float z_ojo;
-};
+	};

@@ -155,10 +155,10 @@ void Interaccion::Rebote(Movil &m, Escenario &e) //Intentar hacer poco a poco, n
 	float xmax = e.p_inicio.limite.x;
 	if (m.posicion.x >= xmax) m.posicion.x = xmax;
 	if (m.posicion.x <= xmin) m.posicion.x = xmin;
-	if (m.posicion.y > 2* e.p_ojo_y)
-		e.p_ojo_y = e.p_ojo_y+7.5; //Si se cambia el 7.5 hay que cambiarlo tambien en el metodo dibuja vidas de personaje
-	if (m.posicion.y <(e.p_ojo_y-7.5))
-		e.p_ojo_y = e.p_ojo_y -7.5;
+	if (m.posicion.y > (8+ e.p_ojo_y))
+		e.p_ojo_y = e.p_ojo_y+8; //Si se cambia el 7.5 hay que cambiarlo tambien en el metodo dibuja vidas de personaje
+	if (m.posicion.y <(e.p_ojo_y-8))
+		e.p_ojo_y = e.p_ojo_y -8;
 }
 void Interaccion::Rebote(Enemigo &ene, Escenario e) {
 	float xmin = e.limites[3].posicion.x; 
@@ -247,12 +247,12 @@ bool Interaccion::Choque(ListaCajas c, Enemigo & e)
 
 void Interaccion::Coger(Personaje &p, Box &c) {
 	bool t = Tocando(p, c);
-	if (t == true && fabsf(p.velocidad.y) < 0.1) {
+	if (t == true && fabsf(p.velocidad.y)==0) {
 		c.CambiaEstado();
 		if (c.trans == false) {
 			p.velocidad.x = 0;
 			c.posicion.x = p.posicion.x + p.Long_caracteristica + c.Long_caracteristica;
-			c.posicion.y = p.posicion.y;
+			//c.posicion.y = p.posicion.y- p.Long_caracteristica+ c.Long_caracteristica+ 1;
 		}
 	}
 }

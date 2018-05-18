@@ -41,21 +41,6 @@ void Personaje::DibujaVidas(float y,float inc)
 	}
 }
 
-//void Personaje::Mueve(float t, bool p) {
-//	
-//	if(vinicial*vinicial + 2 * aceleracion.y*(posicion.y - posinicial)>0){
-//		velocidad.y = sqrt(vinicial*vinicial + 2 * aceleracion.y*(posicion.y - posinicial));
-//		posicion = posicion + velocidad*t;
-//		}
-//	else {
-//		vinicial = 0;
-//		posinicial = 0;
-//		posicion = posicion + velocidad * t + aceleracion * (0.5f*t*t);
-//		velocidad = velocidad + aceleracion * t;
-//	}
-
-
-
 void Personaje::Salto() { //Poner límtes al salto
 	if (fabsf(velocidad.y) < 0.1 && velocidad.y >= 0) {
 		vinicial = velocidad.y = POTENCIA_SALTO;
