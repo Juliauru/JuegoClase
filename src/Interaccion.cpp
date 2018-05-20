@@ -1,4 +1,5 @@
 #include "Interaccion.h"
+#include "Constantes.h"
 #include <math.h>
 #include <iostream>
 #include <fstream>
@@ -11,9 +12,37 @@ Interaccion::Interaccion()
 Interaccion::~Interaccion()
 {
 }
+bool Interaccion::Contacto(Personaje &m, Plataforma &p) { //Esta la estructura pero sin hacer
+	Vector2D dir;
+	float dif;
+	if (m.transportando == false) {
+		dif=p.Distancia(m.posicion, &dir) - m.Long_caracteristica;
+	}
+	if (m.transportando == true) {
+		if(m.velocidad.y<=0)
+			dif = p.Distancia(m.posicion, &dir) - m.Long_caracteristica;
+		if (m.velocidad.y > 0)
+			dif = p.Distancia(m.posicion, &dir) - m.Long_caracteristica;
+	}
+	
+	if (dif <= 0.0f)
+	{
+		if (m.velocidad.y <= 0)
+			m.velocidad.y = 0;
+		m.vinicial = 0;
+		m.posinicial = 0;
+		Vector2D v_inicial = m.velocidad;
+		m.velocidad = v_inicial - dir * 2.0*(v_inicial*dir);
+		m.posicion = m.posicion - dir * dif;
+
+		return true;
+	}
+
+	return false;
+}
 bool Interaccion::Contacto(Movil &m, Plataforma &p) {
 	Vector2D dir;
-	float dif = p.Distancia(m.posicion, &dir) - m.Long_caracteristica;
+	float dif = p.Distancia(m.posicion, &dir) - m.Long_caracteristica;;
 	if (dif <= 0.0f)
 	{
 		if (m.velocidad.y <= 0)
@@ -109,7 +138,7 @@ void Interaccion::Rebote(Enemigo & e, Enemigo & e1) //Intentos fallidos
 		//if (dist == 0)dist = 0.0001f; intento para que se separaran las que vibran, but no
 		float r = e.Long_caracteristica + e1.Long_caracteristica;
 		if (dist<=r) {
-			if (dist > e.Long_caracteristica) {
+			if (dist > e.Long_caracteristica*1.5) {
 				e.velocidad.x = -e.velocidad.x;
 				e1.velocidad.x = -e1.velocidad.x;
 				if (e.velocidad.x == 0 && e1.velocidad.x < 0)
@@ -160,9 +189,11 @@ void Interaccion::Rebote(Personaje  &p, Enemigo &e)
 	////estática que será vidas que comenzarán valiendo 3 y en está función irán disminuyendo. En la función bonus aumentarán.
 	////Introduzco friend class en Personaje, tambien función getVida();
 	////ya que cuando se apoyen en las plataformas tendran el mismo punto y, volver a cambiar el if()
-	////Volver a cambiar ((p.posicion.x + (p.Long_caracteristica / 1.5f) > e.posicion.x) && (p.posicion.x - (p.Long_caracteristica / 1.5f) < e.posicion.x) && p.posicion.y == e.posicion.y)
-	if ((p.posicion.x + (p.Long_caracteristica) > e.posicion.x - e.Long_caracteristica) && (p.posicion.y - (p.Long_caracteristica) >= e.posicion.y - e.Long_caracteristica) && (p.posicion.y - (p.Long_caracteristica) < e.posicion.y) && (p.posicion.x - (p.Long_caracteristica) < e.posicion.x + e.Long_caracteristica)) {
-		p.vida -= 1;
+		////Volver a cambiar ((p.posicion.x + (p.Long_caracteristica / 1.5f) > e.posicion.x) && (p.posicion.x - (p.Long_caracteristica / 1.5f) < e.posicion.x) && p.posicion.y == e.posicion.y)
+	bool t=Interaccion::Tocando(p, e);
+	//	if ((p.posicion.x + (p.Long_caracteristica) > e.posicion.x - e.Long_caracteristica) && (p.posicion.y - (p.Long_caracteristica) >= e.posicion.y - e.Long_caracteristica) && (p.posicion.y - (p.Long_caracteristica) < e.posicion.y) && (p.posicion.x - (p.Long_caracteristica) < e.posicion.x + e.Long_caracteristica)) {
+	if(t==true){
+	p.vida -= 1;
 		p.posicion.x = p.Long_caracteristica;
 		p.posicion.y = p.Long_caracteristica;
 	}
@@ -275,15 +306,15 @@ void Interaccion::Coger(Personaje &p, Box &c) {
 	bool t = Tocando(p, c);
 	if (t == true && fabsf(p.velocidad.y)==0) {
 		c.CambiaEstado();
+		p.CambiaEstado();
 		if (c.trans == false) {
-			p.velocidad.x = 0;
 			c.posicion.x = p.posicion.x + p.Long_caracteristica + c.Long_caracteristica;
 			//c.posicion.y = p.posicion.y- p.Long_caracteristica+ c.Long_caracteristica+ 1;
 		}
 	}
 }
 
-bool Interaccion::Tocando(Personaje &p, Box &c) { //Se han quitado los /2, no compila por eso 
+bool Interaccion::Tocando(Personaje &p, Movil &c) { //Se han quitado los /2, no compila por eso 
 	Vector2D dir;
 	float dist = p.Distancia(c.posicion, &dir);
 	float r = p.Long_caracteristica + c.Long_caracteristica;

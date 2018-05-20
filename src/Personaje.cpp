@@ -1,5 +1,6 @@
 #include "Personaje.h"
 #include "glut.h"
+#include "Constantes.h"
 #include <math.h>
 
 
@@ -53,4 +54,8 @@ float Personaje::Distancia(Vector2D centro, Vector2D *direccion) {
 	float distancia = (posicion - centro).modulo();
 	*direccion = dir;
 	return distancia;
+}
+void Personaje::CambiaEstado() {
+	if (transportando == true) transportando = false;
+	else transportando = true;
 }

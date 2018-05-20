@@ -1,8 +1,11 @@
 #include <math.h>
+#include <stdlib.h>
+#include <fstream>
+#include <iostream>
 #include "Mundo.h"
 #include "glut.h"
 #include "Interaccion.h"
-
+using namespace std;
 //void Mundo::RotarOjo()
 //{
 //	float dist = sqrt(x_ojo*x_ojo + z_ojo * z_ojo);
@@ -51,12 +54,13 @@ void Mundo::Mueve() {
 }
 void Mundo::Inicializa()
 {
-	for (int i = 0; i < 20; i++) {
+	for (int i = 0; i < 3; i++) {
 		Enemigo *aux = new Enemigo;
 		//aux->SetPos(i, 1 + 3 * i);
 		//aux->setAltura(0.25);
 		enemigos.Agregar(aux);
 	}
+	
 	cajas.CreaCajas();
 
 }
@@ -68,9 +72,24 @@ void Mundo::Tecla(unsigned char key)
 		personaje.Salto();
 	}
 }
-void Mundo::TeclaEspecial(bool izq, bool der,bool coge)
+void Mundo::TeclaEspecial(bool izq, bool der, bool coge)
 {
 	if (izq == true) personaje.getVelocidad().x = -2.5;
 	if (der == true) personaje.getVelocidad().x = 2.5;
-	if (coge == true) cajas.Coger(personaje);//Interaccion::Coger(personaje, caja1);
+	if (coge == true) {
+		cajas.Coger(personaje);
+		cout << personaje.transportando;//Interaccion::Coger(personaje, caja1);
+	}
+}
+void Mundo::TeclaEspecial2(unsigned char key) {
+	switch (key)
+	{
+	case GLUT_KEY_LEFT:
+		personaje.getVelocidad().x = 0.0f;
+		break;
+	case GLUT_KEY_RIGHT:
+		personaje.getVelocidad().x = 0.0f;
+		break;
+
+	}
 }

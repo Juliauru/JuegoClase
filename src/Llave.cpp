@@ -1,6 +1,6 @@
 #include "Llave.h"
 #include "glut.h"
-
+#include "Constantes.h"
 
 Llave::Llave()
 {

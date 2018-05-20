@@ -8,6 +8,7 @@ void OnDraw(void); //esta funcion sera llamada para dibujar
 void OnTimer(int value); //esta funcion sera llamada cuando transcurra una temporizacion
 void OnKeyboardDown(unsigned char key, int x, int y); //cuando se pulse una tecla	
 void OnSpecialKeyboardDown(int key, int x, int y);
+void OnSpecialKeyboardDown2(int key, int x, int y);
 
 int main(int argc,char* argv[])
 {
@@ -31,7 +32,7 @@ int main(int argc,char* argv[])
 	glutTimerFunc(25,OnTimer,0);//le decimos que dentro de 25ms llame 1 vez a la funcion OnTimer()
 	glutKeyboardFunc(OnKeyboardDown);
 	glutSpecialFunc(OnSpecialKeyboardDown);
-
+	glutSpecialUpFunc(OnSpecialKeyboardDown2);
 	mundo.Inicializa();
 		
 	//pasarle el control a GLUT,que llamara a los callbacks
@@ -86,4 +87,7 @@ void OnTimer(int value)
 	//no borrar estas lineas
 	glutTimerFunc(25, OnTimer, 0);
 	glutPostRedisplay();
+}
+void OnSpecialKeyboardDown2(int key, int x, int y) {
+	mundo.TeclaEspecial2(key);
 }

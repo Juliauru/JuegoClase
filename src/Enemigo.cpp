@@ -1,4 +1,5 @@
 #include "Enemigo.h"
+#include "Constantes.h"
 #include "glut.h"
 
 

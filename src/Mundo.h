@@ -20,4 +20,5 @@ public:
 	//void RotarOjo();
 	void Mueve();
 	void Dibuja();	
+	void TeclaEspecial2(unsigned char key);
 	};

@@ -11,7 +11,8 @@ class Interaccion //abstract //no se si se usa así
 public:
 	Interaccion();
 	~Interaccion();
-	static bool Contacto(Movil &pers, Plataforma &p);
+	static bool Contacto(Personaje &m, Plataforma &p);
+	static bool Contacto(Movil &m, Plataforma &p);
 
 	static void Contacto(Movil &m, Box &c);//La referencia en la caja maybe sobra
 	static void Contacto(Enemigo &e, ListaCajas c);//Solucion provisional, luego habrá que eliminarlo 
@@ -39,6 +40,6 @@ public:
 	
 	static bool Choque(ListaCajas c, Enemigo &e);
 
-	static bool Tocando(Personaje &p, Box &c);
+	static bool Tocando(Personaje &p, Movil &c);
 };
 
