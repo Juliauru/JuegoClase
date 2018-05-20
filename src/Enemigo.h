@@ -26,6 +26,7 @@ public:
 		velocidad.x = vx;
 		velocidad.y = vy;
 	}
+	float Distancia(Vector2D centro, Vector2D *direccion);
 	friend class Interaccion;
 };
 

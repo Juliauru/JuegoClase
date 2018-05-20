@@ -1,5 +1,5 @@
 #pragma once
-#define MAX_ENEMIGOS 15
+#define MAX_ENEMIGOS 21
 #include "Enemigo.h"
 #include "Pared.h"
 #include "Interaccion.h"

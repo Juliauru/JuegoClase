@@ -30,7 +30,7 @@ bool Interaccion::Contacto(Movil &m, Plataforma &p) {
 	return false;
 }
 void Interaccion::Contacto(Movil &m, Box &c) {
-	Plataforma p;
+	Plataforma p; 
 	p.setLimites((c.getPosicion().x - (c.Long_caracteristica)), (c.getPosicion().y + (c.Long_caracteristica)), (c.getPosicion().x + (c.Long_caracteristica)), (c.getPosicion().y + (c.Long_caracteristica)));
 	Vector2D dir;
 	float dif = p.Distancia(m.posicion, &dir) - m.Long_caracteristica;
@@ -96,33 +96,59 @@ bool Interaccion::Contacto(Enemigo &ene, Plataforma &p) { //arreglar con polimor
 
 
 
-void Interaccion::Rebote(Enemigo & e, Enemigo & e1)
+void Interaccion::Rebote(Enemigo & e, Enemigo & e1) //Intentos fallidos
 {
 	/*if (e.posicion.x == e1.posicion.x && e.posicion.y == e1.posicion.y) {
 		e.velocidad.x = -e.velocidad.x;
 		e1.velocidad.x = -e1.velocidad.x;
 	}*/
-	if (e.posicion.y==e1.posicion.y) {
-		float dist = fabs(e.posicion.x - e1.posicion.x);
-		
+	if (e.posicion.y == e1.posicion.y) {
+		Vector2D dir;
+		//float dist = fabsf(e.posicion.x - e1.posicion.x);+
+		float dist = e.Distancia(e1.posicion,&dir);
 		//if (dist == 0)dist = 0.0001f; intento para que se separaran las que vibran, but no
 		float r = e.Long_caracteristica + e1.Long_caracteristica;
-		if (r >= dist) {
-			if (fabsf(e.velocidad.x) >= 1.5 && fabsf(e1.velocidad.x) >= 1.5) {
+		if (dist<=r) {
+			if (dist > e.Long_caracteristica) {
 				e.velocidad.x = -e.velocidad.x;
 				e1.velocidad.x = -e1.velocidad.x;
+				if (e.velocidad.x == 0 && e1.velocidad.x < 0)
+					e.velocidad.x = 2.0f;
+				else if(e1.velocidad.x > 0)
+					e.velocidad.x = -2.0f;
+				if (e1.velocidad.x == 0 && e.velocidad.x < 0)
+					e1.velocidad.x = 2.0f;
+				else if (e.velocidad.x > 0)
+					e1.velocidad.x = -2.0f;
+				
 			}
 			else {
-				if (e.velocidad.x < 0)
+				/*if (e.velocidad.x < 0)
 					e.velocidad.x =  2.5;
 				else
 					e.velocidad.x = - 2.5;
 				if (e1.velocidad.x < 0)
-					e1.velocidad.x =  2.5;
+					e1.velocidad.x = ;
 				else
-					e1.velocidad.x = - 2.5;
+					e1.velocidad.x = - 4;*/
+				if (e.velocidad.x < 0) {
+					e.posicion.x = e.posicion.x + e.Long_caracteristica * 2;
+					e.velocidad.x = 2.0f;
+					e1.velocidad.x = -2.0f;
+				}
+
+				else if (e.velocidad.x > 0) {
+					e.posicion = e.posicion.x - e.Long_caracteristica * 2;
+					e1.velocidad.x = 2.0f;
+					e.velocidad.x = -2.0f;
+				}
+				/*if (e1.velocidad.x < 0)
+
+					e1.posicion.x = e1.posicion.x + e.Long_caracteristica;
+				else if (e1.velocidad.x > 0)
+					e1.posicion.x = e1.posicion.x - e.Long_caracteristica;*/
 			}
-		}	
+		}
 
 	}
 }

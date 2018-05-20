@@ -22,7 +22,7 @@ bool ListaEnemigos::Agregar(Enemigo * e)
 		}
 		else
 			e->getVelocidad().setValor(-2.0f, -2.0f);
-		e->getPosicion().setValor(rand() % 20 + 1, rand() % 20 + 1);
+		e->getPosicion().setValor(rand() % 20 + 1, rand() % 40 + 1);
 
 	}
 	else {

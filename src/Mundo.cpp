@@ -51,7 +51,7 @@ void Mundo::Mueve() {
 }
 void Mundo::Inicializa()
 {
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < 20; i++) {
 		Enemigo *aux = new Enemigo;
 		//aux->SetPos(i, 1 + 3 * i);
 		//aux->setAltura(0.25);

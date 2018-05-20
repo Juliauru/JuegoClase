@@ -36,23 +36,10 @@ void Enemigo::setAltura(float a) //ESTA FUNCION LA ELIMINARIA PARA NO PODER VARI
 		Long_caracteristica = a;
 	}
 }
-/*void Enemigo::Caida(float t) {
-	velocidad.y = velocidad.y - (0.5*aceleracion.y*t*t);
-	posicion.y = posicion.y + velocidad.y*t;
-}*/
-/*void Enemigo::Mueve(float t)
-{
-velocidad =velocidad +(0.5*aceleracion.y*t*t);
-posicion= posicion + velocidad*t;
-/*for (int i = 0; i < Plataforma::get_nplataformas(); i++){
-if (Interaccion::Contacto(*this, Escenario::*(plat[i])) {
-//Prueba por el momento para que no se vaya al infinito
-if (posicion.x>20) {
-velocidad.x = -velocidad.x;
+float Enemigo::Distancia(Vector2D centro, Vector2D *direccion) {
+	Vector2D dir = (posicion - centro).unitario();
+	float distancia = (posicion - centro).modulo();
+	*direccion = dir;
+	return distancia;
 }
-else if (posicion.x < 0) {
-velocidad.x = -velocidad.x;
-}
-//Interación con los límites de la caja del juego hará que la velocidad varíe de signo y se de la vuelta
-}*/
 
