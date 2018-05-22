@@ -7,101 +7,29 @@ using namespace std;
 Interaccion::Interaccion()
 {
 }
-
-
 Interaccion::~Interaccion()
 {
 }
-bool Interaccion::Contacto(Personaje &m, Plataforma &p) { //Esta la estructura pero sin hacer
+bool Interaccion::Contacto(Personaje &pers, Plataforma p) { 
 	Vector2D dir;
 	float dif;
-	if (m.transportando == false) {
-		dif=p.Distancia(m.posicion, &dir) - m.Long_caracteristica;
+	if (pers.transportando == false) {
+		dif = p.Distancia(pers.posicion, &dir) - pers.Long_caracteristica;
 	}
-	if (m.transportando == true) {
-		if(m.velocidad.y<=0)
-			dif = p.Distancia(m.posicion, &dir) - m.Long_caracteristica;
-		if (m.velocidad.y > 0)
-			dif = p.Distancia(m.posicion, &dir) - m.Long_caracteristica;
-	}
-	
-	if (dif <= 0.0f)
-	{
-		if (m.velocidad.y <= 0)
-			m.velocidad.y = 0;
-		m.vinicial = 0;
-		m.posinicial = 0;
-		Vector2D v_inicial = m.velocidad;
-		m.velocidad = v_inicial - dir * 2.0*(v_inicial*dir);
-		m.posicion = m.posicion - dir * dif;
-
-		return true;
-	}
-
-	return false;
-}
-bool Interaccion::Contacto(Movil &m, Plataforma &p) {
-	Vector2D dir;
-	float dif = p.Distancia(m.posicion, &dir) - m.Long_caracteristica;;
-	if (dif <= 0.0f)
-	{
-		if (m.velocidad.y <= 0)
-			m.velocidad.y = 0;
-		m.vinicial = 0;
-		m.posinicial = 0;
-		Vector2D v_inicial = m.velocidad;
-		m.velocidad = v_inicial - dir * 2.0*(v_inicial*dir);
-		m.posicion = m.posicion - dir * dif;
-
-		return true;
-	}
-
-	return false;
-}
-void Interaccion::Contacto(Movil &m, Box &c) {
-	Plataforma p; 
-	p.setLimites((c.getPosicion().x - (c.Long_caracteristica)), (c.getPosicion().y + (c.Long_caracteristica)), (c.getPosicion().x + (c.Long_caracteristica)), (c.getPosicion().y + (c.Long_caracteristica)));
-	Vector2D dir;
-	float dif = p.Distancia(m.posicion, &dir) - m.Long_caracteristica;
-	if (dif <= 0.0f)
-	{
-		if (m.velocidad.y <= 0)
-			m.velocidad.y = 0;
-		m.vinicial = 0;
-		m.posinicial = 0;
-		Vector2D v_inicial = m.velocidad;
-		m.velocidad = v_inicial - dir * 2.0*(v_inicial*dir);
-		m.posicion = m.posicion - dir * dif;
-
-
-		//return true;
-	}
-
-	//return false;
-}
-void Interaccion::Contacto(Enemigo &e, ListaCajas c) {
-	for (int i = 0; i < c.n_cajas; i++) {
-		Plataforma p;
-		p.setLimites((c.lista[i].posicion.x - (c.lista[i].Long_caracteristica)), (c.lista[i].posicion.y + (c.lista[i].Long_caracteristica)), (c.lista[i].posicion.x + (c.Long_caracteristica)), (c.lista[i].posicion.y + (c.lista[i].Long_caracteristica)));
-		Vector2D dir;
-		float dif = p.Distancia(e.posicion, &dir) - e.Long_caracteristica;
-		if (dif <= 0.0f)
-		{
-			if (e.velocidad.y <= 0)
-				e.velocidad.y = 0;
-			e.vinicial = 0;
-			e.posinicial = 0;
-			Vector2D v_inicial = e.velocidad;
-			e.velocidad = v_inicial - dir * 2.0*(v_inicial*dir);
-			e.posicion = e.posicion - dir * dif;
-
-			//return true;
+	if (pers.transportando == true) {
+		if (pers.velocidad.y <= 0)
+			dif = p.Distancia(pers.posicion, &dir) - pers.Long_caracteristica;
+			
+		if (pers.velocidad.y > 0) {
+			Vector2D aux;
+			aux.setValor(pers.posicion.x, pers.posicion.y + 2 * TAMANIO);
+			dif = p.Distancia(aux, &dir) - pers.Long_caracteristica;
+			
 		}
-
-		//return false;
 	}
-}
-bool Interaccion::Contacto(Enemigo &ene, Plataforma &p) { //arreglar con polimorfismo creo 
+	return(Interaccion::ComprobarDistanciaPlataforma(pers, p, dif, dir));
+	}
+bool Interaccion::Contacto(Enemigo &ene, Plataforma p) { //arreglar con polimorfismo creo 
 	Vector2D dir;
 	float dif = p.Distancia(ene.posicion, &dir) - ene.Long_caracteristica;
 	if (dif <= 0.0f)
@@ -110,18 +38,31 @@ bool Interaccion::Contacto(Enemigo &ene, Plataforma &p) { //arreglar con polimor
 		float xmax = p.limite.x;
 		if (ene.posicion.x >= xmax) ene.velocidad.x = -ene.velocidad.x;
 		if (ene.posicion.x <= xmin) ene.velocidad.x = -ene.velocidad.x;
-		if (ene.velocidad.y <= 0)
-			ene.velocidad.y = 0;
-		ene.vinicial = 0;
-		ene.posinicial = 0;
-		Vector2D v_inicial = ene.velocidad;
-		ene.velocidad = v_inicial - dir * 2.0*(v_inicial*dir);
-		ene.posicion = ene.posicion - dir * dif;		
-		return true;
 	}
-	
-	return false;	
+	return(Interaccion::ComprobarDistanciaPlataforma(ene, p, dif, dir));
 	}
+
+bool Interaccion::Contacto(Movil &m, Plataforma p) { //Creo que no es necesario
+	Vector2D dir;
+	float dif = p.Distancia(m.posicion, &dir) - m.Long_caracteristica;
+	return(Interaccion::ComprobarDistanciaPlataforma(m, p, dif, dir));
+}
+bool Interaccion::Contacto(Movil &m, Box c) {
+	Plataforma p; 
+	p.setLimites((c.getPosicion().x - (c.Long_caracteristica)), (c.getPosicion().y + (c.Long_caracteristica)), (c.getPosicion().x + (c.Long_caracteristica)), (c.getPosicion().y + (c.Long_caracteristica)));
+	Vector2D dir;
+	float dif = p.Distancia(m.posicion, &dir) - m.Long_caracteristica;
+	return(Interaccion::ComprobarDistanciaPlataforma(m, p, dif, dir));
+}
+void Interaccion::Contacto(Enemigo &e, ListaCajas c) {
+	for (int i = 0; i < c.n_cajas; i++) {
+		Plataforma p;
+		p.setLimites((c.lista[i].posicion.x - (c.lista[i].Long_caracteristica)), (c.lista[i].posicion.y + (c.lista[i].Long_caracteristica)), (c.lista[i].posicion.x + (c.Long_caracteristica)), (c.lista[i].posicion.y + (c.lista[i].Long_caracteristica)));
+		Vector2D dir;
+		float dif = p.Distancia(e.posicion, &dir) - e.Long_caracteristica;
+	    Interaccion::ComprobarDistanciaPlataforma(e, p, dif, dir);
+	}
+}
 
 
 
@@ -190,9 +131,9 @@ void Interaccion::Rebote(Personaje  &p, Enemigo &e)
 	////Introduzco friend class en Personaje, tambien función getVida();
 	////ya que cuando se apoyen en las plataformas tendran el mismo punto y, volver a cambiar el if()
 		////Volver a cambiar ((p.posicion.x + (p.Long_caracteristica / 1.5f) > e.posicion.x) && (p.posicion.x - (p.Long_caracteristica / 1.5f) < e.posicion.x) && p.posicion.y == e.posicion.y)
-	bool t=Interaccion::Tocando(p, e);
-	//	if ((p.posicion.x + (p.Long_caracteristica) > e.posicion.x - e.Long_caracteristica) && (p.posicion.y - (p.Long_caracteristica) >= e.posicion.y - e.Long_caracteristica) && (p.posicion.y - (p.Long_caracteristica) < e.posicion.y) && (p.posicion.x - (p.Long_caracteristica) < e.posicion.x + e.Long_caracteristica)) {
-	if(t==true){
+	//bool t=Interaccion::Tocando(p, e);
+	if ((p.posicion.x + (p.Long_caracteristica) > e.posicion.x - e.Long_caracteristica) && (p.posicion.y - (p.Long_caracteristica) >= e.posicion.y - e.Long_caracteristica) && (p.posicion.y - (p.Long_caracteristica) < e.posicion.y) && (p.posicion.x - (p.Long_caracteristica) < e.posicion.x + e.Long_caracteristica)) {
+		
 	p.vida -= 1;
 		p.posicion.x = p.Long_caracteristica;
 		p.posicion.y = p.Long_caracteristica;
@@ -223,7 +164,7 @@ void Interaccion::Rebote(Enemigo &ene, Escenario e) {
 	if (ene.posicion.x >= xmax) ene.velocidad.x = -ene.velocidad.x;
 	if (ene.posicion.x <= xmin) ene.velocidad.x = -ene.velocidad.x;
 }
-void Interaccion::Mover(Personaje &p, Box &c) { //No funciona del todo bien faltan detalles
+void Interaccion::Mover(Personaje &p, Box &c) { 
 	Vector2D dir;
 	float dist = p.Distancia(c.posicion, &dir);	
 	float r = p.Long_caracteristica + c.Long_caracteristica;
@@ -309,17 +250,32 @@ void Interaccion::Coger(Personaje &p, Box &c) {
 		p.CambiaEstado();
 		if (c.trans == false) {
 			c.posicion.x = p.posicion.x + p.Long_caracteristica + c.Long_caracteristica;
-			//c.posicion.y = p.posicion.y- p.Long_caracteristica+ c.Long_caracteristica+ 1;
 		}
 	}
 }
 
-bool Interaccion::Tocando(Personaje &p, Movil &c) { //Se han quitado los /2, no compila por eso 
+bool Interaccion::Tocando(Personaje &p, Movil &m) { 
 	Vector2D dir;
-	float dist = p.Distancia(c.posicion, &dir);
-	float r = p.Long_caracteristica + c.Long_caracteristica;
+	float dist = p.Distancia(m.posicion, &dir);
+	float r = p.Long_caracteristica + m.Long_caracteristica;
 	if (r >= dist)
 		return true;
+	return false;
+}
+bool Interaccion::ComprobarDistanciaPlataforma(Movil &m, Plataforma p,float dif,Vector2D dir) {
+	if (dif <= 0.0f) {
+		if (m.velocidad.y <= 0) {
+			m.velocidad.y = 0;
+		}
+		m.vinicial = 0;
+		m.posinicial = 0;
+		Vector2D v_inicial = m.velocidad;
+		m.velocidad = v_inicial - dir * 2.0*(v_inicial*dir);
+		m.posicion = m.posicion - dir * dif;
+
+		return true;
+	}
+
 	return false;
 }
 	

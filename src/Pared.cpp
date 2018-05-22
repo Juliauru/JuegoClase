@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include "glut.h"
 #include "Pared.h"
+#include "Constantes.h"
 #include "ETSIDI.h"
 using ETSIDI::getTexture;
 
@@ -17,8 +18,8 @@ void Pared::Dibuja() {
 	glDisable(GL_LIGHTING);
 	glColor3ub(color.rojo, color.verde, color.azul);
 	glBegin(GL_POLYGON);
-	glVertex3d(posicion.x, posicion.y, 3);
-	glVertex3d(limite.x, limite.y, 3);
+	glVertex3d(posicion.x, posicion.y, PROFUNDIDAD_PLATAFORMAS);
+	glVertex3d(limite.x, limite.y, PROFUNDIDAD_PLATAFORMAS);
 	glVertex3d(limite.x, limite.y, 0);
 	glVertex3d(posicion.x, posicion.y, 0);
 	glEnd();

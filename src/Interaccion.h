@@ -6,18 +6,19 @@
 #include "Box.h"
 #include "ListaCajas.h"
 class Enemigo;
-class Interaccion //abstract //no se si se usa así 
+class Interaccion  
 {
 public:
 	Interaccion();
 	~Interaccion();
-	static bool Contacto(Personaje &m, Plataforma &p);
-	static bool Contacto(Movil &m, Plataforma &p);
+	static bool Contacto(Movil &m, Plataforma p);
+	static bool Contacto(Personaje &pers, Plataforma p);	
+	static bool Contacto(Enemigo &enem, Plataforma p);
 
-	static void Contacto(Movil &m, Box &c);//La referencia en la caja maybe sobra
+	static bool Contacto(Movil &m, Box c);//La referencia en la caja maybe sobra
 	static void Contacto(Enemigo &e, ListaCajas c);//Solucion provisional, luego habrá que eliminarlo 
 
-	static bool Contacto(Enemigo &enem, Plataforma &p);//BOOL CAMBIADO POR PAULA
+	//BOOL CAMBIADO POR PAULA
 													   //Solucion provisional, luego habrá que eliminarlo 
 
 	static void Rebote(Enemigo &e, Enemigo &e1);
@@ -41,5 +42,6 @@ public:
 	static bool Choque(ListaCajas c, Enemigo &e);
 
 	static bool Tocando(Personaje &p, Movil &c);
+	static bool ComprobarDistanciaPlataforma(Movil &m, Plataforma p,float dif,Vector2D dir);
 };
 

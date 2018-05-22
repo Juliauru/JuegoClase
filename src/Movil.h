@@ -1,7 +1,7 @@
 #pragma once
 #include "Objeto.h"
 #include "Vector2D.h"
-class Movil:public virtual Objeto
+class Movil:public Objeto
 {
 protected:
 	Vector2D velocidad;

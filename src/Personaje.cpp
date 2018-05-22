@@ -18,6 +18,7 @@ Personaje::Personaje(float a)
 	aceleracion.y = -10.0f;
 	velocidad.x = 0;
 	velocidad.y = 0;
+	transportando == false;
 
 }
 Personaje::~Personaje()

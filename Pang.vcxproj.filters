@@ -116,7 +116,7 @@
     <ClInclude Include="src\Llave.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Constantes.h">
+    <ClInclude Include="src\Constantes.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

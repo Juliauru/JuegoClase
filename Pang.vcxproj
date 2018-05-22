@@ -102,8 +102,8 @@
     <ClCompile Include="src\Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Constantes.h" />
     <ClInclude Include="src\Box.h" />
+    <ClInclude Include="src\Constantes.h" />
     <ClInclude Include="src\Enemigo.h" />
     <ClInclude Include="src\Escenario.h" />
     <ClInclude Include="src\Interaccion.h" />
