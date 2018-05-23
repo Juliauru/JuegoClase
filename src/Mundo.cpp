@@ -54,13 +54,14 @@ void Mundo::Mueve() {
 }
 void Mundo::Inicializa()
 {
-	for (int i = 0; i < 3; i++) {
-		Enemigo *aux = new Enemigo;
-		//aux->SetPos(i, 1 + 3 * i);
-		//aux->setAltura(0.25);
-		enemigos.Agregar(aux);
-	}
-	
+	//for (int i = 0; i < 3; i++) {
+	//	Enemigo *aux = new Enemigo;
+	//	//aux->SetPos(i, 1 + 3 * i);
+	//	//aux->setAltura(0.25);
+	//	enemigos.Agregar(aux);
+	//}
+	//
+	enemigos.CreaEnemigos();
 	cajas.CreaCajas();
 
 }

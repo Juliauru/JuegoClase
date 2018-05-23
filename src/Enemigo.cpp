@@ -13,6 +13,7 @@ Enemigo::Enemigo()
 	posicion.y = 1;
 	aceleracion.x = 0;
 	aceleracion.y = -3.0f;
+	getColor().SetColor(0, 40, 30);
 }
 
 
@@ -22,7 +23,7 @@ Enemigo::~Enemigo()
 
 void Enemigo::Dibuja()
 {
-	glColor3b(0, 40, 30);
+	glColor3b(getColor().rojo, getColor().verde, getColor().azul);
 	glTranslatef(posicion.x, posicion.y, 1.5);
 	glutSolidSphere((Long_caracteristica), 20, 30);
 	glTranslatef(-posicion.x, -posicion.y, -1.5);

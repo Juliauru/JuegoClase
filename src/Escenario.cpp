@@ -36,13 +36,13 @@ Escenario::Escenario()
 		limites[3].setLimites(0, 0, long_x, 0);
 		Plataforma::set_nplataformas(n);
 		plat = new Plataforma[Plataforma::get_nplataformas()];//Primero siempre posicion antes que longitud de las paredes
-		cout << Plataforma::get_nplataformas()<<"\n";
+		//cout << Plataforma::get_nplataformas()<<"\n";
 		fichero >> x;
 		while (!fichero.eof()&& i<Plataforma::get_nplataformas()) {
 			fichero >> y;
 			fichero >> l;
 			plat[i].getPosicion().setValor(x, y);
-			cout << plat[i].getPosicion().x << " " << plat[i].getPosicion().y<<"\n";
+		//	cout << plat[i].getPosicion().x << " " << plat[i].getPosicion().y<<"\n";
 			plat[i].setLargo(l);
 			plat[i].getColor().SetColor(153, 255, 51);
 			fichero >> x;

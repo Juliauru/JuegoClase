@@ -1,16 +1,46 @@
 #include "ListaEnemigos.h"
 #include <stdlib.h>
+#include <iostream>
+#include <fstream>
+using namespace std;
 ListaEnemigos::ListaEnemigos()
 {
 	numero = 0;
 	for (int i = 0; i < MAX_ENEMIGOS; i++) {
 		lista[i] = 0;
 	}
+
 }
 
 
 ListaEnemigos::~ListaEnemigos()
 {
+}
+
+void ListaEnemigos::CreaEnemigos()
+{
+	int  n,i = 0;
+	float x, y;
+	/*ofstream fichero("Nombre.txt");
+	fichero << "Hola, mundo" << endl;
+	fichero.close();*/
+	ifstream fichero("Nombre.txt");
+	if (!fichero)
+		cout << "No se puede abrir el fichero" << endl;
+	else {
+		while (!fichero.eof() && i <MAX_ENEMIGOS) {
+			fichero >> x;
+			fichero >> y;
+			lista[i] = new Enemigo;
+			lista[i]->setAltura(TAMANIO / 1.5f);
+			lista[i]->SetPos(x, y);//Se puede sustituir por el getpos().setpos()
+			cout << (lista[i])->getPosicion().x << " " << (lista[i])->getPosicion().y << "\n";
+			lista[i]->getColor().SetColor(0,40, 30);
+			i++;
+			numero++;
+		}
+	}
+	fichero.close();
 }
 
 bool ListaEnemigos::Agregar(Enemigo * e)

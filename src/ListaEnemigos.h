@@ -1,11 +1,12 @@
 #pragma once
-#define MAX_ENEMIGOS 21
+#define MAX_ENEMIGOS 40
 #include "Enemigo.h"
 #include "Pared.h"
 #include "Interaccion.h"
 #include "Personaje.h"
 #include "ListaCajas.h"
 #include "Movil.h"
+#include "Constantes.h"
 class ListaEnemigos :public Enemigo
 {
 private:
@@ -15,6 +16,8 @@ private:
 public:
 	ListaEnemigos();
 	~ListaEnemigos();
+
+	void CreaEnemigos();
 
 	bool Agregar(Enemigo *e);
 

@@ -125,12 +125,6 @@ void Interaccion::Rebote(Enemigo & e, Enemigo & e1) //Intentos fallidos
 
 void Interaccion::Rebote(Personaje  &p, Enemigo &e)
 {
-	////IDEA PARA LAS VIDAS
-	////En esta función, si se produce el choque, las vidas del personaje disminuirán en 1. Por tanto, en personaje se creará una variable
-	////estática que será vidas que comenzarán valiendo 3 y en está función irán disminuyendo. En la función bonus aumentarán.
-	////Introduzco friend class en Personaje, tambien función getVida();
-	////ya que cuando se apoyen en las plataformas tendran el mismo punto y, volver a cambiar el if()
-		////Volver a cambiar ((p.posicion.x + (p.Long_caracteristica / 1.5f) > e.posicion.x) && (p.posicion.x - (p.Long_caracteristica / 1.5f) < e.posicion.x) && p.posicion.y == e.posicion.y)
 	//bool t=Interaccion::Tocando(p, e);
 	if ((p.posicion.x + (p.Long_caracteristica) > e.posicion.x - e.Long_caracteristica) && (p.posicion.y - (p.Long_caracteristica) >= e.posicion.y - e.Long_caracteristica) && (p.posicion.y - (p.Long_caracteristica) < e.posicion.y) && (p.posicion.x - (p.Long_caracteristica) < e.posicion.x + e.Long_caracteristica)) {
 		
@@ -138,13 +132,6 @@ void Interaccion::Rebote(Personaje  &p, Enemigo &e)
 		p.posicion.x = p.Long_caracteristica;
 		p.posicion.y = p.Long_caracteristica;
 	}
-		//	//Esto de las velocidades es una prueba para comprobar visualmente que chocan
-		//	e.velocidad.x = -e.velocidad.x;
-		//	return true;
-		//	//Indicaría que pierde una vida y vuelve a empezar el nivel por el que iba (si la vida es distinta de 0)
-		//	//Si la vida llega a 0 el programa se acabaría y comenzaría la pantalla principal.
-		//}
-		//return false;
 }
 
 void Interaccion::Rebote(Movil &m, Escenario &e) //Intentar hacer poco a poco, no se como quedará
@@ -154,7 +141,7 @@ void Interaccion::Rebote(Movil &m, Escenario &e) //Intentar hacer poco a poco, n
 	if (m.posicion.x >= xmax) m.posicion.x = xmax;
 	if (m.posicion.x <= xmin) m.posicion.x = xmin;
 	if (m.posicion.y > (8+ e.p_ojo_y))
-		e.p_ojo_y = e.p_ojo_y+8; //Si se cambia el 7.5 hay que cambiarlo tambien en el metodo dibuja vidas de personaje
+		e.p_ojo_y = e.p_ojo_y+8; /// (JULIA LEEME :) -> Si se cambia el 8 hay que cambiarlo tambien en el metodo dibuja vidas de personaje <-
 	if (m.posicion.y <(e.p_ojo_y-8))
 		e.p_ojo_y = e.p_ojo_y -8;
 }
