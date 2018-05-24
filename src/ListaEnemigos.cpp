@@ -36,9 +36,14 @@ void ListaEnemigos::CreaEnemigos()
 			lista[i]->SetPos(x, y);//Se puede sustituir por el getpos().setpos()
 			cout << (lista[i])->getPosicion().x << " " << (lista[i])->getPosicion().y << "\n";
 			lista[i]->getColor().SetColor(0,40, 30);
+			if ((rand() % 2) == 0) {
+				lista[i]->getVelocidad().setValor(2.0f, 0.0f);
+			}
+			else
+				lista[i]->getVelocidad().setValor(-2.0f, 0.0f);
 			i++;
 			numero++;
-		}
+		} 
 	}
 	fichero.close();
 }
