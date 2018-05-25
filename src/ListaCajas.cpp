@@ -8,6 +8,7 @@
 using namespace std;
 ListaCajas::ListaCajas()
 {
+	Long_caracteristica = TAMANIO;//prueba
 }
 
 

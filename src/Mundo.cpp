@@ -50,7 +50,7 @@ void Mundo::Mueve() {
 	cajas.Mover(personaje);
 	enemigos.Eliminar(enemigos.Colision(personaje));
 	enemigos.Choque(cajas);
-	enemigos.Contacto(cajas);
+	enemigos.Eliminar(enemigos.Contacto(cajas));
 }
 void Mundo::Inicializa()
 {

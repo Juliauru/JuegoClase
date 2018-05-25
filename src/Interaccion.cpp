@@ -34,6 +34,7 @@ bool Interaccion::Contacto(Enemigo &ene, Plataforma p) { //arreglar con polimorf
 	float dif = p.Distancia(ene.posicion, &dir) - ene.Long_caracteristica;
 	if (dif <= 0.0f)
 	{
+		//cout << "OK" << endl;
 		float xmin = p.posicion.x;
 		float xmax = p.limite.x;
 		if (ene.posicion.x >= xmax) ene.velocidad.x = -ene.velocidad.x;
@@ -265,7 +266,16 @@ bool Interaccion::ComprobarDistanciaPlataforma(Movil &m, Plataforma p,float dif,
 
 	return false;
 }
-	
+bool Interaccion::Colision(Enemigo e, ListaCajas c)
+{
+	for (int i = 0; i < c.n_cajas; i++) {
+		if (e.posicion.x <= (c.posicion.x + c.Long_caracteristica + e.Long_caracteristica / 2) && e.posicion.x <= (c.posicion.x - c.Long_caracteristica - e.Long_caracteristica / 2) && c.posicion.y <= (e.posicion.y + e.Long_caracteristica) && c.posicion.y >(e.posicion.y - e.Long_caracteristica)) {
+			cout << "okreturn" << endl;
+			return true;
+		}
+		return false;
+	}
+}
 
 	
 

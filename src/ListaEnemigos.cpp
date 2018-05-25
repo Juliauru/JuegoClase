@@ -19,7 +19,7 @@ ListaEnemigos::~ListaEnemigos()
 
 void ListaEnemigos::CreaEnemigos()
 {
-	int  n,i = 0;
+	int  i = 0;
 	float x, y;
 	/*ofstream fichero("Nombre.txt");
 	fichero << "Hola, mundo" << endl;
@@ -34,7 +34,8 @@ void ListaEnemigos::CreaEnemigos()
 			lista[i] = new Enemigo;
 			lista[i]->setAltura(TAMANIO / 1.5f);
 			lista[i]->SetPos(x, y);//Se puede sustituir por el getpos().setpos()
-			cout << (lista[i])->getPosicion().x << " " << (lista[i])->getPosicion().y << "\n";
+			lista[i]->SetVel(0.0f, -1.0f);
+			//cout << (lista[i])->getPosicion().x << " " << (lista[i])->getPosicion().y << "\n";
 			lista[i]->getColor().SetColor(0,40, 30);
 			if ((rand() % 2) == 0) {
 				lista[i]->getVelocidad().setValor(2.0f, 0.0f);
@@ -94,11 +95,8 @@ void ListaEnemigos::Rebote(Personaje &p) {
 }
 void ListaEnemigos::Rebote(Plataforma p) {
 	for (int i = 0; i < numero; i++) {
-		/*if (Interaccion::Contacto(*(lista[i]), p)) {*/
 		Interaccion::Contacto(*(lista[i]), p);		
-		/*	Vector2D pos = p.getPosicion();
-		(*lista[i]).SetPos(pos.x, pos.y);
-		(*lista[i]).SetVel(3.0f, 0.0f);*/
+
 	}
 }
 
@@ -140,9 +138,13 @@ void ListaEnemigos::Choque(ListaCajas c)//No funciona bien
 		}
 	}
 }
-void ListaEnemigos::Contacto(ListaCajas c)//No funciona bien
+int ListaEnemigos::Contacto(ListaCajas c)//No funciona bien
 {
 	for (int i = 0; i < numero; i++) {
-		Interaccion::Contacto(*(lista[i]),c);
+		if (Interaccion::Colision(*(lista[i]), c)){
+			cout << "OK" << endl;
+			return i;
+		}
 	}
+	return -1;
 }

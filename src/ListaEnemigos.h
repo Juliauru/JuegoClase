@@ -39,7 +39,7 @@ public:
 
 	void Choque(ListaCajas c);
 
-	void Contacto(ListaCajas c);
+	int Contacto(ListaCajas c);
 
 	friend class Interaccion;
 };

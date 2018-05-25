@@ -1,6 +1,7 @@
 #pragma once
 #include "Movil.h"
 #include "Escenario.h"
+#include "Constantes.h"
 class Personaje:public Movil
 {
 private:
@@ -9,7 +10,7 @@ private:
 	
 public:
 	bool transportando;
-	Personaje(float a=0.5);
+	Personaje(float a=TAMANIO);
 	~Personaje();	
 	void Dibuja();
 	void DibujaVidas(float y,float inc);
