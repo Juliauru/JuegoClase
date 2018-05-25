@@ -13,7 +13,10 @@ private:
 	Escenario escenario;	
 	Llave llave;
 	ListaCajas cajas;	
+	int oportunidad;
 public:
+	bool GetOportunidad();
+	void SetOportunidad(Personaje p);
 	void Tecla(unsigned char key);
 	void TeclaEspecial(bool izq=false, bool der=false,bool coge=false);
 	void Inicializa();

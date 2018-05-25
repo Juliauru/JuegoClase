@@ -51,6 +51,7 @@ void Mundo::Mueve() {
 	enemigos.Eliminar(enemigos.Colision(personaje));
 	enemigos.Choque(cajas);
 	enemigos.Eliminar(enemigos.Contacto(cajas));
+	SetOportunidad(personaje);
 }
 void Mundo::Inicializa()
 {
@@ -61,9 +62,25 @@ void Mundo::Inicializa()
 	//	enemigos.Agregar(aux);
 	//}
 	//
+	oportunidad = personaje.GetVida();
 	enemigos.CreaEnemigos();
 	cajas.CreaCajas();
 
+}
+
+bool Mundo::GetOportunidad()
+{
+	if (oportunidad <= 0) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+void Mundo::SetOportunidad(Personaje p)
+{
+	oportunidad = p.GetVida();
 }
 
 void Mundo::Tecla(unsigned char key)
