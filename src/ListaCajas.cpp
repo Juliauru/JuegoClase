@@ -6,11 +6,9 @@
 
 
 using namespace std;
-ListaCajas::ListaCajas()
-{
-	Long_caracteristica = TAMANIO;//prueba
-}
-
+ListaCajas::ListaCajas() :Box({0.0f,0.0f})
+{};
+	
 
 ListaCajas::~ListaCajas()
 {
@@ -40,13 +38,19 @@ void ListaCajas::CreaCajas()
 			n++;
 		}*/ ///Si en vez de tener que meter numero de cajas quiero que cuente el numero de lineas del fichero NO ESTA BIEN IMPLEMENTADO
 		fichero >> n;
+		if (n > CAJASMAX) {
+			cout << "Error" << endl;
+			exit;
+		}
 		ListaCajas::Set_ncajas(n);
-		lista = new Box[n_cajas];
+		lista[3] = new Box({ 0,0 });
 		while (!fichero.eof() && i < n_cajas) {
 			fichero >> x;
 			fichero >> y;
-			lista[i].getPosicion().setValor(x, (y+(Long_caracteristica)));
-			lista[i].getColor().SetColor(145, 28, 226);
+			Vector2D aux(x, y + Long_caracteristica);
+			lista[i] = new Box(aux);
+			/*lista[i].getPosicion().setValor(x, (y+(Long_caracteristica)));
+			lista[i].getColor().SetColor(145, 28, 226);*/
 			i++;
 		}
 		/*if (i < n_cajas) {
@@ -61,40 +65,40 @@ void ListaCajas::CreaCajas()
 void ListaCajas::Dibuja()
 {
 	for (int i = 0; i < n_cajas; i++) {
-		lista[i].Dibuja();
+		lista[i]->Dibuja();
 	}
 }
 void ListaCajas::Mueve(float t)
 {
 	for (int i = 0; i < n_cajas; i++) {
-		lista[i].Mueve(t);
+		lista[i]->Mueve(t);
 	}
 }
 void ListaCajas::Coger(Personaje &pers) {
 	for (int i = 0; i < n_cajas; i++) {
-		Interaccion::Coger(pers, (lista[i]));
+		Interaccion::Coger(pers, *(lista[i]));
 	}
 }
 
 void ListaCajas::Contacto(Personaje & pers)
 {
 	for (int i = 0; i < n_cajas; i++) {
-		Interaccion::Contacto(pers, (lista[i]));
+		Interaccion::Contacto(pers, *(lista[i]));
 	}
 }
 
 void ListaCajas::Mover(Personaje & pers)
 {
 	for (int i = 0; i < n_cajas; i++) {
-		Interaccion::Mover(pers, (lista[i]));
+		Interaccion::Mover(pers, *(lista[i]));
 		for (int j = i+1; j <= n_cajas-1; j++) {
-			Interaccion::Mover((lista[i]), (lista[j]),pers);
+			Interaccion::Mover(*(lista[i]), *(lista[j]),pers);
 		}
 	}
 }
 void ListaCajas::Caida(Plataforma p) {
 	for (int i = 0; i < n_cajas; i++) {
-		Interaccion::Contacto((lista[i]),p);
+		Interaccion::Contacto(*(lista[i]),p);
 	}
 }
 

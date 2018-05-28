@@ -14,12 +14,8 @@ public:
 	static bool Contacto(Movil &m, Plataforma p);
 	static bool Contacto(Personaje &pers, Plataforma p);	
 	static bool Contacto(Enemigo &enem, Plataforma p);
-
-	static bool Contacto(Movil &m, Box c);//La referencia en la caja maybe sobra
-	static void Contacto(Enemigo &e, ListaCajas c);//Solucion provisional, luego habrá que eliminarlo 
-
-	//BOOL CAMBIADO POR PAULA
-													   //Solucion provisional, luego habrá que eliminarlo 
+	static bool Contacto(Movil &m, Box c);
+	static void Contacto(Enemigo &e, ListaCajas c);													  
 
 	static void Rebote(Enemigo &e, Enemigo &e1);
 

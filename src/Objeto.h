@@ -6,7 +6,7 @@ class Objeto
 protected:
 	Vector2D posicion;
 	Tono color;
-	Objeto();
+	Objeto(Vector2D v);
 	~Objeto();
 public:
 	Vector2D & getPosicion();

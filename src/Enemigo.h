@@ -9,7 +9,7 @@ class Enemigo :public Movil
 	//float Long_caracteristica; //O lo de la clase movil de long_caracteristica??_P
 
 public:
-	Enemigo();
+	Enemigo(Vector2D pos);
 	~Enemigo();
 	void Dibuja();
 	void setAltura(float a);

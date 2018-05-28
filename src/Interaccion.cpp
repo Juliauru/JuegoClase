@@ -35,8 +35,8 @@ bool Interaccion::Contacto(Enemigo &ene, Plataforma p) { //arreglar con polimorf
 	if (dif <= 0.0f)
 	{
 		//cout << "OK" << endl;
-		float xmin = p.posicion.x;
-		float xmax = p.limite.x;
+		float xmin = p.posicion.x+0.01;
+		float xmax = p.limite.x-0.01;
 		if (ene.posicion.x >= xmax) ene.velocidad.x = -ene.velocidad.x;
 		if (ene.posicion.x <= xmin) ene.velocidad.x = -ene.velocidad.x;
 	}
@@ -49,16 +49,16 @@ bool Interaccion::Contacto(Movil &m, Plataforma p) { //Creo que no es necesario
 	return(Interaccion::ComprobarDistanciaPlataforma(m, p, dif, dir));
 }
 bool Interaccion::Contacto(Movil &m, Box c) {
-	Plataforma p; 
-	p.setLimites((c.getPosicion().x - (c.Long_caracteristica)), (c.getPosicion().y + (c.Long_caracteristica)), (c.getPosicion().x + (c.Long_caracteristica)), (c.getPosicion().y + (c.Long_caracteristica)));
+	Plataforma p((c.getPosicion().x - (c.Long_caracteristica)), (c.getPosicion().y + (c.Long_caracteristica)), (c.getPosicion().x + (c.Long_caracteristica)), (c.getPosicion().y + (c.Long_caracteristica)));
+	//p.setLimites((c.getPosicion().x - (c.Long_caracteristica)), (c.getPosicion().y + (c.Long_caracteristica)), (c.getPosicion().x + (c.Long_caracteristica)), (c.getPosicion().y + (c.Long_caracteristica)));
 	Vector2D dir;
 	float dif = p.Distancia(m.posicion, &dir) - m.Long_caracteristica;
 	return(Interaccion::ComprobarDistanciaPlataforma(m, p, dif, dir));
 }
 void Interaccion::Contacto(Enemigo &e, ListaCajas c) {
 	for (int i = 0; i < c.n_cajas; i++) {
-		Plataforma p;
-		p.setLimites((c.lista[i].posicion.x - (c.lista[i].Long_caracteristica)), (c.lista[i].posicion.y + (c.lista[i].Long_caracteristica)), (c.lista[i].posicion.x + (c.Long_caracteristica)), (c.lista[i].posicion.y + (c.lista[i].Long_caracteristica)));
+		Plataforma p((c.lista[i]->posicion.x - (c.lista[i]->Long_caracteristica)), (c.lista[i]->posicion.y + (c.lista[i]->Long_caracteristica)), (c.lista[i]->posicion.x + (c.Long_caracteristica)), (c.lista[i]->posicion.y + (c.lista[i]->Long_caracteristica)));
+		//p.setLimites((c.lista[i]->posicion.x - (c.lista[i]->Long_caracteristica)), (c.lista[i]->posicion.y + (c.lista[i]->Long_caracteristica)), (c.lista[i].posicion.x + (c.Long_caracteristica)), (c.lista[i].posicion.y + (c.lista[i].Long_caracteristica)));
 		Vector2D dir;
 		float dif = p.Distancia(e.posicion, &dir) - e.Long_caracteristica;
 	    Interaccion::ComprobarDistanciaPlataforma(e, p, dif, dir);
@@ -137,8 +137,8 @@ void Interaccion::Rebote(Personaje  &p, Enemigo &e)
 
 void Interaccion::Rebote(Movil &m, Escenario &e) //Intentar hacer poco a poco, no se como quedará
 {
-	float xmin = e.p_inicio.posicion.x;
-	float xmax = e.p_inicio.limite.x;
+	float xmin = e.limites[3].posicion.x;
+	float xmax = e.limites[3].limite.x;
 	if (m.posicion.x >= xmax) m.posicion.x = xmax;
 	if (m.posicion.x <= xmin) m.posicion.x = xmin;
 	if (m.posicion.y > (8+ e.p_ojo_y))
@@ -222,9 +222,9 @@ bool Interaccion::Colision(Enemigo e, Personaje p)
 bool Interaccion::Choque(ListaCajas c, Enemigo & e)
 {
 	for (int i = 0; i < c.n_cajas; i++) {
-		float dist = fabsf(c.lista[i].posicion.x - e.posicion.x);
-		float r = c.lista[i].Long_caracteristica/*HE quitado aqui un entre 2*/ + e.Long_caracteristica;
-		if (fabsf(c.lista[i].posicion.y - e.posicion.y) < 0.5 && r >= dist) {
+		float dist = fabsf(c.lista[i]->posicion.x - e.posicion.x);
+		float r = c.lista[i]->Long_caracteristica/*HE quitado aqui un entre 2*/ + e.Long_caracteristica;
+		if (fabsf(c.lista[i]->posicion.y - e.posicion.y) < 0.5 && r >= dist) {
 			return true;
 		}
 	}

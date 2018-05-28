@@ -84,6 +84,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Box.cpp" />
+    <ClCompile Include="src\CoordinadorPang.cpp" />
     <ClCompile Include="src\Enemigo.cpp" />
     <ClCompile Include="src\Escenario.cpp" />
     <ClCompile Include="src\Interaccion.cpp" />
@@ -104,6 +105,7 @@
   <ItemGroup>
     <ClInclude Include="src\Box.h" />
     <ClInclude Include="src\Constantes.h" />
+    <ClInclude Include="src\CoordinadorPang.h" />
     <ClInclude Include="src\Enemigo.h" />
     <ClInclude Include="src\Escenario.h" />
     <ClInclude Include="src\Interaccion.h" />

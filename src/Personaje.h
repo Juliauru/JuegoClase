@@ -7,10 +7,9 @@ class Personaje:public Movil
 private:
 	//Longitud característica radio esfera, hasta que tengamos una altura, luego cambiar
 	int vida;
-	
-public:
-	bool transportando;
-	Personaje(float a=TAMANIO);
+	bool transportando;	
+public:	
+	Personaje();
 	~Personaje();	
 	void Dibuja();
 	void DibujaVidas(float y,float inc);

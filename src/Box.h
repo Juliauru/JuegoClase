@@ -6,7 +6,7 @@ class Box:public Transportable
 protected:
 	bool tocando; //Está la caja teniendo contacto con el personaje??
 public:
-	Box();
+	Box(Vector2D pos);
 	~Box();
 	void Dibuja();
 	void CambiaEstado();

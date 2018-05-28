@@ -2,8 +2,12 @@
 #include "Constantes.h"
 #include <math.h>
 
-Movil::Movil()
+Movil::Movil(Vector2D pos, Vector2D vel, Vector2D ac, float l) :Objeto(pos),
+																Long_caracteristica(l),
+																velocidad(vel), 
+																aceleracion(ac)
 {
+
 	posinicial=0;
 	vinicial=0;
 }

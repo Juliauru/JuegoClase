@@ -4,15 +4,8 @@
 
 
 
-Enemigo::Enemigo()
+Enemigo::Enemigo(Vector2D pos):Movil(pos, {0.0f,0.0f}, { 0.0f,-3.0f }, TAMANIO/1.5f) //La aceleración??
 {
-	Long_caracteristica = TAMANIO / 1.5f;
-	posicion.x = 0;
-	velocidad.x = 0.0f;
-	velocidad.y = 0.0;
-	posicion.y = 1;
-	aceleracion.x = 0;
-	aceleracion.y = -3.0f;
 	getColor().SetColor(0, 40, 30);
 }
 

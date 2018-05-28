@@ -14,6 +14,7 @@ using namespace std;
 //	x_ojo = dist * cos(ang);
 //	z_ojo = dist * sin(ang);
 //}
+
 void Mundo::Dibuja()
 {
 	escenario.Reorientar();
@@ -36,9 +37,9 @@ void Mundo::Mueve() {
 	enemigos.Mueve(0.025f);	
 	cajas.Mueve(0.025f);
 	for (int i = 0; i < Plataforma::get_nplataformas(); i++) {
-		Interaccion::Contacto(personaje, escenario.plat[i]);
-		enemigos.Rebote(escenario.plat[i]);
-		cajas.Caida(escenario.plat[i]);
+		Interaccion::Contacto(personaje, *(escenario.plat[i]));
+		enemigos.Rebote(*(escenario.plat[i]));
+		cajas.Caida(*(escenario.plat[i]));
 	}
 	Interaccion::Contacto(personaje, escenario.p_inicio);
 	enemigos.Rebote(escenario.p_inicio);
@@ -96,7 +97,7 @@ void Mundo::TeclaEspecial(bool izq, bool der, bool coge)
 	if (der == true) personaje.getVelocidad().x = 2.5;
 	if (coge == true) {
 		cajas.Coger(personaje);
-		cout << personaje.transportando;//Interaccion::Coger(personaje, caja1);
+		//cout << personaje.transportando;//Interaccion::Coger(personaje, caja1);
 	}
 }
 void Mundo::TeclaEspecial2(unsigned char key) {

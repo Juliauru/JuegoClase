@@ -9,9 +9,9 @@ protected:
 	float Long_caracteristica;
 	float posinicial;
 	float vinicial;
-public:
-	Movil();
+	Movil(Vector2D pos, Vector2D vel, Vector2D ac, float l);
 	~Movil();
+public:	
 	void virtual Mueve(float t);
 	Vector2D& getVelocidad();
 	Vector2D& getAceleracion();

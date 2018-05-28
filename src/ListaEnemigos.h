@@ -1,5 +1,4 @@
 #pragma once
-#define MAX_ENEMIGOS 40
 #include "Enemigo.h"
 #include "Pared.h"
 #include "Interaccion.h"
@@ -10,7 +9,7 @@
 class ListaEnemigos :public Enemigo
 {
 private:
-	Enemigo * lista[MAX_ENEMIGOS];
+	Enemigo *lista[MAX_ENEMIGOS];
 	int numero;
 
 public:

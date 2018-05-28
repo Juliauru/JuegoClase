@@ -2,9 +2,7 @@
 
 
 
-Objeto::Objeto()
-{
-}
+Objeto::Objeto(Vector2D v):posicion(v){}
 Objeto::~Objeto()
 {
 }

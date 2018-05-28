@@ -3,7 +3,7 @@
 #include <iostream>
 #include <fstream>
 using namespace std;
-ListaEnemigos::ListaEnemigos()
+ListaEnemigos::ListaEnemigos():Enemigo({0.0f,0.0f})
 {
 	numero = 0;
 	for (int i = 0; i < MAX_ENEMIGOS; i++) {
@@ -20,10 +20,7 @@ ListaEnemigos::~ListaEnemigos()
 void ListaEnemigos::CreaEnemigos()
 {
 	int  i = 0;
-	float x, y;
-	/*ofstream fichero("Nombre.txt");
-	fichero << "Hola, mundo" << endl;
-	fichero.close();*/
+	float x, y;	
 	ifstream fichero("Nombre.txt");
 	if (!fichero)
 		cout << "No se puede abrir el fichero" << endl;
@@ -31,12 +28,13 @@ void ListaEnemigos::CreaEnemigos()
 		while (!fichero.eof() && i <MAX_ENEMIGOS) {
 			fichero >> x;
 			fichero >> y;
-			lista[i] = new Enemigo;
-			lista[i]->setAltura(TAMANIO / 1.5f);
-			lista[i]->SetPos(x, y);//Se puede sustituir por el getpos().setpos()
-			lista[i]->SetVel(0.0f, -1.0f);
-			//cout << (lista[i])->getPosicion().x << " " << (lista[i])->getPosicion().y << "\n";
-			lista[i]->getColor().SetColor(0,40, 30);
+			Vector2D aux(x, y);
+			lista[i] = new Enemigo(aux);
+			
+			//lista[i]->SetPos(x, y);//Se puede sustituir por el getpos().setpos()
+			//lista[i]->SetVel(0.0f, -1.0f);
+			////cout << (lista[i])->getPosicion().x << " " << (lista[i])->getPosicion().y << "\n";
+			/*lista[i]->getColor().SetColor(0,40, 30);*/
 			if ((rand() % 2) == 0) {
 				lista[i]->getVelocidad().setValor(2.0f, 0.0f);
 			}
@@ -54,10 +52,10 @@ bool ListaEnemigos::Agregar(Enemigo * e)
 	if (numero < MAX_ENEMIGOS) {
 		lista[numero++] = e;
 		if ((rand() % 2) == 0) {
-			e->getVelocidad().setValor(2.0f, -2.0f);
+			e->getVelocidad().setValor(2.0f, 0.0f);
 		}
 		else
-			e->getVelocidad().setValor(-2.0f, -2.0f);
+			e->getVelocidad().setValor(-2.0f, 0.0f);
 		e->getPosicion().setValor(rand() % 20 + 1, rand() % 40 + 1);
 
 	}

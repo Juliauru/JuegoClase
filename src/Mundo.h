@@ -15,6 +15,7 @@ private:
 	ListaCajas cajas;	
 	int oportunidad;
 public:
+	Mundo() {};
 	bool GetOportunidad();
 	void SetOportunidad(Personaje p);
 	void Tecla(unsigned char key);

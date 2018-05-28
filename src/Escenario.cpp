@@ -4,6 +4,7 @@
 #include <fstream>
 #include "glut.h"
 #include "ETSIDI.h"
+#include "Constantes.h"
 using namespace std;
 using  ETSIDI::getTexture;
 Escenario::~Escenario()
@@ -11,15 +12,13 @@ Escenario::~Escenario()
 }
 Escenario::Escenario()
 {
+	p_inicio.setLimites(0, 0, 20, 0);
 	p_ojo_y = 8.0f;
 	int n,l,i=0;
 	float x, y, long_x, long_y;
 	 char caracter[10];
 	 char caracter2[10];
-	p_inicio.getPosicion().setValor(0, 0);
-	p_inicio.setLargo(20);	
-	 
-	ifstream fichero("Plataformas.txt");
+		ifstream fichero("Plataformas.txt");
 	if (!fichero)
 		cout << "No se puede abrir el fichero" << endl;
 	else{
@@ -35,16 +34,17 @@ Escenario::Escenario()
 		limites[2].setLimites(20, long_y, long_x, 0);
 		limites[3].setLimites(0, 0, long_x, 0);
 		Plataforma::set_nplataformas(n);
-		plat = new Plataforma[Plataforma::get_nplataformas()];//Primero siempre posicion antes que longitud de las paredes
+		//Primero siempre posicion antes que longitud de las paredes
 		//cout << Plataforma::get_nplataformas()<<"\n";
 		fichero >> x;
 		while (!fichero.eof()&& i<Plataforma::get_nplataformas()) {
 			fichero >> y;
 			fichero >> l;
-			plat[i].getPosicion().setValor(x, y);
+			plat[i] = new Plataforma({x,y}, l);
+			//plat[i].getPosicion().setValor(x, y);
 		//	cout << plat[i].getPosicion().x << " " << plat[i].getPosicion().y<<"\n";
-			plat[i].setLargo(l);
-			plat[i].getColor().SetColor(153, 255, 51);
+			//plat[i].setLargo(l);
+			//plat[i].getColor().SetColor(153, 255, 51);
 			fichero >> x;
 			i++;
 		}
@@ -75,7 +75,7 @@ void Escenario::Dibuja() {
 	glEnable(GL_LIGHT0);
 	p_inicio.Dibuja();
 	for (int i = 0; i < Plataforma::get_nplataformas(); i++) {
-		plat[i].Dibuja();
+		plat[i]->Dibuja();
 	}
 	for (int i = 0; i < 4; i++) {
 		limites[i].Dibuja();

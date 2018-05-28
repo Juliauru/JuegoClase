@@ -2,13 +2,9 @@
 #include "glut.h"
 #include "Constantes.h"
 
-Llave::Llave()
-{
-	Long_caracteristica = TAMANIO;
-	posicion.x = 10;
-	posicion.y = 3;
-}
-
+Llave::Llave(Vector2D pos): Transportable(pos, TAMANIO)
+{}
+Llave::Llave(): Transportable({10,3}, TAMANIO){}
 
 Llave::~Llave()
 {

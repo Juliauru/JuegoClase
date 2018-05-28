@@ -1,12 +1,9 @@
 #include "CoordinadorPang.h"
 #include "ETSIDI.h"
 
-
-
 CoordinadorPang::CoordinadorPang()
 {
 	estado = INICIO;
-
 }
 
 

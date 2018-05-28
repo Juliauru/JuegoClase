@@ -5,11 +5,16 @@
 #include "ETSIDI.h"
 using ETSIDI::getTexture;
 
-Pared::Pared()//Cambiar de sitio
+Pared::Pared(Vector2D pos): Objeto(pos)
 {
 	color.SetColor(204, 0, 153);
 }
-
+Pared::Pared(float v1x, float v1y, float v2x, float v2y) : Objeto({ v1x,v2y })
+{
+	limite.setValor(v2x, v2y);
+	color.SetColor(204, 0, 153);
+}
+Pared::Pared() : Objeto({ 0.0f,0.0f }) {}
 
 Pared::~Pared()
 {

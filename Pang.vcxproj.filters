@@ -66,6 +66,9 @@
     <ClCompile Include="src\Llave.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
+    <ClCompile Include="src\CoordinadorPang.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Mundo.h">
@@ -117,6 +120,9 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="src\Constantes.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CoordinadorPang.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

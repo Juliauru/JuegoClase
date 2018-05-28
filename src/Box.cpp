@@ -5,14 +5,11 @@
 #include "glut.h"
 #include "Constantes.h"
 using namespace std;
-Box::Box()
+Box::Box(Vector2D pos) :Transportable(pos, TAMANIO)
 {
+	color.SetColor(145, 28, 226);
 	tocando = false;
-	trans = false;
-	Long_caracteristica = TAMANIO;
-	posicion.x = posicion.y = 0 + Long_caracteristica;
-	aceleracion.y = -10.0f;
-	aceleracion.x = 0.0f;
+	trans = false;	
 }
 
 

@@ -5,7 +5,7 @@ class ListaCajas:public Box
 {
 private:
 	int n_cajas;
-	Box * lista;
+	Box *lista[CAJASMAX];
 public:
 	ListaCajas();
 	~ListaCajas();
