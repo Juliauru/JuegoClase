@@ -4,7 +4,7 @@ class Transportable:public Movil
 {
 public:
 	bool trans; //Se está transportando??
-	Transportable(Vector2D pos, float l);
+	Transportable(Vector pos, float l);
 	~Transportable();
 
 };

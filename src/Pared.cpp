@@ -5,11 +5,11 @@
 #include "ETSIDI.h"
 using ETSIDI::getTexture;
 
-Pared::Pared(Vector2D pos): Objeto(pos)
+Pared::Pared(Vector pos): Objeto(pos)
 {
 	color.SetColor(204, 0, 153);
 }
-Pared::Pared(float v1x, float v1y, float v2x, float v2y) : Objeto({ v1x,v2y })
+Pared::Pared(float v1x, float v1y, float v2x, float v2y) : Objeto({ v1x,v1y })
 {
 	limite.setValor(v2x, v2y);
 	color.SetColor(204, 0, 153);
@@ -21,26 +21,28 @@ Pared::~Pared()
 }
 void Pared::Dibuja() {
 	glDisable(GL_LIGHTING);
-	glColor3ub(color.rojo, color.verde, color.azul);
+	glColor3ub(color.rojo, color.verde, color.azul);	
+	//glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("Textures/Text_plat.png").id);
 	glBegin(GL_POLYGON);
-	glVertex3d(posicion.x, posicion.y, PROFUNDIDAD_PLATAFORMAS);
-	glVertex3d(limite.x, limite.y, PROFUNDIDAD_PLATAFORMAS);
-	glVertex3d(limite.x, limite.y, 0);
-	glVertex3d(posicion.x, posicion.y, 0);
+	glColor3f(1, 1, 1);
+	glTexCoord2d(0, 0); glVertex3d(posicion.x, posicion.y, PROFUNDIDAD_PLATAFORMAS);
+	glTexCoord2d(1, 0); glVertex3d(limite.x, limite.y, PROFUNDIDAD_PLATAFORMAS);
+	glTexCoord2d(1, 1); glVertex3d(limite.x, limite.y, 0);
+	glTexCoord2d(0, 1); glVertex3d(posicion.x, posicion.y, 0);
 	glEnd();
 	glEnable(GL_LIGHTING);
 	glEnd();
 
 }
-Vector2D& Pared::getLimites()
+Vector& Pared::getLimites()
 {
 	return limite;
 }
-float Pared::Distancia(Vector2D punto, Vector2D *direccion) {
-	Vector2D u = (punto - posicion);
-	Vector2D v = (limite - posicion).unitario();
+float Pared::Distancia(Vector punto, Vector *direccion) {
+	Vector u = (punto - posicion);
+	Vector v = (limite - posicion).unitario();
 	float longitud = (posicion - limite).modulo();
-	Vector2D dir;
+	Vector dir;
 	float valor = u * v;
 	float distancia = 0;
 	if (valor<0)

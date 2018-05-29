@@ -1,4 +1,5 @@
 #include "ListaEnemigos.h"
+#include "EnemigoD.h"
 #include <stdlib.h>
 #include <iostream>
 #include <fstream>
@@ -21,15 +22,20 @@ void ListaEnemigos::CreaEnemigos()
 {
 	int  i = 0;
 	float x, y;	
-	ifstream fichero("Nombre.txt");
+	bool tipo=false;
+	ifstream fichero("EnemigosDesdeElPrincipio.txt");
 	if (!fichero)
 		cout << "No se puede abrir el fichero" << endl;
 	else {
 		while (!fichero.eof() && i <MAX_ENEMIGOS) {
+			fichero >> tipo;
 			fichero >> x;
 			fichero >> y;
-			Vector2D aux(x, y);
+			Vector aux(x, y);
+			if(tipo==false)
 			lista[i] = new Enemigo(aux);
+			if(tipo == true)
+			lista[i] = new EnemigoD(aux);
 			
 			//lista[i]->SetPos(x, y);//Se puede sustituir por el getpos().setpos()
 			//lista[i]->SetVel(0.0f, -1.0f);
@@ -140,7 +146,7 @@ int ListaEnemigos::Contacto(ListaCajas c)//No funciona bien
 {
 	for (int i = 0; i < numero; i++) {
 		if (Interaccion::Colision(*(lista[i]), c)){
-			cout << "OK" << endl;
+			cout << "OK " <<i<< endl;
 			return i;
 		}
 	}

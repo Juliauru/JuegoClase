@@ -2,7 +2,7 @@
 #include "Constantes.h"
 #include "glut.h"
 int Plataforma::n_plataformas = 0;
-Plataforma::Plataforma(Vector2D pos,int l):Pared(pos)
+Plataforma::Plataforma(Vector pos,int l):Pared(pos)
 {
 	if (l < 2) { //Hacer 
 		l = 2;
@@ -19,6 +19,24 @@ Plataforma::~Plataforma()
 }
 void Plataforma::Dibuja() {
 	Pared::Dibuja();
+	Pared p1(posicion.x, posicion.y - ESPESOR, limite.x, limite.y - ESPESOR);
+	Pared p2(posicion.x, posicion.y, posicion.x, posicion.y - ESPESOR);
+	Pared p3(limite.x, limite.y, limite.x, limite.y - ESPESOR);
+	p1.Dibuja();
+	p2.Dibuja();
+	p3.Dibuja(); //No funciona
+	
+	glDisable(GL_LIGHTING);
+	glColor3ub(color.rojo, color.verde, color.azul);
+	glBegin(GL_POLYGON);
+	glVertex3d(posicion.x, posicion.y, PROFUNDIDAD_PLATAFORMAS);
+	glVertex3d(limite.x, limite.y, PROFUNDIDAD_PLATAFORMAS);
+	glVertex3d(limite.x, limite.y-ESPESOR, PROFUNDIDAD_PLATAFORMAS);
+	glVertex3d(posicion.x, posicion.y-ESPESOR, PROFUNDIDAD_PLATAFORMAS);
+	glEnd();
+	glEnable(GL_LIGHTING);
+	glEnd();
+
 	
 	/*glTranslatef(ESPESOR / 2, -ESPESOR / 2-0.001f, ESPESOR / 2);
 	

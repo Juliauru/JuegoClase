@@ -4,7 +4,7 @@
 
 
 
-Enemigo::Enemigo(Vector2D pos):Movil(pos, {0.0f,0.0f}, { 0.0f,-3.0f }, TAMANIO/1.5f) //La aceleración??
+Enemigo::Enemigo(Vector pos):Movil(pos, {0.0f,0.0f}, { 0.0f,-3.0f }, TAMANIO/1.5f) //La aceleración??
 {
 	getColor().SetColor(0, 40, 30);
 }
@@ -31,10 +31,6 @@ void Enemigo::setAltura(float a) //ESTA FUNCION LA ELIMINARIA PARA NO PODER VARI
 		Long_caracteristica = a;
 	}
 }
-float Enemigo::Distancia(Vector2D centro, Vector2D *direccion) {
-	Vector2D dir = (posicion - centro).unitario();
-	float distancia = (posicion - centro).modulo();
-	*direccion = dir;
-	return distancia;
-}
+
+
 

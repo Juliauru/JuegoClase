@@ -2,7 +2,7 @@
 #include "Constantes.h"
 #include <math.h>
 
-Movil::Movil(Vector2D pos, Vector2D vel, Vector2D ac, float l) :Objeto(pos),
+Movil::Movil(Vector pos, Vector vel, Vector ac, float l) :Objeto(pos),
 																Long_caracteristica(l),
 																velocidad(vel), 
 																aceleracion(ac)
@@ -28,12 +28,19 @@ void Movil::Mueve(float t) {
 		velocidad = velocidad + aceleracion * t;
 	}
 }
-Vector2D& Movil::getVelocidad() {
+Vector& Movil::getVelocidad() {
 	return velocidad;
 }
-Vector2D& Movil::getAceleracion() {
+Vector& Movil::getAceleracion() {
 	return aceleracion;
 }
 float Movil::get_LCaract() {
 	return Long_caracteristica;
+}
+float Movil::Distancia(Vector centro, Vector *direccion) {
+	//Posicion u = (punto - limite1);
+	Vector dir = (posicion - centro).unitario();
+	float distancia = (posicion - centro).modulo();
+	*direccion = dir;
+	return distancia;
 }

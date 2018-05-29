@@ -2,11 +2,11 @@
 
 
 
-Objeto::Objeto(Vector2D v):posicion(v){}
+Objeto::Objeto(Vector v):posicion(v){}
 Objeto::~Objeto()
 {
 }
-Vector2D& Objeto::getPosicion() {
+Vector& Objeto::getPosicion() {
 	return posicion;
 }
 Tono& Objeto::getColor() {

@@ -4,7 +4,7 @@ class Llave:public Transportable
 {
 
 public:
-	Llave(Vector2D pos);
+	Llave(Vector pos);
 	Llave();
 	~Llave();
 	void Dibuja();

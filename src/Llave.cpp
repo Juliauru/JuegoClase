@@ -2,7 +2,7 @@
 #include "glut.h"
 #include "Constantes.h"
 
-Llave::Llave(Vector2D pos): Transportable(pos, TAMANIO)
+Llave::Llave(Vector pos): Transportable(pos, TAMANIO)
 {}
 Llave::Llave(): Transportable({10,3}, TAMANIO){}
 

@@ -86,6 +86,7 @@
     <ClCompile Include="src\Box.cpp" />
     <ClCompile Include="src\CoordinadorPang.cpp" />
     <ClCompile Include="src\Enemigo.cpp" />
+    <ClCompile Include="src\EnemigoD.cpp" />
     <ClCompile Include="src\Escenario.cpp" />
     <ClCompile Include="src\Interaccion.cpp" />
     <ClCompile Include="src\ListaCajas.cpp" />
@@ -100,13 +101,14 @@
     <ClCompile Include="src\Plataforma.cpp" />
     <ClCompile Include="src\Tono.cpp" />
     <ClCompile Include="src\Transportable.cpp" />
-    <ClCompile Include="src\Vector2D.cpp" />
+    <ClCompile Include="src\Vector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Box.h" />
     <ClInclude Include="src\Constantes.h" />
     <ClInclude Include="src\CoordinadorPang.h" />
     <ClInclude Include="src\Enemigo.h" />
+    <ClInclude Include="src\EnemigoD.h" />
     <ClInclude Include="src\Escenario.h" />
     <ClInclude Include="src\Interaccion.h" />
     <ClInclude Include="src\ListaCajas.h" />
@@ -120,7 +122,7 @@
     <ClInclude Include="src\Plataforma.h" />
     <ClInclude Include="src\Tono.h" />
     <ClInclude Include="src\Transportable.h" />
-    <ClInclude Include="src\Vector2D.h" />
+    <ClInclude Include="src\Vector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

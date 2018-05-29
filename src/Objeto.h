@@ -1,15 +1,15 @@
 #pragma once
-#include "Vector2D.h"
+#include "Vector.h"
 #include "Tono.h"
 class Objeto
 {
 protected:
-	Vector2D posicion;
+	Vector posicion;
 	Tono color;
-	Objeto(Vector2D v);
+	Objeto(Vector v);
 	~Objeto();
 public:
-	Vector2D & getPosicion();
+	Vector & getPosicion();
 	Tono& getColor();
 };
 

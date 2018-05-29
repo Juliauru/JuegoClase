@@ -47,7 +47,7 @@ void ListaCajas::CreaCajas()
 		while (!fichero.eof() && i < n_cajas) {
 			fichero >> x;
 			fichero >> y;
-			Vector2D aux(x, y + Long_caracteristica);
+			Vector aux(x, y + Long_caracteristica);
 			lista[i] = new Box(aux);
 			/*lista[i].getPosicion().setValor(x, (y+(Long_caracteristica)));
 			lista[i].getColor().SetColor(145, 28, 226);*/

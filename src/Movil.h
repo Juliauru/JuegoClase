@@ -1,21 +1,22 @@
 #pragma once
 #include "Objeto.h"
-#include "Vector2D.h"
+#include "Vector.h"
 class Movil:public Objeto
 {
 protected:
-	Vector2D velocidad;
-	Vector2D aceleracion;
+	Vector velocidad;
+	Vector aceleracion;
 	float Long_caracteristica;
 	float posinicial;
 	float vinicial;
-	Movil(Vector2D pos, Vector2D vel, Vector2D ac, float l);
+	Movil(Vector pos, Vector vel, Vector ac, float l);
 	~Movil();
 public:	
 	void virtual Mueve(float t);
-	Vector2D& getVelocidad();
-	Vector2D& getAceleracion();
+	Vector& getVelocidad();
+	Vector& getAceleracion();
 	float get_LCaract();
+	float Distancia(Vector centro, Vector *direccion);
 	friend class Interaccion;
 };
 

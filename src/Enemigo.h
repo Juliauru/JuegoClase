@@ -1,5 +1,5 @@
 #pragma once
-#include "Vector2D.h"
+#include "Vector.h"
 #include "Movil.h"
 #include "Escenario.h"
 #include "Interaccion.h"
@@ -9,8 +9,8 @@ class Enemigo :public Movil
 	//float Long_caracteristica; //O lo de la clase movil de long_caracteristica??_P
 
 public:
-	Enemigo(Vector2D pos);
-	~Enemigo();
+	Enemigo(Vector pos);
+	virtual~Enemigo();
 	void Dibuja();
 	void setAltura(float a);
 	//void Caida(float t);
@@ -25,8 +25,7 @@ public:
 	void SetVel(float vx, float vy) {
 		velocidad.x = vx;
 		velocidad.y = vy;
-	}
-	float Distancia(Vector2D centro, Vector2D *direccion);
+	}	
 	friend class Interaccion;
 };
 

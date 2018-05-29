@@ -1,12 +1,15 @@
+#include "ETSIDI.h"
 #include "Personaje.h"
 #include "glut.h"
 #include "Constantes.h"
 #include <math.h>
+#include "Constantes.h"
+using namespace ETSIDI;
 
-
+int Personaje::vida = 3;
+int Personaje::puntuacion = 0;
 Personaje::Personaje() : Movil({ 0.75f,0.75f }, { 0.0f,0.0f }, { 0.0f,-10.0f }, TAMANIO)
 {
-	vida = 3;
 	transportando == false;
 
 }
@@ -22,11 +25,14 @@ void Personaje::Dibuja()
 }
 void Personaje::DibujaVidas(float y,float inc)
 {
-	float l = 0, plus=inc-7.5;
+	Sprite *sprite;
+	float l = 0, plus=inc-7.5 ;
 	for (int i = 0; i < vida; i++) {
+		//sprite= new Sprite("Textures/heart.png", 5, 5, 10,10);
 		glColor3f(255, 0, 0);
 		glTranslatef(((TAMANIO/3)+l),(((int)y/3)+plus), 0);
 		glutSolidSphere((TAMANIO / 3), 20, 30);
+		//sprite->draw();
 		glTranslatef(-((TAMANIO / 3)+l), -(((int)y / 3) + plus), 0);
 		l = l + TAMANIO;
 	}
@@ -37,13 +43,6 @@ void Personaje::Salto() { //Poner límtes al salto
 		vinicial = velocidad.y = POTENCIA_SALTO;
 		posinicial = posicion.y;
 	}
-}
-float Personaje::Distancia(Vector2D centro, Vector2D *direccion) {
-	//Posicion u = (punto - limite1);
-	Vector2D dir = (posicion - centro).unitario();
-	float distancia = (posicion - centro).modulo();
-	*direccion = dir;
-	return distancia;
 }
 void Personaje::CambiaEstado() {
 	if (transportando == true) transportando = false;

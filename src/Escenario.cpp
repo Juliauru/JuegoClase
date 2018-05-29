@@ -61,14 +61,14 @@ void Escenario::Dibuja() {
 	glEnable(GL_TEXTURE_2D);
 	glDisable(GL_LIGHTING);
 	//glColor3ub(colorPared.rojo, colorPared.verde, colorPared.azul);
-	glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("Textures/Sun.png").id);
+	glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("Textures/Text_plat1.png").id);
 	//glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("Sun.png").id);//Para que se me dibuje a mi bien cuando compile
 	glBegin(GL_POLYGON);
 	glColor3f(1, 1, 1);
-	glTexCoord2d(0, 0); glVertex3d(vertices[0].x, vertices[0].y, 0);
-	glTexCoord2d(1, 0); glVertex3d(vertices[1].x, vertices[1].y, 0);
-	glTexCoord2d(1, 1); glVertex3d(vertices[2].x, vertices[2].y, 0);
-	glTexCoord2d(0, 1); glVertex3d(vertices[3].x, vertices[3].y, 0);
+	glTexCoord2d(1, 0); glVertex3d(vertices[0].x, vertices[0].y, 0);
+	glTexCoord2d(1, 1); glVertex3d(vertices[1].x, vertices[1].y, 0);
+	glTexCoord2d(0, 1); glVertex3d(vertices[2].x, vertices[2].y, 0);
+	glTexCoord2d(0, 0); glVertex3d(vertices[3].x, vertices[3].y, 0);
 	glEnd();
 	glDisable(GL_LIGHTING);
 	glDisable(GL_TEXTURE_2D);

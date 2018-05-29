@@ -6,7 +6,7 @@ class Plataforma :public Pared //Cambiar a paredes
 protected:
 	static int n_plataformas;
 public:
-	Plataforma(Vector2D pos,int l = 2);
+	Plataforma(Vector pos,int l = 2);
 	Plataforma(float v1x, float v1y, float v2x, float v2y);
 	Plataforma();
 	virtual ~Plataforma();

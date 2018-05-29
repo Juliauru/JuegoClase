@@ -5,7 +5,7 @@
 #include "glut.h"
 #include "Constantes.h"
 using namespace std;
-Box::Box(Vector2D pos) :Transportable(pos, TAMANIO)
+Box::Box(Vector pos) :Transportable(pos, TAMANIO) //2*Tamanio =lado
 {
 	color.SetColor(145, 28, 226);
 	tocando = false;

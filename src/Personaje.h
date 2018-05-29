@@ -6,7 +6,8 @@ class Personaje:public Movil
 {
 private:
 	//Longitud característica radio esfera, hasta que tengamos una altura, luego cambiar
-	int vida;
+	static int puntuacion;
+	static int vida;
 	bool transportando;	
 public:	
 	Personaje();
@@ -14,9 +15,10 @@ public:
 	void Dibuja();
 	void DibujaVidas(float y,float inc);
 	void Salto();
-	int GetVida() {	return vida;}
-	float Distancia(Vector2D centro, Vector2D *direccion);
+	static int GetVida() {return vida;}
+	static int GetPuntuacion() { return puntuacion; }	
 	void CambiaEstado();
 	friend class Interaccion;
+	friend class EnemigoD;
 };
 
