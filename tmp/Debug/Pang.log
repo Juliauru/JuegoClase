@@ -1,6 +1,8 @@
-﻿  Interaccion.cpp
+﻿  ListaEnemigos.cpp
+c:\users\user\documents\github\juegoclase\src\listaenemigos.cpp(65): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+  Interaccion.cpp
 c:\users\user\documents\github\juegoclase\src\interaccion.cpp(25): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
 c:\users\user\documents\github\juegoclase\src\interaccion.cpp(38): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
 c:\users\user\documents\github\juegoclase\src\interaccion.cpp(39): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\user\documents\github\juegoclase\src\interaccion.cpp(291): warning C4715: 'Interaccion::Colision': no todas las rutas de acceso de control devuelven un valor
+  Generando código...
   Pang.vcxproj -> C:\Users\user\Documents\GitHub\JuegoClase\bin\Pang.exe

@@ -32,7 +32,7 @@ public:
 
 	void Rebote(Escenario e);
 
-	void Eliminar(int ind);
+	void Eliminar(int ind, bool caso=false);
 
 	int Colision(Personaje p);
 

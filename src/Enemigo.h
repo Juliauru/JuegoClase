@@ -10,7 +10,7 @@ class Enemigo :public Movil
 
 public:
 	Enemigo(Vector pos);
-	virtual~Enemigo();
+	~Enemigo();
 	void Dibuja();
 	void setAltura(float a);
 	//void Caida(float t);
@@ -25,7 +25,8 @@ public:
 	void SetVel(float vx, float vy) {
 		velocidad.x = vx;
 		velocidad.y = vy;
-	}	
+	}
+	virtual void EnemEliminado();
 	friend class Interaccion;
 };
 

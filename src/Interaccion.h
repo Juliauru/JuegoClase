@@ -39,6 +39,7 @@ public:
 
 	static bool Tocando(Personaje &p, Movil &c);
 	static bool ComprobarDistanciaPlataforma(Movil &m, Plataforma p,float dif,Vector dir);
+	static bool Colision(Enemigo &e, Box c);
 	static bool Colision(Enemigo &e, ListaCajas c);
 };
 

@@ -11,9 +11,8 @@ Enemigo::Enemigo(Vector pos):Movil(pos, {0.0f,0.0f}, { 0.0f,-3.0f }, TAMANIO/1.5
 
 
 Enemigo::~Enemigo()
-{
-}
-
+{}
+void Enemigo::EnemEliminado() {}
 void Enemigo::Dibuja()
 {
 	glColor3b(getColor().rojo, getColor().verde, getColor().azul);
@@ -31,6 +30,7 @@ void Enemigo::setAltura(float a) //ESTA FUNCION LA ELIMINARIA PARA NO PODER VARI
 		Long_caracteristica = a;
 	}
 }
+
 
 
 

@@ -38,7 +38,6 @@ float Movil::get_LCaract() {
 	return Long_caracteristica;
 }
 float Movil::Distancia(Vector centro, Vector *direccion) {
-	//Posicion u = (punto - limite1);
 	Vector dir = (posicion - centro).unitario();
 	float distancia = (posicion - centro).modulo();
 	*direccion = dir;

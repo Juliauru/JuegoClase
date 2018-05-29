@@ -2,8 +2,9 @@
 #include "Enemigo.h"
 class EnemigoD :public Enemigo
 {
-public:
+public:	
 	EnemigoD(Vector pos);
 	~EnemigoD();
+	void EnemEliminado();
 };
 

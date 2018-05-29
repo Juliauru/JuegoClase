@@ -110,11 +110,14 @@ void ListaEnemigos::Rebote(Escenario e) {
 	}
 }
 
-void ListaEnemigos::Eliminar(int ind)
+void ListaEnemigos::Eliminar(int ind,bool caso) //Si es matado por una caja true, si es por un personaje false
 {
 	if (ind < 0 || ind >= numero) {
 		return;
 	}
+	if (caso == true) lista[ind]->Enemigo::EnemEliminado();
+	else
+		lista[ind]->EnemEliminado();
 	delete lista[ind];
 	numero--;
 	for (int i = ind; i < numero; i++) {
@@ -146,7 +149,6 @@ int ListaEnemigos::Contacto(ListaCajas c)//No funciona bien
 {
 	for (int i = 0; i < numero; i++) {
 		if (Interaccion::Colision(*(lista[i]), c)){
-			cout << "OK " <<i<< endl;
 			return i;
 		}
 	}

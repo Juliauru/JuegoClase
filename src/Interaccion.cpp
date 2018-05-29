@@ -214,6 +214,8 @@ void Interaccion::Mover(Box &caja1, Box &caja2, Personaje &p) //Se han quitado l
 bool Interaccion::Colision(Enemigo e, Personaje p)
 {
 	if (p.posicion.x <= (e.posicion.x + p.Long_caracteristica) && p.posicion.x >= (e.posicion.x - p.Long_caracteristica) && p.posicion.y <= (e.posicion.y + e.Long_caracteristica + p.Long_caracteristica)&& p.posicion.y > (e.posicion.y + e.Long_caracteristica + p.Long_caracteristica/2)) {
+		Personaje::puntuacion = Personaje::puntuacion + 100;
+		cout << Personaje::puntuacion << endl;
 		return true;
 	}
 	return false;
@@ -266,30 +268,32 @@ bool Interaccion::ComprobarDistanciaPlataforma(Movil &m, Plataforma p,float dif,
 
 	return false;
 }
-bool Interaccion::Colision(Enemigo &e, ListaCajas c)
+bool Interaccion::Colision(Enemigo &e, Box c)
 {
 	float dist;
 	float r;
-	for (int i = 0; i < c.n_cajas; i++) {
-		Vector aux;
-		dist = e.Distancia(c.lista[i]->posicion, &aux);
-		r = e.Long_caracteristica + c.lista[i]->Long_caracteristica;
+	Vector aux;
+		dist = e.Distancia(c.posicion, &aux);
+		r = e.Long_caracteristica + c.Long_caracteristica;
 		
 		if (r >= dist) {
-			cout << "entra" << endl;
-			if ((e.posicion.x <= (c.lista[i]->posicion.x + c.lista[i]->Long_caracteristica)) && (e.posicion.x >= (c.lista[i]->posicion.x - c.lista[i]->Long_caracteristica)))
+			if ((e.posicion.x <= (c.posicion.x + c.Long_caracteristica)) && (e.posicion.x >= (c.posicion.x - c.Long_caracteristica)))
 				/*if (e.posicion.x <= (c.lista[i]->posicion.x + c.lista[i]->Long_caracteristica + e.Long_caracteristica / 2) &&
 					e.posicion.x <= (c.lista[i]->posicion.x - c.lista[i]->Long_caracteristica - e.Long_caracteristica / 2) &&
 					c.lista[i]->posicion.y <= (e.posicion.y + e.Long_caracteristica) &&
 					c.lista[i]->posicion.y >(e.posicion.y - e.Long_caracteristica))*/ {
-				cout << "okreturn" << endl;
 				return true;
 			}
 		}
 		return false;
 	}
+bool Interaccion::Colision(Enemigo &e, ListaCajas c) {
+	for (int i = 0; i < c.n_cajas; i++) {
+		if (Interaccion::Colision(e, *(c.lista[i])))
+			return true;
+	}
+	return false;
 }
-
 	
 
 
