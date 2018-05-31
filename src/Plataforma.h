@@ -13,7 +13,7 @@ public:
 	static int get_nplataformas();
 	static void set_nplataformas(int n);
 	void setLargo(int l = 2);
-	void Dibuja();
+	void Dibuja(const char *nombre);
 };
 
 

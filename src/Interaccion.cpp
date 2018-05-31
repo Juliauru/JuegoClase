@@ -137,8 +137,8 @@ void Interaccion::Rebote(Personaje  &p, Enemigo &e)
 
 void Interaccion::Rebote(Movil &m, Escenario &e) //Intentar hacer poco a poco, no se como quedará
 {
-	float xmin = e.limites[3].posicion.x;
-	float xmax = e.limites[3].limite.x;
+	float xmin = e.limites[3].posicion.x+ m.Long_caracteristica;
+	float xmax = e.limites[3].limite.x- m.Long_caracteristica;
 	if (m.posicion.x >= xmax) m.posicion.x = xmax;
 	if (m.posicion.x <= xmin) m.posicion.x = xmin;
 	if (m.posicion.y > (8+ e.p_ojo_y))
@@ -147,8 +147,8 @@ void Interaccion::Rebote(Movil &m, Escenario &e) //Intentar hacer poco a poco, n
 		e.p_ojo_y = e.p_ojo_y -8;
 }
 void Interaccion::Rebote(Enemigo &ene, Escenario e) {
-	float xmin = e.limites[3].posicion.x; 
-	float xmax = e.limites[3].limite.x;
+	float xmin = e.limites[3].posicion.x + ene.Long_caracteristica; 
+	float xmax = e.limites[3].limite.x - ene.Long_caracteristica;
 	if (ene.posicion.x >= xmax) ene.velocidad.x = -ene.velocidad.x;
 	if (ene.posicion.x <= xmin) ene.velocidad.x = -ene.velocidad.x;
 }
@@ -268,7 +268,7 @@ bool Interaccion::ComprobarDistanciaPlataforma(Movil &m, Plataforma p,float dif,
 
 	return false;
 }
-bool Interaccion::Colision(Enemigo &e, Box c)
+bool Interaccion::Colision(Enemigo &e, Box &c)
 {
 	float dist;
 	float r;
@@ -289,7 +289,7 @@ bool Interaccion::Colision(Enemigo &e, Box c)
 	}
 bool Interaccion::Colision(Enemigo &e, ListaCajas c) {
 	for (int i = 0; i < c.n_cajas; i++) {
-		if (Interaccion::Colision(e, *(c.lista[i])))
+		if (Interaccion::Colision(e, *c.lista[i]))
 			return true;
 	}
 	return false;

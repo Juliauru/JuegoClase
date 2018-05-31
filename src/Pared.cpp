@@ -19,21 +19,22 @@ Pared::Pared() : Objeto({ 0.0f,0.0f }) {}
 Pared::~Pared()
 {
 }
-void Pared::Dibuja() {
+void Pared::Dibuja(const char *nombre) {
+	glEnable(GL_TEXTURE_2D);
 	glDisable(GL_LIGHTING);
-	glColor3ub(color.rojo, color.verde, color.azul);	
-	//glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("Textures/Text_plat.png").id);
+	//glColor3ub(colorPared.rojo, colorPared.verde, colorPared.azul);
+	glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture(nombre).id);
 	glBegin(GL_POLYGON);
 	glColor3f(1, 1, 1);
 	glTexCoord2d(0, 0); glVertex3d(posicion.x, posicion.y, PROFUNDIDAD_PLATAFORMAS);
 	glTexCoord2d(1, 0); glVertex3d(limite.x, limite.y, PROFUNDIDAD_PLATAFORMAS);
 	glTexCoord2d(1, 1); glVertex3d(limite.x, limite.y, 0);
-	glTexCoord2d(0, 1); glVertex3d(posicion.x, posicion.y, 0);
+	glTexCoord2d(0, 1); glVertex3d(posicion.x, posicion.y, 0);	
 	glEnd();
-	glEnable(GL_LIGHTING);
-	glEnd();
-
-}
+	glDisable(GL_LIGHTING);
+	glDisable(GL_TEXTURE_2D);
+	glEnable(GL_LIGHT0);
+	}
 Vector& Pared::getLimites()
 {
 	return limite;

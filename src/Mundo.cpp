@@ -41,8 +41,6 @@ void Mundo::Mueve() {
 		enemigos.Rebote(*(escenario.plat[i]));
 		cajas.Caida(*(escenario.plat[i]));
 	}
-	Interaccion::Contacto(personaje, escenario.p_inicio);
-	enemigos.Rebote(escenario.p_inicio);
 	enemigos.Rebote(personaje);
 	enemigos.Rebote();
 	Interaccion::Rebote(personaje, escenario);

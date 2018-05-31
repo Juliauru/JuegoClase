@@ -9,7 +9,7 @@ public:
 	Vector vertices[4];
 	Plataforma *plat[MAX_PLATAFORMAS];
 	Pared limites[4];//0, empezando por la izquierda y en sentido horario
-	Plataforma p_inicio;
+	//Plataforma p_inicio;
 	//Pared* bases;
 public:
 	void Dibuja();

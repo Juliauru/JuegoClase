@@ -12,8 +12,6 @@ ListaEnemigos::ListaEnemigos():Enemigo({0.0f,0.0f})
 	}
 
 }
-
-
 ListaEnemigos::~ListaEnemigos()
 {
 }
@@ -21,7 +19,7 @@ ListaEnemigos::~ListaEnemigos()
 void ListaEnemigos::CreaEnemigos()
 {
 	int  i = 0;
-	float x, y;	
+	int x, y;	
 	bool tipo=false;
 	ifstream fichero("EnemigosDesdeElPrincipio.txt");
 	if (!fichero)
@@ -62,7 +60,7 @@ bool ListaEnemigos::Agregar(Enemigo * e)
 		}
 		else
 			e->getVelocidad().setValor(-2.0f, 0.0f);
-		e->getPosicion().setValor(rand() % 20 + 1, rand() % 40 + 1);
+		//e->getPosicion().setValor(rand() % 20 + 1, rand() % 40 + 1);
 
 	}
 	else {

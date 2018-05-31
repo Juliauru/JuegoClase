@@ -10,7 +10,7 @@ public:
 	Pared(float v1x, float v1y, float v2x, float v2y);
 	Pared();
 	~Pared();
-	void Dibuja();
+	void Dibuja(const char *nombre);
 	Vector& getLimites();
 	void setLimites(float v1x, float v1y, float v2x, float v2y);
 	float Distancia(Vector punto, Vector *direccion = 0);

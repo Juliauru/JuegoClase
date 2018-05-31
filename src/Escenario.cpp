@@ -11,8 +11,7 @@ Escenario::~Escenario()
 {
 }
 Escenario::Escenario()
-{
-	p_inicio.setLimites(0, 0, 20, 0);
+{	
 	p_ojo_y = 8.0f;
 	int n,l,i=0;
 	float x, y, long_x, long_y;
@@ -35,34 +34,24 @@ Escenario::Escenario()
 		limites[3].setLimites(0, 0, long_x, 0);
 		Plataforma::set_nplataformas(n);
 		//Primero siempre posicion antes que longitud de las paredes
-		//cout << Plataforma::get_nplataformas()<<"\n";
 		fichero >> x;
 		while (!fichero.eof()&& i<Plataforma::get_nplataformas()) {
 			fichero >> y;
 			fichero >> l;
 			plat[i] = new Plataforma({x,y}, l);
-			//plat[i].getPosicion().setValor(x, y);
-		//	cout << plat[i].getPosicion().x << " " << plat[i].getPosicion().y<<"\n";
-			//plat[i].setLargo(l);
-			//plat[i].getColor().SetColor(153, 255, 51);
 			fichero >> x;
 			i++;
 		}
 	}
 	fichero.close();
-	//Limites caja
-	
 
-	//limites pared trasera
 	
 
 }
 void Escenario::Dibuja() {
 	glEnable(GL_TEXTURE_2D);
 	glDisable(GL_LIGHTING);
-	//glColor3ub(colorPared.rojo, colorPared.verde, colorPared.azul);
-	glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("Textures/Text_plat1.png").id);
-	//glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("Sun.png").id);//Para que se me dibuje a mi bien cuando compile
+	glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("Textures/T_fondo.png").id);
 	glBegin(GL_POLYGON);
 	glColor3f(1, 1, 1);
 	glTexCoord2d(1, 0); glVertex3d(vertices[0].x, vertices[0].y, 0);
@@ -73,12 +62,11 @@ void Escenario::Dibuja() {
 	glDisable(GL_LIGHTING);
 	glDisable(GL_TEXTURE_2D);
 	glEnable(GL_LIGHT0);
-	p_inicio.Dibuja();
 	for (int i = 0; i < Plataforma::get_nplataformas(); i++) {
-		plat[i]->Dibuja();
+		plat[i]->Dibuja("Textures/T_plat.png");
 	}
 	for (int i = 0; i < 4; i++) {
-		limites[i].Dibuja();
+		limites[i].Dibuja("Textures/T_limites.png");
 	}
 	
 
