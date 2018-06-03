@@ -19,7 +19,7 @@ public:
 
 	static void Rebote(Enemigo &e, Enemigo &e1);
 
-	static void Rebote(Personaje &p, Enemigo &e);
+	static void Rebote(Personaje &p, Enemigo &e,ListaCajas c);
 
 	static void Rebote(Movil &m, Escenario &e);
 

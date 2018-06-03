@@ -4,6 +4,7 @@
 class ListaCajas:public Box
 {
 private:
+	char *f;
 	int n_cajas;
 	Box *lista[CAJASMAX];
 public:
@@ -12,7 +13,7 @@ public:
 
 	void Set_ncajas(int num);
 
-	void CreaCajas();
+	void CreaCajas(const char *fich);
 
 	void Dibuja();
 

@@ -16,12 +16,14 @@ ListaEnemigos::~ListaEnemigos()
 {
 }
 
-void ListaEnemigos::CreaEnemigos()
+void ListaEnemigos::CreaEnemigos(const char *fich)
 {
+	f = new char[strlen(fich)];
+	strcpy(f, fich);
 	int  i = 0;
 	int x, y;	
 	bool tipo=false;
-	ifstream fichero("EnemigosDesdeElPrincipio.txt");
+	ifstream fichero(f); //"EnemigosDesdeElPrincipio.txt"
 	if (!fichero)
 		cout << "No se puede abrir el fichero" << endl;
 	else {
@@ -90,9 +92,9 @@ void ListaEnemigos::Rebote() {
 		}
 	}
 }
-void ListaEnemigos::Rebote(Personaje &p) {
+void ListaEnemigos::Rebote(Personaje &p,ListaCajas c) {
 	for (int i = 0; i < numero; i++) {
-		Interaccion::Rebote(p, *(lista[i]));
+		Interaccion::Rebote(p, *(lista[i]), c);
 	}
 }
 void ListaEnemigos::Rebote(Plataforma p) {

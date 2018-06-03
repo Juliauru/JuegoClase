@@ -38,9 +38,9 @@ void Plataforma::Dibuja(const char *nombre) {
 	glTexCoord2d(1, 1); glVertex3d(limite.x, limite.y - ESPESOR, PROFUNDIDAD_PLATAFORMAS);
 	glTexCoord2d(0, 1); glVertex3d(posicion.x, posicion.y - ESPESOR, PROFUNDIDAD_PLATAFORMAS);
 	glEnd();
-	glDisable(GL_LIGHTING);
 	glDisable(GL_TEXTURE_2D);
 	glEnable(GL_LIGHT0);
+	glEnable(GL_LIGHTING);
 
 	
 	/*glTranslatef(ESPESOR / 2, -ESPESOR / 2-0.001f, ESPESOR / 2);

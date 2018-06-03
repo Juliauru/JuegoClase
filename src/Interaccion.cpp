@@ -124,14 +124,14 @@ void Interaccion::Rebote(Enemigo & e, Enemigo & e1) //Intentos fallidos
 	}
 }
 
-void Interaccion::Rebote(Personaje  &p, Enemigo &e)
+void Interaccion::Rebote(Personaje  &p, Enemigo &e,ListaCajas c)
 {
 	//bool t=Interaccion::Tocando(p, e);
 	if ((p.posicion.x + (p.Long_caracteristica) > e.posicion.x - e.Long_caracteristica) && (p.posicion.y - (p.Long_caracteristica) >= e.posicion.y - e.Long_caracteristica) && (p.posicion.y - (p.Long_caracteristica) < e.posicion.y) && (p.posicion.x - (p.Long_caracteristica) < e.posicion.x + e.Long_caracteristica)) {
-		
+	c.Coger(p);
 	p.vida -= 1;
-		p.posicion.x = p.Long_caracteristica;
-		p.posicion.y = p.Long_caracteristica;
+	p.posicion.x = p.Long_caracteristica;
+	p.posicion.y = p.Long_caracteristica;
 	}
 }
 

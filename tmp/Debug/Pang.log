@@ -1,8 +1,4 @@
-﻿  ListaEnemigos.cpp
-c:\users\user\documents\github\juegoclase\src\listaenemigos.cpp(32): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-  Interaccion.cpp
-c:\users\user\documents\github\juegoclase\src\interaccion.cpp(25): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\user\documents\github\juegoclase\src\interaccion.cpp(38): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\user\documents\github\juegoclase\src\interaccion.cpp(39): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-  Generando código...
+﻿  Personaje.cpp
+c:\users\user\documents\github\juegoclase\src\personaje.cpp(13): warning C4553: '==': el operador no tiene efecto; ¿ha pensado en '='?
+c:\users\user\documents\github\juegoclase\src\personaje.cpp(28): warning C4101: 'sprite': variable local sin referencia
   Pang.vcxproj -> C:\Users\user\Documents\GitHub\JuegoClase\bin\Pang.exe

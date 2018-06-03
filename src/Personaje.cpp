@@ -36,6 +36,20 @@ void Personaje::DibujaVidas(float y,float inc)
 		glTranslatef(-((TAMANIO / 3)+l), -(((int)y / 3) + plus), 0);
 		l = l + TAMANIO;
 	}
+	/*{
+		char vidas[] = "VIDAS:";
+		int a = 0;
+
+		glColor3ub(255, 50, 50);
+		for (int i = 0; vidas[i] != '\0'; i++)
+		{
+			glRasterPos3i(4 + a, 80, 6);
+			glutBitmapCharacter(GLUT_BITMAP_8_BY_13, vidas[i]);
+			a += 2;
+		}
+		glRasterPos3i(4 + a, 80, 6);
+		glutBitmapCharacter(GLUT_BITMAP_8_BY_13, vida);
+	}*/
 }
 
 void Personaje::Salto() { //Poner límtes al salto

@@ -11,23 +11,28 @@ Escenario::~Escenario()
 {
 }
 Escenario::Escenario()
-{	
-	p_ojo_y = 8.0f;
-	int n,l,i=0;
+{
+	p_ojo_y = 8.0f;	
+	f = 0;
+}
+void Escenario::setFichero(const char* fich) {
+	int n, l, i = 0;
 	float x, y, long_x, long_y;
-	 char caracter[10];
-	 char caracter2[10];
-		ifstream fichero("Plataformas.txt");
+	char caracter[10];
+	char caracter2[10];
+	f = new char[strlen(fich)];
+	strcpy(f, fich);
+	ifstream fichero(f);//"Plataformas.txt"
 	if (!fichero)
 		cout << "No se puede abrir el fichero" << endl;
-	else{
+	else {
 		fichero >> n;
 		fichero >> long_x;
 		fichero >> long_y;
 		vertices[0].setValor(0, 0);
 		vertices[1].setValor(0, long_y);
 		vertices[2].setValor(long_x, long_y);
-		vertices[3].setValor(long_x,0);
+		vertices[3].setValor(long_x, 0);
 		limites[0].setLimites(0, 0, 0, long_y);
 		limites[1].setLimites(0, long_y, long_x, long_y);
 		limites[2].setLimites(20, long_y, long_x, 0);
@@ -35,18 +40,15 @@ Escenario::Escenario()
 		Plataforma::set_nplataformas(n);
 		//Primero siempre posicion antes que longitud de las paredes
 		fichero >> x;
-		while (!fichero.eof()&& i<Plataforma::get_nplataformas()) {
+		while (!fichero.eof() && i<Plataforma::get_nplataformas()) {
 			fichero >> y;
 			fichero >> l;
-			plat[i] = new Plataforma({x,y}, l);
+			plat[i] = new Plataforma({ x,y }, l);
 			fichero >> x;
 			i++;
 		}
 	}
 	fichero.close();
-
-	
-
 }
 void Escenario::Dibuja() {
 	glEnable(GL_TEXTURE_2D);
@@ -62,11 +64,12 @@ void Escenario::Dibuja() {
 	glDisable(GL_LIGHTING);
 	glDisable(GL_TEXTURE_2D);
 	glEnable(GL_LIGHT0);
+	glEnable(GL_LIGHTING);
 	for (int i = 0; i < Plataforma::get_nplataformas(); i++) {
 		plat[i]->Dibuja("Textures/T_plat.png");
 	}
 	for (int i = 0; i < 4; i++) {
-		limites[i].Dibuja("Textures/T_limites.png");
+		limites[i].Dibuja("Textures/Text_Laterales.png");
 	}
 	
 

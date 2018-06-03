@@ -24,11 +24,13 @@ void ListaCajas::Set_ncajas(int num)
 	}
 }
 
-void ListaCajas::CreaCajas()
+void ListaCajas::CreaCajas(const char *fich)
 {
+	f = new char[strlen(fich)];
+	strcpy(f, fich);
 	int n, i = 0;
 	float x, y;
-	ifstream fichero("Cajas.txt");
+	ifstream fichero(f); //"Cajas.txt"
 	if (!fichero)
 		cout << "No se puede abrir el fichero" << endl;
 	else {
@@ -49,8 +51,6 @@ void ListaCajas::CreaCajas()
 			fichero >> y;
 			Vector aux(x, y + Long_caracteristica);
 			lista[i] = new Box(aux);
-			/*lista[i].getPosicion().setValor(x, (y+(Long_caracteristica)));
-			lista[i].getColor().SetColor(145, 28, 226);*/
 			i++;
 		}
 		/*if (i < n_cajas) {

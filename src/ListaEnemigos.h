@@ -9,6 +9,7 @@
 class ListaEnemigos :public Enemigo
 {
 private:
+	char *f;
 	Enemigo *lista[MAX_ENEMIGOS];
 	int numero;
 
@@ -16,7 +17,7 @@ public:
 	ListaEnemigos();
 	~ListaEnemigos();
 
-	void CreaEnemigos();
+	void CreaEnemigos(const char *fich);
 
 	bool Agregar(Enemigo *e);
 
@@ -26,7 +27,7 @@ public:
 
 	void Rebote();
 
-	void Rebote(Personaje & p);
+	void Rebote(Personaje & p,ListaCajas c);
 
 	void Rebote(Plataforma p);
 

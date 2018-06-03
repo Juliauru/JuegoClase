@@ -20,7 +20,7 @@ void Mundo::Dibuja()
 	escenario.Reorientar();
 	//aqui es donde hay que poner el codigo de dibujo
 	//dibujo del suelo
-	glDisable(GL_LIGHTING);
+	glEnable(GL_LIGHTING);
 	escenario.Dibuja();
 	personaje.Dibuja();
 	enemigos.Dibuja();
@@ -41,7 +41,7 @@ void Mundo::Mueve() {
 		enemigos.Rebote(*(escenario.plat[i]));
 		cajas.Caida(*(escenario.plat[i]));
 	}
-	enemigos.Rebote(personaje);
+	enemigos.Rebote(personaje,cajas);
 	enemigos.Rebote();
 	Interaccion::Rebote(personaje, escenario);
 	enemigos.Rebote(escenario);
@@ -54,16 +54,10 @@ void Mundo::Mueve() {
 }
 void Mundo::Inicializa()
 {
-	//for (int i = 0; i < 3; i++) {
-	//	Enemigo *aux = new Enemigo;
-	//	//aux->SetPos(i, 1 + 3 * i);
-	//	//aux->setAltura(0.25);
-	//	enemigos.Agregar(aux);
-	//}
-	//
 	oportunidad = personaje.GetVida();
-	enemigos.CreaEnemigos();
-	cajas.CreaCajas();
+	escenario.setFichero("Plataformas.txt"); //Cambiará para cada nivel 	
+	enemigos.CreaEnemigos("EnemigosDesdeElPrincipio.txt");
+	cajas.CreaCajas("Cajas.txt");
 
 }
 
@@ -95,7 +89,6 @@ void Mundo::TeclaEspecial(bool izq, bool der, bool coge)
 	if (der == true) personaje.getVelocidad().x = 2.5;
 	if (coge == true) {
 		cajas.Coger(personaje);
-		//cout << personaje.transportando;//Interaccion::Coger(personaje, caja1);
 	}
 }
 void Mundo::TeclaEspecial2(unsigned char key) {
