@@ -54,12 +54,12 @@ void CoordinadorPang::Tecla(unsigned char key)
 		if (key == 'c')
 	
 			estado = INICIO;
-			//mundo.Destruye();
+			
 			
 			
 	}
 	else if(estado == PAUSE) {
-		if (key == 'c') {
+		if (key == 'p') {
 			estado = JUEGO;
 		}
 	}
@@ -139,8 +139,10 @@ void CoordinadorPang::Dibuja()
 	{
 		mundo.Dibuja();
 		ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
-		ETSIDI::printxy("JUEGO PAUSADO", 5, 10);
-		ETSIDI::printxy("Pulsa -C- para continuar", 5, 9);
+		/*ETSIDI::printxy("JUEGO PAUSADO", 5, 10);
+		ETSIDI::printxy("Pulsa -C- para continuar", 5, 9);*/
+		ETSIDI::printxy("JUEGO PAUSADO", 6, mundo.escenario.p_ojo_y+1);
+		ETSIDI::printxy("Pulsa -P- para continuar", 6, mundo.escenario.p_ojo_y);
 	}
 	else if (estado == TRANSICION)
 	{

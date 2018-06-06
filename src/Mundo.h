@@ -10,12 +10,13 @@ class Mundo
 private: 
 	Personaje personaje;
 	ListaEnemigos enemigos;
-	Escenario escenario;	
+		
 	Llave llave;
 	ListaCajas cajas;	
 	int oportunidad;
 	int nivel;
 public:
+	Escenario escenario;
 	Mundo() {};
 	bool GetOportunidad();
 	void SetOportunidad(Personaje p);

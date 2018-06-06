@@ -152,6 +152,10 @@ bool Mundo::CargarNivel()
 
 	if (nivel == 1)
 	{
+		//EL DE VERDAD
+		//llave.SetPosicion(1, 26+(llave.get_LCaract()));
+		//MAÑANA PARA RAQUEL
+		llave.SetPosicion(2, 40+ (llave.get_LCaract()));
 		escenario.setFichero("Plataformas.txt"); //Cambiará para cada nivel 	
 		enemigos.CreaEnemigos("EnemigosDesdeElPrincipio.txt");
 		cajas.CreaCajas("Cajas.txt");

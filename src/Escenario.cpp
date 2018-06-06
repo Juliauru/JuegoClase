@@ -22,8 +22,8 @@ Escenario::Escenario()
 {
 	p_ojo_y = 8.0f;
 	f = 0;
-	puerta.x = 6;
-	puerta.y = 42;
+	/*puerta.x = 6;
+	puerta.y = 42;*/
 	/*Plataforma::set_nplataformas(0);
 	for (int i = 0; i < MAX_PLATAFORMAS; i++) {
 		plat[i] = 0;
@@ -61,8 +61,8 @@ void Escenario::setFichero(const char* fich) {
 			fichero >> x;
 			i++;
 		}
-		/*puerta.x = long_x + l / 2;
-		puerta.y = long_y;*/
+		puerta.x = x + l / 2;
+		puerta.y = y;
 	}
 	fichero.close();
 }
