@@ -64,10 +64,8 @@ void Mundo::Mueve() {
 	Interaccion::Contacto(personaje, llave);
 	Interaccion::Mover(personaje, llave);
 	enemigos.Choque(llave);
-	//CONDICION DE PRUEBA
-	if (llave.getPosicion().x>5 && llave.getPosicion().y > 6) {
-		llave.num = 0;
-	}
+	Interaccion::EncuentroFinal(llave, escenario);
+
 }
 void Mundo::Inicializa()
 {
@@ -112,6 +110,10 @@ void Mundo::Tecla(unsigned char key)
 	switch (key) {
 	case 32:
 		personaje.Salto();
+		break;
+	case 'v':
+		personaje.SetPosicion(2, 44);
+		break;
 	}
 }
 void Mundo::TeclaEspecial(bool izq, bool der, bool coge)
@@ -162,9 +164,9 @@ bool Mundo::CargarNivel()
 	}
 	if (nivel == 3)
 	{
-		//escenario.setFichero("Plataformas.txt"); //Cambiará para cada nivel 	
-		//enemigos.CreaEnemigos("EnemigosDesdeElPrincipio.txt");
-		//cajas.CreaCajas("Cajas.txt");
+		escenario.setFichero("Plataformas3.txt"); //Cambiará para cada nivel 	
+		enemigos.CreaEnemigos("EnemigosDesdeElPrincipio3.txt");
+		cajas.CreaCajas("Cajas3.txt");
 	}
 	if (nivel <= 3)
 		return true;

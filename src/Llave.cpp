@@ -4,7 +4,7 @@
 
 Llave::Llave(Vector pos): Transportable(pos, TAMANIO),num(1)
 {}
-Llave::Llave(): Transportable({10,0.5}, TAMANIO), num(1) {}
+Llave::Llave(): Transportable({2,44}, TAMANIO), num(1) {}
 
 Llave::~Llave()
 {

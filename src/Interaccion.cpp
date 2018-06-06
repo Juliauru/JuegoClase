@@ -289,8 +289,11 @@ bool Interaccion::Colision(Enemigo &e, Transportable &c)
 	}
 void Interaccion::EncuentroFinal(Llave & l, Escenario e)
 {
-	
+	if (l.posicion.x<e.puerta.x + 0.5&&l.posicion.x>e.puerta.x - 0.5&&l.posicion.y >= e.puerta.y&&l.posicion.y < e.puerta.y+1.5){
+		l.num = 0;
 }
+}
+
 bool Interaccion::Colision(Enemigo &e, ListaCajas c) {
 	for (int i = 0; i < c.n_cajas; i++) {
 		if (Interaccion::Colision(e, *c.lista[i]))

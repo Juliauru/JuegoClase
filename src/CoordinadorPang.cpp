@@ -146,7 +146,7 @@ void CoordinadorPang::Dibuja()
 	{
 		mundo.Dibuja();
 		ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
-		ETSIDI::printxy("NIVEL SUPERADO", 5, 10);
-		ETSIDI::printxy("Pulsa -N- para comenzar el siguiente nivel", 5, 9);
+		ETSIDI::printxy("NIVEL SUPERADO", 5, 47);
+		ETSIDI::printxy("Pulsa -N- para comenzar el siguiente nivel", 5, 46);
 	}
 }
