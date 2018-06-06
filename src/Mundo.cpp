@@ -15,6 +15,7 @@ using namespace std;
 //	z_ojo = dist * sin(ang);
 //}
 
+
 void Mundo::Dibuja()
 {
 	escenario.Reorientar();
@@ -31,15 +32,24 @@ void Mundo::Dibuja()
 	glEnable(GL_LIGHTING);
 }
 
+void Mundo::Destruye()
+{
+	escenario.DestruirContenido();
+	cajas.DestruirContenido();
+	enemigos.DestruirContenido();
+}
+
 void Mundo::Mueve() {
 
 	personaje.Mueve(0.025f);
 	enemigos.Mueve(0.025f);	
 	cajas.Mueve(0.025f);
+	llave.Mueve(0.025f);
 	for (int i = 0; i < Plataforma::get_nplataformas(); i++) {
 		Interaccion::Contacto(personaje, *(escenario.plat[i]));
 		enemigos.Rebote(*(escenario.plat[i]));
 		cajas.Caida(*(escenario.plat[i]));
+		Interaccion::Contacto(llave, *(escenario.plat[i]));
 	}
 	enemigos.Rebote(personaje,cajas);
 	enemigos.Rebote();
@@ -51,13 +61,24 @@ void Mundo::Mueve() {
 	enemigos.Choque(cajas);
 	enemigos.Eliminar(enemigos.Contacto(cajas),true);
 	SetOportunidad(personaje);
+	Interaccion::Contacto(personaje, llave);
+	Interaccion::Mover(personaje, llave);
+	enemigos.Choque(llave);
+	//CONDICION DE PRUEBA
+	if (llave.getPosicion().x>5 && llave.getPosicion().y > 6) {
+		llave.num = 0;
+	}
 }
 void Mundo::Inicializa()
 {
+	//llave.num = 1;
+	nivel = 0;
+	//personaje.SetVida(3);
 	oportunidad = personaje.GetVida();
-	escenario.setFichero("Plataformas.txt"); //Cambiará para cada nivel 	
-	enemigos.CreaEnemigos("EnemigosDesdeElPrincipio.txt");
-	cajas.CreaCajas("Cajas.txt");
+	//escenario.setFichero("Plataformas.txt"); //Cambiará para cada nivel 	
+	//enemigos.CreaEnemigos("EnemigosDesdeElPrincipio.txt");
+	//cajas.CreaCajas("Cajas.txt");
+	CargarNivel();
 
 }
 
@@ -76,6 +97,16 @@ void Mundo::SetOportunidad(Personaje p)
 	oportunidad = p.GetVida();
 }
 
+bool Mundo::GetLlave()
+{
+	if (llave.ValorLlave() == 0) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
 void Mundo::Tecla(unsigned char key)
 {
 	switch (key) {
@@ -89,6 +120,7 @@ void Mundo::TeclaEspecial(bool izq, bool der, bool coge)
 	if (der == true) personaje.getVelocidad().x = 2.5;
 	if (coge == true) {
 		cajas.Coger(personaje);
+		Interaccion::Coger(personaje, llave);
 	}
 }
 void Mundo::TeclaEspecial2(unsigned char key) {
@@ -102,4 +134,39 @@ void Mundo::TeclaEspecial2(unsigned char key) {
 		break;
 
 	}
+}
+bool Mundo::CargarNivel()
+{
+	if (nivel > 0) {
+		escenario.DestruirContenido();
+		cajas.DestruirContenido();
+		enemigos.DestruirContenido();
+	}
+	nivel++;
+	personaje.SetPosicion(0.75,0.75);
+	personaje.SetVida(3);
+	oportunidad = personaje.GetVida();
+	llave.num = 1;
+
+	if (nivel == 1)
+	{
+		escenario.setFichero("Plataformas.txt"); //Cambiará para cada nivel 	
+		enemigos.CreaEnemigos("EnemigosDesdeElPrincipio.txt");
+		cajas.CreaCajas("Cajas.txt");
+	}
+	if (nivel == 2)
+	{
+		escenario.setFichero("Plataformas2.txt"); //Cambiará para cada nivel 	
+		enemigos.CreaEnemigos("EnemigosDesdeElPrincipio2.txt");
+		cajas.CreaCajas("Cajas2.txt");
+	}
+	if (nivel == 3)
+	{
+		//escenario.setFichero("Plataformas.txt"); //Cambiará para cada nivel 	
+		//enemigos.CreaEnemigos("EnemigosDesdeElPrincipio.txt");
+		//cajas.CreaCajas("Cajas.txt");
+	}
+	if (nivel <= 3)
+		return true;
+	return false;
 }

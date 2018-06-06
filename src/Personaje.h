@@ -16,7 +16,8 @@ public:
 	void DibujaVidas(float y,float inc);
 	void Salto();
 	static int GetVida() {return vida;}
-	static int GetPuntuacion() { return puntuacion; }	
+	static int GetPuntuacion() { return puntuacion; }
+	void SetVida(int num) {vida = num;}
 	void CambiaEstado();
 	friend class Interaccion;
 	friend class EnemigoD;

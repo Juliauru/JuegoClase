@@ -3,12 +3,12 @@
 #include "Personaje.h"
 class Box:public Transportable
 {
-protected:
-	bool tocando; //Está la caja teniendo contacto con el personaje??
+//protected:
+//	bool tocando; //Está la caja teniendo contacto con el personaje??
 public:
 	Box(Vector pos);
 	~Box();
 	void Dibuja();
-	void CambiaEstado();
+//	void CambiaEstado();
 };
 

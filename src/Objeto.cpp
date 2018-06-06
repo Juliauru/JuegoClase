@@ -12,3 +12,9 @@ Vector& Objeto::getPosicion() {
 Tono& Objeto::getColor() {
 	return color;
 }
+
+void Objeto::SetPosicion(float x, float y)
+{
+	posicion.x = x;
+	posicion.y = y;
+}

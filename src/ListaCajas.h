@@ -25,6 +25,8 @@ public:
 
 	void Mover(Personaje &pers);
 
+	void DestruirContenido();
+
 	void Caida(Plataforma p);
 	
 	friend class Interaccion;

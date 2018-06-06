@@ -5,6 +5,7 @@
 #include "Escenario.h"
 #include "Box.h"
 #include "ListaCajas.h"
+#include "Llave.h"
 class Enemigo;
 class Interaccion  
 {
@@ -12,9 +13,13 @@ public:
 	Interaccion();
 	~Interaccion();
 	static bool Contacto(Movil &m, Plataforma p);
-	static bool Contacto(Personaje &pers, Plataforma p);	
+
+	static bool Contacto(Personaje &pers, Plataforma p);
+
 	static bool Contacto(Enemigo &enem, Plataforma p);
-	static bool Contacto(Movil &m, Box c);
+
+	static bool Contacto(Movil &m, Transportable c);
+
 	static void Contacto(Enemigo &e, ListaCajas c);													  
 
 	static void Rebote(Enemigo &e, Enemigo &e1);
@@ -27,9 +32,9 @@ public:
 
 	//static void Rebote(Enemigo &ene, Plataforma &p);
 
-	static void Coger(Personaje &p, Box &c);
+	static void Coger(Personaje &p, Transportable &c);
 
-	static void Mover(Personaje &p, Box &c);
+	static void Mover(Personaje &p, Transportable &c);
 
 	static void Mover(Box &c, Box &c1, Personaje &p);
 
@@ -41,6 +46,9 @@ public:
 	static bool ComprobarDistanciaPlataforma(Movil &m, Plataforma p,float dif,Vector dir);
 	
 	static bool Colision(Enemigo &e, ListaCajas c);
-	static bool Colision(Enemigo &e, Box &c);
+
+	static bool Colision(Enemigo &e, Transportable &c);
+
+	static void EncuentroFinal(Llave &l, Escenario e);
 };
 

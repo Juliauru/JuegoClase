@@ -9,11 +9,24 @@ using namespace std;
 using  ETSIDI::getTexture;
 Escenario::~Escenario()
 {
+	puerta.x = 13;
+	puerta.y = 5;
+}
+void Escenario::DestruirContenido()
+{
+	for (int i = 0; i < Plataforma::get_nplataformas(); i++) {
+		delete plat[i];
+	}
+	Plataforma::set_nplataformas(0);
 }
 Escenario::Escenario()
 {
-	p_ojo_y = 8.0f;	
+	p_ojo_y = 8.0f;
 	f = 0;
+	/*Plataforma::set_nplataformas(0);
+	for (int i = 0; i < MAX_PLATAFORMAS; i++) {
+		plat[i] = 0;
+	}*/
 }
 void Escenario::setFichero(const char* fich) {
 	int n, l, i = 0;
@@ -47,6 +60,8 @@ void Escenario::setFichero(const char* fich) {
 			fichero >> x;
 			i++;
 		}
+		//puerta.x = long_x + l / 2;
+		//puerta.y = long_y+1;
 	}
 	fichero.close();
 }
@@ -65,6 +80,7 @@ void Escenario::Dibuja() {
 	glDisable(GL_TEXTURE_2D);
 	glEnable(GL_LIGHT0);
 	glEnable(GL_LIGHTING);
+	
 	for (int i = 0; i < Plataforma::get_nplataformas(); i++) {
 		plat[i]->Dibuja("Textures/T_plat.png");
 	}

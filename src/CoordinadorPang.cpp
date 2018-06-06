@@ -37,16 +37,36 @@ void CoordinadorPang::Tecla(unsigned char key)
 	else if (estado == JUEGO)
 	{
 		mundo.Tecla(key);
+		if (key == 'p') {
+			estado = PAUSE;
+		}
 	}
 	else if (estado == GAMEOVER)
 	{
 		if (key == 'c')
+		
 			estado = INICIO;
+			mundo.Destruye();
+		
 	}
 	else if (estado == FIN)
 	{
 		if (key == 'c')
+	
 			estado = INICIO;
+			//mundo.Destruye();
+			
+			
+	}
+	else if(estado == PAUSE) {
+		if (key == 'c') {
+			estado = JUEGO;
+		}
+	}
+	else if (estado == TRANSICION) {
+		if (key == 'n') {
+			estado = JUEGO;
+		}
 	}
 }
 
@@ -55,14 +75,19 @@ void CoordinadorPang::Mueve()
 	if (estado == JUEGO)
 	{
 		mundo.Mueve();
+		if (mundo.GetLlave())
+		{
+			if (!mundo.CargarNivel()) {
+				estado = FIN;
+			}
+			else {
+				estado = TRANSICION;	
+			}
+		}
 		if (mundo.GetOportunidad())
 		{
 			estado = GAMEOVER;
 		}
-		//if(//mundo.GetNivel())
-		//{
-		//	estado = FIN;
-		//}
 	}
 }
 
@@ -107,7 +132,21 @@ void CoordinadorPang::Dibuja()
 	{
 		mundo.Dibuja();
 		ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
-		ETSIDI::printxy("ENHORABUENA, ¡Has triunfado!", -5, 10);
-		ETSIDI::printxy("Pulsa -C- para continuar", -5, 9);
+		ETSIDI::printxy("ENHORABUENA, ¡Has triunfado!", 5, 10);
+		ETSIDI::printxy("Pulsa -C- para continuar", 5, 9);
+	}
+	else if (estado == PAUSE)
+	{
+		mundo.Dibuja();
+		ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
+		ETSIDI::printxy("JUEGO PAUSADO", 5, 10);
+		ETSIDI::printxy("Pulsa -C- para continuar", 5, 9);
+	}
+	else if (estado == TRANSICION)
+	{
+		mundo.Dibuja();
+		ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
+		ETSIDI::printxy("NIVEL SUPERADO", 5, 10);
+		ETSIDI::printxy("Pulsa -N- para comenzar el siguiente nivel", 5, 9);
 	}
 }

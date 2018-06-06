@@ -6,6 +6,7 @@
 #include "ListaCajas.h"
 #include "Movil.h"
 #include "Constantes.h"
+#include "Llave.h"
 class ListaEnemigos :public Enemigo
 {
 private:
@@ -38,8 +39,12 @@ public:
 	int Colision(Personaje p);
 
 	void Choque(ListaCajas c);
+	
+	void Choque(Llave l);
 
 	int Contacto(ListaCajas c);
+	
+	void DestruirContenido();
 
 	friend class Interaccion;
 };

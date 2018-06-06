@@ -14,15 +14,19 @@ private:
 	Llave llave;
 	ListaCajas cajas;	
 	int oportunidad;
+	int nivel;
 public:
 	Mundo() {};
 	bool GetOportunidad();
 	void SetOportunidad(Personaje p);
+	bool GetLlave();
 	void Tecla(unsigned char key);
 	void TeclaEspecial(bool izq=false, bool der=false,bool coge=false);
 	void Inicializa();
 	//void RotarOjo();
 	void Mueve();
-	void Dibuja();	
+	void Dibuja();
+	void Destruye();
 	void TeclaEspecial2(unsigned char key);
+	bool CargarNivel();
 	};

@@ -48,7 +48,7 @@ bool Interaccion::Contacto(Movil &m, Plataforma p) { //Creo que no es necesario
 	float dif = p.Distancia(m.posicion, &dir) - m.Long_caracteristica;
 	return(Interaccion::ComprobarDistanciaPlataforma(m, p, dif, dir));
 }
-bool Interaccion::Contacto(Movil &m, Box c) {
+bool Interaccion::Contacto(Movil &m, Transportable c) {
 	Plataforma p((c.getPosicion().x - (c.Long_caracteristica)), (c.getPosicion().y + (c.Long_caracteristica)), (c.getPosicion().x + (c.Long_caracteristica)), (c.getPosicion().y + (c.Long_caracteristica)));
 	//p.setLimites((c.getPosicion().x - (c.Long_caracteristica)), (c.getPosicion().y + (c.Long_caracteristica)), (c.getPosicion().x + (c.Long_caracteristica)), (c.getPosicion().y + (c.Long_caracteristica)));
 	Vector dir;
@@ -152,7 +152,7 @@ void Interaccion::Rebote(Enemigo &ene, Escenario e) {
 	if (ene.posicion.x >= xmax) ene.velocidad.x = -ene.velocidad.x;
 	if (ene.posicion.x <= xmin) ene.velocidad.x = -ene.velocidad.x;
 }
-void Interaccion::Mover(Personaje &p, Box &c) { 
+void Interaccion::Mover(Personaje &p, Transportable &c) {
 	Vector dir;
 	float dist = p.Distancia(c.posicion, &dir);	
 	float r = p.Long_caracteristica + c.Long_caracteristica;
@@ -233,7 +233,7 @@ bool Interaccion::Choque(ListaCajas c, Enemigo &e)
 	return false;
 }
 
-void Interaccion::Coger(Personaje &p, Box &c) {
+void Interaccion::Coger(Personaje &p, Transportable &c) {
 	bool t = Tocando(p, c);
 	if (t == true && fabsf(p.velocidad.y)==0) {
 		c.CambiaEstado();
@@ -268,7 +268,7 @@ bool Interaccion::ComprobarDistanciaPlataforma(Movil &m, Plataforma p,float dif,
 
 	return false;
 }
-bool Interaccion::Colision(Enemigo &e, Box &c)
+bool Interaccion::Colision(Enemigo &e, Transportable &c)
 {
 	float dist;
 	float r;
@@ -287,6 +287,10 @@ bool Interaccion::Colision(Enemigo &e, Box &c)
 		}
 		return false;
 	}
+void Interaccion::EncuentroFinal(Llave & l, Escenario e)
+{
+	
+}
 bool Interaccion::Colision(Enemigo &e, ListaCajas c) {
 	for (int i = 0; i < c.n_cajas; i++) {
 		if (Interaccion::Colision(e, *c.lista[i]))

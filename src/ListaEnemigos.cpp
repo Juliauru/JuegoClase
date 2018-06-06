@@ -7,13 +7,16 @@ using namespace std;
 ListaEnemigos::ListaEnemigos():Enemigo({0.0f,0.0f})
 {
 	numero = 0;
-	for (int i = 0; i < MAX_ENEMIGOS; i++) {
+	/*for (int i = 0; i < MAX_ENEMIGOS; i++) {
 		lista[i] = 0;
-	}
+	}*/
 
 }
 ListaEnemigos::~ListaEnemigos()
 {
+	/*for (int i = 0; i < numero; i++) {
+		delete lista[i];
+	}*/
 }
 
 void ListaEnemigos::CreaEnemigos(const char *fich)
@@ -145,6 +148,19 @@ void ListaEnemigos::Choque(ListaCajas c)//No funciona bien
 		}
 	}
 }
+
+void ListaEnemigos::Choque(Llave l)
+{
+	for (int i = 0; i < numero; i++) {
+		if (Interaccion::Colision(*(lista[i]),l))
+		{
+			float aux = lista[i]->getVelocidad().x;
+			float aux1 = lista[i]->getVelocidad().y;
+			lista[i]->getVelocidad().setValor(-aux, aux1);
+		}
+	}
+}
+
 int ListaEnemigos::Contacto(ListaCajas c)//No funciona bien
 {
 	for (int i = 0; i < numero; i++) {
@@ -153,4 +169,12 @@ int ListaEnemigos::Contacto(ListaCajas c)//No funciona bien
 		}
 	}
 	return -1;
+}
+
+void ListaEnemigos::DestruirContenido()
+{
+	for (int i = 0; i < numero; i++) {
+		delete lista[i];
+	}
+	numero = 0;
 }

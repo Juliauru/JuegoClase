@@ -62,3 +62,4 @@ void Personaje::CambiaEstado() {
 	if (transportando == true) transportando = false;
 	else transportando = true;
 }
+

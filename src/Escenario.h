@@ -10,12 +10,14 @@ public:
 	Vector vertices[4];
 	Plataforma *plat[MAX_PLATAFORMAS];
 	Pared limites[4];//0, empezando por la izquierda y en sentido horario
+	Vector puerta;
 public:
 	void Dibuja();
 	void Reorientar();
 	void setFichero(const char* f);
 	Escenario();
 	~Escenario();
+	void DestruirContenido();
 	friend class Interaccion;
 };
 

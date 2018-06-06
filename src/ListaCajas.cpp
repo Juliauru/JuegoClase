@@ -7,11 +7,18 @@
 
 using namespace std;
 ListaCajas::ListaCajas() :Box({0.0f,0.0f})
-{};
+{
+	n_cajas = 0;
+	/*for (int i = 0; i < CAJASMAX; i++) {
+		lista[i] = 0;
+	}*/
+}
 	
 
 ListaCajas::~ListaCajas()
 {
+	
+	
 }
 
 void ListaCajas::Set_ncajas(int num)
@@ -95,6 +102,13 @@ void ListaCajas::Mover(Personaje & pers)
 			Interaccion::Mover(*(lista[i]), *(lista[j]),pers);
 		}
 	}
+}
+void ListaCajas::DestruirContenido()
+{
+	for (int i = 0; i < n_cajas; i++) {
+		delete lista[i];
+	}
+	n_cajas = 0;
 }
 void ListaCajas::Caida(Plataforma p) {
 	for (int i = 0; i < n_cajas; i++) {
