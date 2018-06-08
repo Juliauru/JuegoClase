@@ -1,6 +1,7 @@
 #pragma once
 #include "Box.h"
 #include "Personaje.h"
+#include "Llave.h"
 class ListaCajas:public Box
 {
 private:
@@ -23,7 +24,7 @@ public:
 
 	void Contacto(Personaje &pers);
 
-	void Mover(Personaje &pers);
+	void Mover(Personaje &pers,Llave &llave);
 
 	void DestruirContenido();
 

@@ -1,4 +1,2 @@
 ﻿  Personaje.cpp
-c:\users\user\documents\github\juegoclase\src\personaje.cpp(13): warning C4553: '==': el operador no tiene efecto; ¿ha pensado en '='?
-c:\users\user\documents\github\juegoclase\src\personaje.cpp(28): warning C4101: 'sprite': variable local sin referencia
   Pang.vcxproj -> C:\Users\user\Documents\GitHub\JuegoClase\bin\Pang.exe

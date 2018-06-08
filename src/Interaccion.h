@@ -36,7 +36,7 @@ public:
 
 	static void Mover(Personaje &p, Transportable &c);
 
-	static void Mover(Box &c, Box &c1, Personaje &p);
+	static void Mover(Transportable &c, Transportable &c1, Personaje &p);
 
 	static bool Colision(Enemigo e, Personaje p);
 	

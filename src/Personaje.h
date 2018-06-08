@@ -2,9 +2,12 @@
 #include "Movil.h"
 #include "Escenario.h"
 #include "Constantes.h"
+#include "ETSIDI.h"
+using ETSIDI::Sprite;
 class Personaje:public Movil
 {
 private:
+	Sprite *sVida[3];
 	//Longitud característica radio esfera, hasta que tengamos una altura, luego cambiar
 	static int puntuacion;
 	static int vida;

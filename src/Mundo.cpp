@@ -56,7 +56,7 @@ void Mundo::Mueve() {
 	Interaccion::Rebote(personaje, escenario);
 	enemigos.Rebote(escenario);
 	cajas.Contacto(personaje);
-	cajas.Mover(personaje);
+	cajas.Mover(personaje,llave);
 	enemigos.Eliminar(enemigos.Colision(personaje));
 	enemigos.Choque(cajas);
 	enemigos.Eliminar(enemigos.Contacto(cajas),true);

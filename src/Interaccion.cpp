@@ -50,18 +50,17 @@ bool Interaccion::Contacto(Movil &m, Plataforma p) { //Creo que no es necesario
 }
 bool Interaccion::Contacto(Movil &m, Transportable c) {
 	Plataforma p((c.getPosicion().x - (c.Long_caracteristica)), (c.getPosicion().y + (c.Long_caracteristica)), (c.getPosicion().x + (c.Long_caracteristica)), (c.getPosicion().y + (c.Long_caracteristica)));
-	//p.setLimites((c.getPosicion().x - (c.Long_caracteristica)), (c.getPosicion().y + (c.Long_caracteristica)), (c.getPosicion().x + (c.Long_caracteristica)), (c.getPosicion().y + (c.Long_caracteristica)));
 	Vector dir;
 	float dif = p.Distancia(m.posicion, &dir) - m.Long_caracteristica;
 	return(Interaccion::ComprobarDistanciaPlataforma(m, p, dif, dir));
 }
 void Interaccion::Contacto(Enemigo &e, ListaCajas c) {
 	for (int i = 0; i < c.n_cajas; i++) {
-		Plataforma p((c.lista[i]->posicion.x - (c.lista[i]->Long_caracteristica)), (c.lista[i]->posicion.y + (c.lista[i]->Long_caracteristica)), (c.lista[i]->posicion.x + (c.Long_caracteristica)), (c.lista[i]->posicion.y + (c.lista[i]->Long_caracteristica)));
-		//p.setLimites((c.lista[i]->posicion.x - (c.lista[i]->Long_caracteristica)), (c.lista[i]->posicion.y + (c.lista[i]->Long_caracteristica)), (c.lista[i].posicion.x + (c.Long_caracteristica)), (c.lista[i].posicion.y + (c.lista[i].Long_caracteristica)));
+		Interaccion::Contacto(e, *c.lista[i]);
+	/*	Plataforma p((c.lista[i]->posicion.x - (c.lista[i]->Long_caracteristica)), (c.lista[i]->posicion.y + (c.lista[i]->Long_caracteristica)), (c.lista[i]->posicion.x + (c.Long_caracteristica)), (c.lista[i]->posicion.y + (c.lista[i]->Long_caracteristica)));
 		Vector dir;
 		float dif = p.Distancia(e.posicion, &dir) - e.Long_caracteristica;
-	    Interaccion::ComprobarDistanciaPlataforma(e, p, dif, dir);
+	    Interaccion::ComprobarDistanciaPlataforma(e, p, dif, dir);*/
 	}
 }
 
@@ -141,8 +140,11 @@ void Interaccion::Rebote(Movil &m, Escenario &e) //Intentar hacer poco a poco, n
 	float xmax = e.limites[3].limite.x- m.Long_caracteristica;
 	if (m.posicion.x >= xmax) m.posicion.x = xmax;
 	if (m.posicion.x <= xmin) m.posicion.x = xmin;
-	if (m.posicion.y > (8+ e.p_ojo_y))
-		e.p_ojo_y = e.p_ojo_y+8; /// (JULIA LEEME :) -> Si se cambia el 8 hay que cambiarlo tambien en el metodo dibuja vidas de personaje <-
+	if (m.posicion.y > (8 + e.p_ojo_y))
+		if (e.GetSizeY() >= (16 + e.p_ojo_y))/// (JULIA LEEME :) -> Si se cambia el 8 hay que cambiarlo tambien en el metodo dibuja vidas de personaje <-
+			e.p_ojo_y = e.p_ojo_y + 8;
+		else
+			e.p_ojo_y = e.GetSizeY() - 8;
 	if (m.posicion.y <(e.p_ojo_y-8))
 		e.p_ojo_y = e.p_ojo_y -8;
 }
@@ -177,12 +179,12 @@ void Interaccion::Mover(Personaje &p, Transportable &c) {
 		}
 	}
 
-void Interaccion::Mover(Box &caja1, Box &caja2, Personaje &p) //Se han quitado los /2, no compila por eso 
+void Interaccion::Mover(Transportable &caja1, Transportable &caja2, Personaje &p) //Se han quitado los /2, no compila por eso 
 {
 	bool t = Tocando(p, caja1);
 	bool s = Tocando(p, caja2);
-	Box& c1 = caja2;
-	Box& c = caja1;
+	Transportable& c1 = caja2;
+	Transportable& c = caja1;
 	float dist = fabsf(c.posicion.x - c1.posicion.x);
 	float r = c.Long_caracteristica + c1.Long_caracteristica;
 

@@ -1,9 +1,12 @@
 #pragma once
+#include "ETSIDI.h"
 #include "Transportable.h"
+using  ETSIDI::Sprite;
 class Llave:public Transportable
 {
 	//PRUEBA A PUBLIC,ESTABA EN PRIVATE
-//private:
+private:
+	Sprite sprite;
 public:
 	int num;
 public:

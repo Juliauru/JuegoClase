@@ -4,14 +4,20 @@
 #include "Constantes.h"
 #include <math.h>
 #include "Constantes.h"
-using namespace ETSIDI;
+using ETSIDI::Sprite;
 
 int Personaje::vida = 3;
 int Personaje::puntuacion = 0;
 Personaje::Personaje() : Movil({ 0.75f,0.75f }, { 0.0f,0.0f }, { 0.0f,-10.0f }, TAMANIO)
 {
-	transportando == false;
+	for (int i = 0; i < 3; i++) {
+		sVida[i] = new Sprite("Textures/vida.png");
+		/*sVida[i]->setPos(5, 5);
+		sVida[i]->setCenter(5.5, 5.5);
+		sVida[i]->setSize(1, 1);*/
+	}
 
+	transportando = false;
 }
 Personaje::~Personaje()
 {
@@ -25,31 +31,19 @@ void Personaje::Dibuja()
 }
 void Personaje::DibujaVidas(float y,float inc)
 {
-	Sprite *sprite;
-	float l = 0, plus=inc-7.5 ;
+	//sVida= new Sprite("Textures/vida.png");
+	float l = 1.5, plus = inc-7.5;
 	for (int i = 0; i < vida; i++) {
-		//sprite= new Sprite("Textures/heart.png", 5, 5, 10,10);
-		glColor3f(255, 0, 0);
-		glTranslatef(((TAMANIO/3)+l),(((int)y/3)+plus), 0);
-		glutSolidSphere((TAMANIO / 3), 20, 30);
-		//sprite->draw();
-		glTranslatef(-((TAMANIO / 3)+l), -(((int)y / 3) + plus), 0);
-		l = l + TAMANIO;
+		sVida[i]->setCenter(((TAMANIO / 3) + l), (((int)y / 3) + plus)-1);
+		sVida[i]->setPos(((TAMANIO / 3) + l-0.5) , (((int)y / 3) + plus)-1.5);
+		sVida[i]->setSize(1, 1);
+		glPushMatrix();
+		glTranslated(((TAMANIO / 3) + l)-0.5, (((int)y / 3) + plus)-1.5, 3.5);
+		glColor3f(1.0f, 1.0f, 1.0f);
+		sVida[i]->draw();
+		glPopMatrix();
+		l = l + TAMANIO*2;
 	}
-	/*{
-		char vidas[] = "VIDAS:";
-		int a = 0;
-
-		glColor3ub(255, 50, 50);
-		for (int i = 0; vidas[i] != '\0'; i++)
-		{
-			glRasterPos3i(4 + a, 80, 6);
-			glutBitmapCharacter(GLUT_BITMAP_8_BY_13, vidas[i]);
-			a += 2;
-		}
-		glRasterPos3i(4 + a, 80, 6);
-		glutBitmapCharacter(GLUT_BITMAP_8_BY_13, vida);
-	}*/
 }
 
 void Personaje::Salto() { //Poner límtes al salto

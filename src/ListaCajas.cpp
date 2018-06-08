@@ -94,10 +94,11 @@ void ListaCajas::Contacto(Personaje & pers)
 	}
 }
 
-void ListaCajas::Mover(Personaje & pers)
+void ListaCajas::Mover(Personaje & pers,Llave &llave)
 {
 	for (int i = 0; i < n_cajas; i++) {
 		Interaccion::Mover(pers, *(lista[i]));
+		Interaccion::Mover(*(lista[i]), llave, pers);
 		for (int j = i+1; j <= n_cajas-1; j++) {
 			Interaccion::Mover(*(lista[i]), *(lista[j]),pers);
 		}

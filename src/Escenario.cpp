@@ -31,7 +31,7 @@ Escenario::Escenario()
 }
 void Escenario::setFichero(const char* fich) {
 	int n, l, i = 0;
-	float x, y, long_x, long_y;
+	float x, y;
 	char caracter[10];
 	char caracter2[10];
 	f = new char[strlen(fich)];
@@ -41,16 +41,16 @@ void Escenario::setFichero(const char* fich) {
 		cout << "No se puede abrir el fichero" << endl;
 	else {
 		fichero >> n;
-		fichero >> long_x;
-		fichero >> long_y;
+		fichero >> ex;
+		fichero >> ey;
 		vertices[0].setValor(0, 0);
-		vertices[1].setValor(0, long_y);
-		vertices[2].setValor(long_x, long_y);
-		vertices[3].setValor(long_x, 0);
-		limites[0].setLimites(0, 0, 0, long_y);
-		limites[1].setLimites(0, long_y, long_x, long_y);
-		limites[2].setLimites(20, long_y, long_x, 0);
-		limites[3].setLimites(0, 0, long_x, 0);
+		vertices[1].setValor(0, ey);
+		vertices[2].setValor(ex, ey);
+		vertices[3].setValor(ex, 0);
+		limites[0].setLimites(0, 0, 0, ey);
+		limites[1].setLimites(0, ey, ex, ey);
+		limites[2].setLimites(20, ey, ex, 0);
+		limites[3].setLimites(0, 0, ex, 0);
 		Plataforma::set_nplataformas(n);
 		//Primero siempre posicion antes que longitud de las paredes
 		fichero >> x;

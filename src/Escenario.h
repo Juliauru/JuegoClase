@@ -5,6 +5,7 @@
 class Escenario
 {
 public:
+	float ex, ey;
 	char *f;
 	float p_ojo_x, p_ojo_y, p_ojo_z;
 	Vector vertices[4];
@@ -12,6 +13,7 @@ public:
 	Pared limites[4];//0, empezando por la izquierda y en sentido horario
 	Vector puerta;
 public:
+	float GetSizeY() { return ey;}
 	void Dibuja();
 	void Reorientar();
 	void setFichero(const char* f);
