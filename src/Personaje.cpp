@@ -3,8 +3,9 @@
 #include "glut.h"
 #include "Constantes.h"
 #include <math.h>
-#include "Constantes.h"
+#include <iostream>
 using ETSIDI::Sprite;
+using namespace std;
 
 int Personaje::vida = 3;
 int Personaje::puntuacion = 0;
@@ -12,9 +13,6 @@ Personaje::Personaje() : Movil({ 0.75f,0.75f }, { 0.0f,0.0f }, { 0.0f,-10.0f }, 
 {
 	for (int i = 0; i < 3; i++) {
 		sVida[i] = new Sprite("Textures/vida.png");
-		/*sVida[i]->setPos(5, 5);
-		sVida[i]->setCenter(5.5, 5.5);
-		sVida[i]->setSize(1, 1);*/
 	}
 
 	transportando = false;
@@ -43,7 +41,12 @@ void Personaje::DibujaVidas(float y,float inc)
 		sVida[i]->draw();
 		glPopMatrix();
 		l = l + TAMANIO*2;
-	}
+	}	
+	char punt[10];
+	itoa(puntuacion, punt, 10);
+	ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
+	ETSIDI::printxy("Puntos:", 16, (((int)y / 3) + plus) - 0.5, 3.5);
+	ETSIDI::printxy(punt, 19, (((int)y / 3) + plus) - 0.5, 3.5);
 }
 
 void Personaje::Salto() { //Poner límtes al salto

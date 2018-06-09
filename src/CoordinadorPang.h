@@ -1,5 +1,6 @@
 #pragma once
 #include "Mundo.h"
+class EnemigoD;
 class CoordinadorPang
 {
 public:
@@ -14,5 +15,6 @@ protected:
 	Mundo mundo;
 	enum Estado{INICIO,JUEGO,PAUSE,TRANSICION,GAMEOVER,FIN};
 	Estado estado;
+	friend class enemigoD; //Cambiar
 };
 

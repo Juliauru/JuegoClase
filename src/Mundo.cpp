@@ -1,7 +1,6 @@
 #include <math.h>
 #include <stdlib.h>
 #include <fstream>
-#include <iostream>
 #include "Mundo.h"
 #include "glut.h"
 #include "Interaccion.h"
@@ -20,6 +19,7 @@ void Mundo::Dibuja()
 	cajas.Dibuja();	
 	//DIBUJO DE LAS VIDAS
 	personaje.DibujaVidas(escenario.vertices[1].y,escenario.p_ojo_y);
+	//enemigos.DibujaFrase(texto, escenario.vertices[1].y, escenario.p_ojo_y);
 	glEnable(GL_LIGHTING);
 }
 
@@ -49,9 +49,9 @@ void Mundo::Mueve() {
 	cajas.Contacto(personaje);
 	cajas.Mover(personaje,llave);
 	cajas.Rebote(escenario);
-	enemigos.Eliminar(enemigos.Colision(personaje));
+	texto=enemigos.Eliminar(enemigos.Colision(personaje));
 	enemigos.Choque(cajas);
-	enemigos.Eliminar(enemigos.Contacto(cajas),true);
+	texto=enemigos.Eliminar(enemigos.Contacto(cajas),true);
 	SetOportunidad(personaje);
 	Interaccion::Contacto(personaje, llave);
 	Interaccion::Mover(personaje, llave);
@@ -63,6 +63,7 @@ void Mundo::Inicializa()
 {
 	//llave.num = 1;
 	nivel = 0;
+	texto = 0;
 	//personaje.SetVida(3);
 	oportunidad = personaje.GetVida();
 	//escenario.setFichero("Plataformas.txt"); //Cambiará para cada nivel 	
@@ -139,6 +140,7 @@ bool Mundo::CargarNivel()
 	nivel++;
 	personaje.SetPosicion(0.75,0.75);
 	personaje.SetVida(3);
+	texto = 0;
 	oportunidad = personaje.GetVida();
 	llave.num = 1;
 

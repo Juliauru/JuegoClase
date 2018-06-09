@@ -15,9 +15,10 @@ private:
 	ListaCajas cajas;	
 	int oportunidad;
 	int nivel;
+	int texto;
 public:
 	Escenario escenario;
-	Mundo() {};
+	Mundo() { texto = 0; };
 	bool GetOportunidad();
 	void SetOportunidad(Personaje p);
 	bool GetLlave();

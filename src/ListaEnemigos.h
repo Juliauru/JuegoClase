@@ -34,7 +34,7 @@ public:
 
 	void Rebote(Escenario e);
 
-	void Eliminar(int ind, bool caso=false);
+	int Eliminar(int ind, bool caso=false);
 
 	int Colision(Personaje p);
 
@@ -45,6 +45,8 @@ public:
 	int Contacto(ListaCajas c);
 	
 	void DestruirContenido();
+
+	void DibujaFrase(int num, float y, float inc);
 
 	friend class Interaccion;
 };

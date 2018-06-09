@@ -12,10 +12,8 @@ Enemigo::Enemigo(Vector pos):Movil(pos, {0.0f,0.0f}, { 0.0f,-3.0f }, TAMANIO/1.5
 
 Enemigo::~Enemigo()
 {}
-void Enemigo::EnemEliminado( char* f) { 
-	delete f;
-f = new char[1];
-strcpy(f, " ");
+int Enemigo::EnemEliminado() { 
+	return 0;
 }
 void Enemigo::Dibuja()
 {

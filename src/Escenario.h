@@ -21,6 +21,6 @@ public:
 	~Escenario();
 	void DestruirContenido();
 	friend class Interaccion;
-	//friend void ListaEnemigos::Eliminar(int ind, bool caso);
+	friend class EnemigoD;
 };
 
