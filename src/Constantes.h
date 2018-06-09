@@ -7,3 +7,4 @@
 #define MAX_ENEMIGOS 40
 #define MAX_PLATAFORMAS 100
 #define ALTURA 8
+#define T_max 2

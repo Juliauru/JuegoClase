@@ -46,8 +46,6 @@ public:
 	
 	void DestruirContenido();
 
-	void DibujaFrase(int num, float y, float inc);
-
 	friend class Interaccion;
 };
 

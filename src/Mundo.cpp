@@ -1,9 +1,11 @@
 #include <math.h>
 #include <stdlib.h>
 #include <fstream>
+#include <iostream>
 #include "Mundo.h"
 #include "glut.h"
 #include "Interaccion.h"
+#include <time.h>
 using namespace std;
 
 void Mundo::Dibuja()
@@ -19,7 +21,7 @@ void Mundo::Dibuja()
 	cajas.Dibuja();	
 	//DIBUJO DE LAS VIDAS
 	personaje.DibujaVidas(escenario.vertices[1].y,escenario.p_ojo_y);
-	//enemigos.DibujaFrase(texto, escenario.vertices[1].y, escenario.p_ojo_y);
+	DibujaFrase(texto, escenario.vertices[1].y, escenario.p_ojo_y);
 	glEnable(GL_LIGHTING);
 }
 
@@ -51,7 +53,7 @@ void Mundo::Mueve() {
 	cajas.Rebote(escenario);
 	texto=enemigos.Eliminar(enemigos.Colision(personaje));
 	enemigos.Choque(cajas);
-	texto=enemigos.Eliminar(enemigos.Contacto(cajas),true);
+	enemigos.Eliminar(enemigos.Contacto(cajas),true);
 	SetOportunidad(personaje);
 	Interaccion::Contacto(personaje, llave);
 	Interaccion::Mover(personaje, llave);
@@ -64,6 +66,9 @@ void Mundo::Inicializa()
 	//llave.num = 1;
 	nivel = 0;
 	texto = 0;
+	fich = new char[2];
+	strcpy(fich, " ");
+	time(&tiempo);
 	//personaje.SetVida(3);
 	oportunidad = personaje.GetVida();
 	//escenario.setFichero("Plataformas.txt"); //Cambiará para cada nivel 	
@@ -169,4 +174,34 @@ bool Mundo::CargarNivel()
 	if (nivel <= 3)
 		return true;
 	return false;
+}
+void Mundo::DibujaFrase(int i, float y, float inc) {
+
+	ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
+	switch (i) {
+	case 1:	{
+		fich = new char[strlen("Has obtenido un vida extra") + 1];
+		strcpy(fich, "HAS OBTENIDO UNA VIDA EXTRA");
+		time(&tiempo);
+		break;
+	}
+	case 4: {
+		fich = new char[strlen("Nivel de vida maximo") + 1];
+		strcpy(fich, "TIENES LAS VIDAS AL MAXIMO");
+		time(&tiempo); }
+		break;
+	case 2: {
+		fich = new char[strlen("Has obtenido un bonus") + 1];
+		strcpy(fich, "HAS OBTENIDO UN BONUS  +500 ");
+		time(&tiempo);
+		break;
+	}
+	case 3: {
+		fich = new char[strlen("No has tenido suerte") + 1];
+		strcpy(fich, "NO HAS TENIDO SUERTE");
+		time(&tiempo);
+		break; }
+	}
+	if (time(NULL) <= tiempo + 2)
+		ETSIDI::printxy(fich, 5, escenario.p_ojo_y + 1,3.5);
 }

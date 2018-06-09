@@ -178,38 +178,4 @@ void ListaEnemigos::DestruirContenido()
 	}
 	numero = 0;
 }
-void DibujaFrase(int i, float y, float inc) {
-	char *fich;
-	switch (i) {
-	case 1:
-	{
-		fich = new char[strlen("Has obtenido un vida extra") + 1];
-		strcpy(fich, "Has obtenido una vida extra");
-		break;
-	}
-	case 4: {
-		fich = new char[strlen("Nivel de vida maximo") + 1];
-		strcpy(fich, "Nivel de vida maximo");
-		break; }
-			//cout << "Tienes una vida más" << endl;
-	case 2:
-	{
-		//cout << "Has obtenido un bonus" << endl;
-		fich = new char[strlen("Has obtenido un bonus") + 1];
-		strcpy(fich, "Has obtenido un bonus");
-		break;
-	}
-	case 3:
-	{
-		//cout << "No has tenido suerte" << endl;
-		fich = new char[strlen("No has tenido suerte") + 1];
-		strcpy(fich, "No has tenido suerte");
-		break; }
-	case 0:
-		return;
-	}
-	cout << fich << endl;
-	/*ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
-	ETSIDI::printxy("JUEGO PAUSADO", 6, mundo.escenario.p_ojo_y + 1);
-	ETSIDI::printxy("Pulsa -P- para continuar", 6, mundo.escenario.p_ojo_y);*/
-}
+

@@ -13,12 +13,11 @@ EnemigoD::EnemigoD(Vector pos) :Enemigo(pos)
 
 EnemigoD::~EnemigoD(){}
 int EnemigoD::EnemEliminado() {
-	char *f;
 	int i = lanzaDado(4, 1);
 	if (i == 1 && Personaje::vida < 3) {
 		Personaje::vida++;
 	}
-	if (i == 1 && Personaje::vida >= 3) {
+	else if (i == 1 && Personaje::vida >= 3) {
 		i = 4;
 	}
 	if (i == 2) {

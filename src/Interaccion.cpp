@@ -215,7 +215,7 @@ bool Interaccion::Colision(Enemigo e, Personaje p)
 {
 	if (p.posicion.x <= (e.posicion.x + p.Long_caracteristica) && p.posicion.x >= (e.posicion.x - p.Long_caracteristica) && p.posicion.y <= (e.posicion.y + e.Long_caracteristica + p.Long_caracteristica)&& p.posicion.y > (e.posicion.y + e.Long_caracteristica + p.Long_caracteristica/2)) {
 		Personaje::puntuacion = Personaje::puntuacion + 100;
-		cout << Personaje::puntuacion << endl;
+		//cout << Personaje::puntuacion << endl;
 		return true;
 	}
 	return false;
