@@ -1,5 +1,6 @@
 #include "ListaEnemigos.h"
 #include "EnemigoD.h"
+#include "Escenario.h"
 #include <stdlib.h>
 #include <iostream>
 #include <fstream>
@@ -40,10 +41,6 @@ void ListaEnemigos::CreaEnemigos(const char *fich)
 			if(tipo == true)
 			lista[i] = new EnemigoD(aux);
 			
-			//lista[i]->SetPos(x, y);//Se puede sustituir por el getpos().setpos()
-			//lista[i]->SetVel(0.0f, -1.0f);
-			////cout << (lista[i])->getPosicion().x << " " << (lista[i])->getPosicion().y << "\n";
-			/*lista[i]->getColor().SetColor(0,40, 30);*/
 			if ((rand() % 2) == 0) {
 				lista[i]->getVelocidad().setValor(2.0f, 0.0f);
 			}
@@ -65,8 +62,6 @@ bool ListaEnemigos::Agregar(Enemigo * e)
 		}
 		else
 			e->getVelocidad().setValor(-2.0f, 0.0f);
-		//e->getPosicion().setValor(rand() % 20 + 1, rand() % 40 + 1);
-
 	}
 	else {
 		return false;
@@ -95,9 +90,9 @@ void ListaEnemigos::Rebote() {
 		}
 	}
 }
-void ListaEnemigos::Rebote(Personaje &p,ListaCajas c) {
+void ListaEnemigos::Rebote(Personaje &p,ListaCajas c,Llave &l) {
 	for (int i = 0; i < numero; i++) {
-		Interaccion::Rebote(p, *(lista[i]), c);
+		Interaccion::Rebote(p, *(lista[i]), c,l);
 	}
 }
 void ListaEnemigos::Rebote(Plataforma p) {
@@ -115,12 +110,17 @@ void ListaEnemigos::Rebote(Escenario e) {
 
 void ListaEnemigos::Eliminar(int ind,bool caso) //Si es matado por una caja true, si es por un personaje false
 {
+	char *frase=new char[0];
 	if (ind < 0 || ind >= numero) {
 		return;
 	}
-	if (caso == true) lista[ind]->Enemigo::EnemEliminado();
+	if (caso == true) {
+		lista[ind]->Enemigo::EnemEliminado(frase);
+	}
 	else
-		lista[ind]->EnemEliminado();
+		lista[ind]->EnemEliminado(frase);
+	
+	cout << frase;
 	delete lista[ind];
 	numero--;
 	for (int i = ind; i < numero; i++) {

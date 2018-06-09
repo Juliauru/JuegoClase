@@ -1,2 +1,16 @@
-﻿  Personaje.cpp
+﻿  ListaEnemigos.cpp
+c:\users\user\documents\github\juegoclase\src\listaenemigos.cpp(38): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\user\documents\github\juegoclase\src\listaenemigos.cpp(26): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(132): note: vea la declaración de 'strcpy'
+  EnemigoD.cpp
+c:\users\user\documents\github\juegoclase\src\enemigod.cpp(24): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(132): note: vea la declaración de 'strcpy'
+c:\users\user\documents\github\juegoclase\src\enemigod.cpp(31): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(132): note: vea la declaración de 'strcpy'
+c:\users\user\documents\github\juegoclase\src\enemigod.cpp(38): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(132): note: vea la declaración de 'strcpy'
+  Enemigo.cpp
+c:\users\user\documents\github\juegoclase\src\enemigo.cpp(18): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(132): note: vea la declaración de 'strcpy'
+  Generando código...
   Pang.vcxproj -> C:\Users\user\Documents\GitHub\JuegoClase\bin\Pang.exe

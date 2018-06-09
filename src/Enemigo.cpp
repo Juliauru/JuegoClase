@@ -12,7 +12,11 @@ Enemigo::Enemigo(Vector pos):Movil(pos, {0.0f,0.0f}, { 0.0f,-3.0f }, TAMANIO/1.5
 
 Enemigo::~Enemigo()
 {}
-void Enemigo::EnemEliminado() {}
+void Enemigo::EnemEliminado( char* f) { 
+	delete f;
+f = new char[1];
+strcpy(f, " ");
+}
 void Enemigo::Dibuja()
 {
 	glColor3b(getColor().rojo, getColor().verde, getColor().azul);

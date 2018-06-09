@@ -29,6 +29,7 @@ public:
 	void DestruirContenido();
 
 	void Caida(Plataforma p);
+	void Rebote(Escenario e);
 	
 	friend class Interaccion;
 

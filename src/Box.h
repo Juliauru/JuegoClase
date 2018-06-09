@@ -9,6 +9,6 @@ public:
 	Box(Vector pos);
 	~Box();
 	void Dibuja();
-//	void CambiaEstado();
+	void Moviendo(float x, float y, float l);
 };
 

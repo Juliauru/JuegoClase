@@ -30,3 +30,7 @@ void Llave::Dibuja()
 	glutSolidCube(Long_caracteristica*2.0f);
 	glTranslatef(-posicion.x, -posicion.y, -1.5);*/
 }
+void Llave::Moviendo(float x,float y,float l) {
+	
+	}
+

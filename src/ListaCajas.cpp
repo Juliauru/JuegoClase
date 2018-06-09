@@ -116,5 +116,10 @@ void ListaCajas::Caida(Plataforma p) {
 		Interaccion::Contacto(*(lista[i]),p);
 	}
 }
+void ListaCajas::Rebote(Escenario e) {
+	for (int i = 0; i < n_cajas; i++) {
+		Interaccion::Rebote(*(lista[i]), e);
+	}
+}
 
 

@@ -24,7 +24,7 @@ public:
 
 	static void Rebote(Enemigo &e, Enemigo &e1);
 
-	static void Rebote(Personaje &p, Enemigo &e,ListaCajas c);
+	static void Rebote(Personaje &p, Enemigo &e,ListaCajas c,Llave &llave);
 
 	static void Rebote(Movil &m, Escenario &e);
 
@@ -50,5 +50,6 @@ public:
 	static bool Colision(Enemigo &e, Transportable &c);
 
 	static void EncuentroFinal(Llave &l, Escenario e);
+	
 };
 

@@ -28,7 +28,7 @@ public:
 
 	void Rebote();
 
-	void Rebote(Personaje & p,ListaCajas c);
+	void Rebote(Personaje & p,ListaCajas c,Llave &l);
 
 	void Rebote(Plataforma p);
 

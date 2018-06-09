@@ -26,7 +26,7 @@ public:
 		velocidad.x = vx;
 		velocidad.y = vy;
 	}
-	virtual void EnemEliminado();
+	virtual void EnemEliminado(char *);
 	friend class Interaccion;
 };
 

@@ -123,11 +123,12 @@ void Interaccion::Rebote(Enemigo & e, Enemigo & e1) //Intentos fallidos
 	}
 }
 
-void Interaccion::Rebote(Personaje  &p, Enemigo &e,ListaCajas c)
+void Interaccion::Rebote(Personaje  &p, Enemigo &e,ListaCajas c,Llave &llave)
 {
 	//bool t=Interaccion::Tocando(p, e);
 	if ((p.posicion.x + (p.Long_caracteristica) > e.posicion.x - e.Long_caracteristica) && (p.posicion.y - (p.Long_caracteristica) >= e.posicion.y - e.Long_caracteristica) && (p.posicion.y - (p.Long_caracteristica) < e.posicion.y) && (p.posicion.x - (p.Long_caracteristica) < e.posicion.x + e.Long_caracteristica)) {
 	c.Coger(p);
+	Interaccion::Coger(p,llave);
 	p.vida -= 1;
 	p.posicion.x = p.Long_caracteristica;
 	p.posicion.y = p.Long_caracteristica;
@@ -142,11 +143,14 @@ void Interaccion::Rebote(Movil &m, Escenario &e) //Intentar hacer poco a poco, n
 	if (m.posicion.x <= xmin) m.posicion.x = xmin;
 	if (m.posicion.y > (8 + e.p_ojo_y))
 		if (e.GetSizeY() >= (16 + e.p_ojo_y))/// (JULIA LEEME :) -> Si se cambia el 8 hay que cambiarlo tambien en el metodo dibuja vidas de personaje <-
-			e.p_ojo_y = e.p_ojo_y + 8;
+			e.p_ojo_y = e.p_ojo_y + ALTURA;
 		else
-			e.p_ojo_y = e.GetSizeY() - 8;
-	if (m.posicion.y <(e.p_ojo_y-8))
-		e.p_ojo_y = e.p_ojo_y -8;
+			e.p_ojo_y = e.GetSizeY() - ALTURA;
+	if (m.posicion.y <(e.p_ojo_y-ALTURA))
+		if(0>=(e.p_ojo_y-ALTURA*2))
+			e.p_ojo_y = e.p_ojo_y - ALTURA;
+		else 
+			e.p_ojo_y = ALTURA;
 }
 void Interaccion::Rebote(Enemigo &ene, Escenario e) {
 	float xmin = e.limites[3].posicion.x + ene.Long_caracteristica; 
@@ -155,6 +159,7 @@ void Interaccion::Rebote(Enemigo &ene, Escenario e) {
 	if (ene.posicion.x <= xmin) ene.velocidad.x = -ene.velocidad.x;
 }
 void Interaccion::Mover(Personaje &p, Transportable &c) {
+	Transportable *punt=&c;
 	Vector dir;
 	float dist = p.Distancia(c.posicion, &dir);	
 	float r = p.Long_caracteristica + c.Long_caracteristica;
@@ -162,22 +167,15 @@ void Interaccion::Mover(Personaje &p, Transportable &c) {
 	if (c.trans == false) {
 		if (r >= dist && fabsf(p.posicion.y-c.posicion.y)<0.1) {
 			p.velocidad.x = 0;
-			if (c.posicion.x > p.posicion.x) {
-				c.posicion.x = p.posicion.x + p.Long_caracteristica + c.Long_caracteristica;
-				c.posicion.y = p.posicion.y;
-			}
-			else {
-				c.posicion.x = p.posicion.x - p.Long_caracteristica - c.Long_caracteristica;
-				c.posicion.y = p.posicion.y;
-			}
+			punt->Moviendo(p.posicion.x, p.posicion.y, p.Long_caracteristica);
 		}
 	}
-		if (c.trans == true) {
-			c.posicion.x = p.posicion.x;
-			c.posicion.y = p.posicion.y + p.Long_caracteristica + c.Long_caracteristica;
+	if (c.trans == true) {
+		c.posicion.x = p.posicion.x;
+		c.posicion.y = p.posicion.y + p.Long_caracteristica + c.Long_caracteristica;
 
-		}
 	}
+}
 
 void Interaccion::Mover(Transportable &caja1, Transportable &caja2, Personaje &p) //Se han quitado los /2, no compila por eso 
 {
@@ -280,10 +278,7 @@ bool Interaccion::Colision(Enemigo &e, Transportable &c)
 		
 		if (r >= dist) {
 			if ((e.posicion.x <= (c.posicion.x + c.Long_caracteristica)) && (e.posicion.x >= (c.posicion.x - c.Long_caracteristica)))
-				/*if (e.posicion.x <= (c.lista[i]->posicion.x + c.lista[i]->Long_caracteristica + e.Long_caracteristica / 2) &&
-					e.posicion.x <= (c.lista[i]->posicion.x - c.lista[i]->Long_caracteristica - e.Long_caracteristica / 2) &&
-					c.lista[i]->posicion.y <= (e.posicion.y + e.Long_caracteristica) &&
-					c.lista[i]->posicion.y >(e.posicion.y - e.Long_caracteristica))*/ {
+			 {
 				return true;
 			}
 		}
@@ -291,7 +286,7 @@ bool Interaccion::Colision(Enemigo &e, Transportable &c)
 	}
 void Interaccion::EncuentroFinal(Llave & l, Escenario e)
 {
-	if (l.posicion.x<e.puerta.x + 0.5&&l.posicion.x>e.puerta.x - 0.5&&l.posicion.y >= e.puerta.y&&l.posicion.y < e.puerta.y+1.5){
+	if (l.posicion.x<e.puerta.x + 0.5 && l.posicion.x>e.puerta.x - 0.5&&l.posicion.y >= e.puerta.y&&l.posicion.y < e.puerta.y+1.5){
 		l.num = 0;
 }
 }

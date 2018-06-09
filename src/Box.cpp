@@ -41,9 +41,16 @@ void Box::Dibuja()
 	glEnable(GL_LIGHT0);
 	glEnable(GL_LIGHTING);
 }
-//void Box::CambiaEstado() {
-//	if (trans == true) trans = false;
-//	else trans = true;
-//}
+void Box::Moviendo(float x, float y, float l) {
+	if (posicion.x > x) {
+		posicion.x = x + l + Long_caracteristica;
+		posicion.y = y;
+	}
+	else {
+		posicion.x = x - l - Long_caracteristica;
+		posicion.y = y;
+	}
+	}
+
 
 

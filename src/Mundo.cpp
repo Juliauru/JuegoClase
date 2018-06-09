@@ -6,15 +6,6 @@
 #include "glut.h"
 #include "Interaccion.h"
 using namespace std;
-//void Mundo::RotarOjo()
-//{
-//	float dist = sqrt(x_ojo*x_ojo + z_ojo * z_ojo);
-//	float ang = atan2(z_ojo, x_ojo);
-//	ang += 0.05f;
-//	x_ojo = dist * cos(ang);
-//	z_ojo = dist * sin(ang);
-//}
-
 
 void Mundo::Dibuja()
 {
@@ -51,12 +42,13 @@ void Mundo::Mueve() {
 		cajas.Caida(*(escenario.plat[i]));
 		Interaccion::Contacto(llave, *(escenario.plat[i]));
 	}
-	enemigos.Rebote(personaje,cajas);
+	enemigos.Rebote(personaje,cajas,llave);
 	enemigos.Rebote();
 	Interaccion::Rebote(personaje, escenario);
 	enemigos.Rebote(escenario);
 	cajas.Contacto(personaje);
 	cajas.Mover(personaje,llave);
+	cajas.Rebote(escenario);
 	enemigos.Eliminar(enemigos.Colision(personaje));
 	enemigos.Choque(cajas);
 	enemigos.Eliminar(enemigos.Contacto(cajas),true);

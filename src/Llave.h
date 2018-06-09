@@ -15,5 +15,6 @@ public:
 	~Llave();
 	void Dibuja();
 	int ValorLlave() { return num; }
+	void Moviendo(float x,float y,float l);
 };
 

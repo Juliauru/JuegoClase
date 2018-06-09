@@ -5,6 +5,6 @@ class EnemigoD :public Enemigo
 public:	
 	EnemigoD(Vector pos);
 	~EnemigoD();
-	void EnemEliminado();
+	void EnemEliminado(char *);
 };
 
