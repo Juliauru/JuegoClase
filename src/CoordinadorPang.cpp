@@ -26,32 +26,34 @@ void CoordinadorPang::Tecla(unsigned char key)
 {
 	if (estado == INICIO)
 	{
-		if (key == 'e')
+		if (key == 'e'|| key == 'E')
 		{
 			mundo.Inicializa();
 			estado = JUEGO;
 		}
-		if (key == 's')
+		if (key == 's'|| key == 'S')
 			exit(0);
 	}
 	else if (estado == JUEGO)
 	{
 		mundo.Tecla(key);
-		if (key == 'p') {
+		if (key == 'p'|| key == 'P') {
 			estado = PAUSE;
 		}
+
 	}
 	else if (estado == GAMEOVER)
 	{
-		if (key == 'c')
-		
+		if (key == 'c'|| key == 'C') {
 			estado = INICIO;
 			mundo.Destruye();
+		}if (key == 's'|| key == 'S')
+			exit(0);
 		
 	}
 	else if (estado == FIN)
 	{
-		if (key == 'c')
+		if (key == 'c'|| key == 'C')
 	
 			estado = INICIO;
 			
@@ -59,12 +61,12 @@ void CoordinadorPang::Tecla(unsigned char key)
 			
 	}
 	else if(estado == PAUSE) {
-		if (key == 'p') {
+		if (key == 'p'|| key == 'P') {
 			estado = JUEGO;
 		}
 	}
 	else if (estado == TRANSICION) {
-		if (key == 'n') {
+		if (key == 'n'|| key == 'N') {
 			estado = JUEGO;
 		}
 	}
@@ -94,24 +96,26 @@ void CoordinadorPang::Mueve()
 
 void CoordinadorPang::Dibuja()
 {
-	////PRUEBITA LETRAS
-	//ETSIDI::setTextColor(1, 1, 0);
-	//ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
-	//ETSIDI::printxy("Pang 1.1", 4, 5);
 
 	if (estado == INICIO) {
 		//CODIGO PARA PINTAR UNA PANTALLA NEGRA CON LETRAS
 		gluLookAt(0, 7.5, 30, // posicion del ojo
 			0.0, 7.5, 0.0, // hacia que punto mira (0,7.5,0)
 			0.0, 1.0, 0.0); // definimos hacia arriba (eje Y)
-		ETSIDI::setTextColor(1, 1, 0);
-		ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
-		ETSIDI::printxy("Pang 1.1", -5, 8);
-		ETSIDI::setTextColor(1, 1, 1);
-		ETSIDI::setFont("fuentes/Bitwise.ttf", 12);
-		ETSIDI::printxy("PULSE LA TECLA -E- PARA EMPEZAR", -5, 7);
-		ETSIDI::printxy("PULSE LA TECLA -S- PARA SALIR", -5, 6);
-		ETSIDI::printxy("Paula y Julia", 2, 1);
+		glEnable(GL_TEXTURE_2D);
+		glDisable(GL_LIGHTING);
+		glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("Textures/Inicio.png").id);
+		glBegin(GL_POLYGON);
+		glColor3f(1, 1, 1);
+		glTexCoord2d(1, 0); glVertex3d(14, 18, 1);
+		glTexCoord2d(1, 1); glVertex3d(14, -4, 1);
+		glTexCoord2d(0, 1); glVertex3d(-15, -4, 1);
+		glTexCoord2d(0, 0); glVertex3d(-15, 18, 1);
+		glEnd();
+		glDisable(GL_TEXTURE_2D);
+		glEnable(GL_LIGHT0);
+		glEnable(GL_LIGHTING);
+
 	}
 	else if (estado == JUEGO)
 	{
@@ -123,10 +127,22 @@ void CoordinadorPang::Dibuja()
 		gluLookAt(0, 7.5, 30, // posicion del ojo
 			0.0, 7.5, 0.0, // hacia que punto mira (0,7.5,0)
 			0.0, 1.0, 0.0); // definimos hacia arriba (eje Y)
-		ETSIDI::setTextColor(1, 0, 0);
+		ETSIDI::setTextColor(1, 1, 1);
 		ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
-		ETSIDI::printxy("GAMEOVER: Has perdido", -5, 10);
-		ETSIDI::printxy("Pulsa -C- para continuar", -5, 5);
+		ETSIDI::printxy("Presione -C- para continuar", -6, 15);
+		glEnable(GL_TEXTURE_2D);
+		glDisable(GL_LIGHTING);
+		glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("Textures/over.png").id);
+		glBegin(GL_POLYGON);
+		glColor3f(1, 1, 1);
+		glTexCoord2d(1, 0); glVertex3d(10, 14, 1);
+		glTexCoord2d(1, 1); glVertex3d(10, 0, 1);
+		glTexCoord2d(0, 1); glVertex3d(-10, 0, 1);
+		glTexCoord2d(0, 0); glVertex3d(-10, 14, 1);
+		glEnd();
+		glDisable(GL_TEXTURE_2D);
+		glEnable(GL_LIGHT0);
+		glEnable(GL_LIGHTING);
 	}
 	else if (estado == FIN)
 	{
@@ -139,16 +155,28 @@ void CoordinadorPang::Dibuja()
 	{
 		mundo.Dibuja();
 		ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
-		/*ETSIDI::printxy("JUEGO PAUSADO", 5, 10);
-		ETSIDI::printxy("Pulsa -C- para continuar", 5, 9);*/
-		ETSIDI::printxy("JUEGO PAUSADO", 6, mundo.escenario.p_ojo_y+1);
-		ETSIDI::printxy("Pulsa -P- para continuar", 6, mundo.escenario.p_ojo_y);
+		ETSIDI::printxy("JUEGO PAUSADO", 6, mundo.escenario.p_ojo_y+2);
+		ETSIDI::printxy("Presione -P- para continuar", 6, mundo.escenario.p_ojo_y);
+		ETSIDI::printxy("Presione -S- para salir", 6, mundo.escenario.p_ojo_y-1);
 	}
 	else if (estado == TRANSICION)
 	{
-		mundo.Dibuja();
-		ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
-		ETSIDI::printxy("NIVEL SUPERADO", 5, 47);
-		ETSIDI::printxy("Pulsa -N- para comenzar el siguiente nivel", 5, 46);
+		//CODIGO PARA PINTAR UNA PANTALLA NEGRA CON LETRAS
+		gluLookAt(0, 7.5, 30, // posicion del ojo
+			0.0, 7.5, 0.0, // hacia que punto mira (0,7.5,0)
+			0.0, 1.0, 0.0); // definimos hacia arriba (eje Y)
+		glEnable(GL_TEXTURE_2D);
+		glDisable(GL_LIGHTING);
+		glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("Textures/nextlevel.png").id);
+		glBegin(GL_POLYGON);
+		glColor3f(1, 1, 1);
+		glTexCoord2d(1, 0); glVertex3d(14, 18, 1);
+		glTexCoord2d(1, 1); glVertex3d(14, -4, 1);
+		glTexCoord2d(0, 1); glVertex3d(-15, -4, 1);
+		glTexCoord2d(0, 0); glVertex3d(-15, 18, 1);
+		glEnd();
+		glDisable(GL_TEXTURE_2D);
+		glEnable(GL_LIGHT0);
+		glEnable(GL_LIGHTING);
 	}
 }
