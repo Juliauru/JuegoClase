@@ -47,7 +47,8 @@ void CoordinadorPang::Tecla(unsigned char key)
 		if (key == 'c'|| key == 'C') {
 			estado = INICIO;
 			mundo.Destruye();
-		}if (key == 's'|| key == 'S')
+		}
+		if (key == 's'|| key == 'S')
 			exit(0);
 		
 	}
@@ -61,8 +62,11 @@ void CoordinadorPang::Tecla(unsigned char key)
 			
 	}
 	else if(estado == PAUSE) {
-		if (key == 'p'|| key == 'P') {
+		if (key == 'p' || key == 'P') {
 			estado = JUEGO;
+		}
+			if (key == 's' || key == 'S'){
+				estado=INICIO;
 		}
 	}
 	else if (estado == TRANSICION) {

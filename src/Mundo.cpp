@@ -71,9 +71,6 @@ void Mundo::Inicializa()
 	time(&tiempo);
 	//personaje.SetVida(3);
 	oportunidad = personaje.GetVida();
-	//escenario.setFichero("Plataformas.txt"); //Cambiará para cada nivel 	
-	//enemigos.CreaEnemigos("EnemigosDesdeElPrincipio.txt");
-	//cajas.CreaCajas("Cajas.txt");
 	CargarNivel();
 
 }
@@ -110,7 +107,7 @@ void Mundo::Tecla(unsigned char key)
 		personaje.Salto();
 		break;
 	case 'v':
-		personaje.SetPosicion(2, 44);
+		personaje.SetPosicion(4, 44);
 		break;
 	}
 }
@@ -156,7 +153,7 @@ bool Mundo::CargarNivel()
 		//MAÑANA PARA RAQUEL
 		llave.SetPosicion(2, 40+ (llave.get_LCaract()));
 		escenario.setFichero("Plataformas.txt"); //Cambiará para cada nivel 	
-		enemigos.CreaEnemigos("EnemigosDesdeElPrincipio.txt");
+		enemigos.CreaEnemigos("Enemigos1.txt");
 		cajas.CreaCajas("Cajas.txt");
 	}
 	if (nivel == 2)
