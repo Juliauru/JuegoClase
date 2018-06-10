@@ -4,7 +4,6 @@ public:
 	float x;
 	float y;
 
-
 	Vector(float xv = 0.0f, float yv = 0.0f);
 	virtual ~Vector();
 	float modulo();

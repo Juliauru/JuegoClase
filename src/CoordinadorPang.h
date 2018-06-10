@@ -15,6 +15,5 @@ protected:
 	Mundo mundo;
 	enum Estado{INICIO,JUEGO,PAUSE,TRANSICION,GAMEOVER,FIN};
 	Estado estado;
-	friend class enemigoD; //Cambiar
 };
 

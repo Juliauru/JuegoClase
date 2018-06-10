@@ -13,6 +13,7 @@ protected:
 	~Movil();
 public:	
 	void virtual Mueve(float t);
+	void SetVel(float vx, float vy);
 	Vector& getVelocidad();
 	Vector& getAceleracion();
 	float get_LCaract();

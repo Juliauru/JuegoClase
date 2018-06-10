@@ -4,7 +4,7 @@
 #include "Constantes.h"
 class Escenario
 {
-public:
+protected:
 	float ex, ey;
 	char *f;
 	float p_ojo_x, p_ojo_y, p_ojo_z;
@@ -22,5 +22,6 @@ public:
 	void DestruirContenido();
 	friend class Interaccion;
 	friend class EnemigoD;
+	friend class Mundo;
 };
 

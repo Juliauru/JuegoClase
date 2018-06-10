@@ -25,10 +25,10 @@ void Llave::Dibuja()
 	glColor3f(1.0f, 1.0f, 1.0f);
 	sprite.draw();
 	glPopMatrix();
-	/*glColor3b(252,234, 87);
-	glTranslatef(posicion.x, posicion.y, 1.5);
-	glutSolidCube(Long_caracteristica*2.0f);
-	glTranslatef(-posicion.x, -posicion.y, -1.5);*/
+}
+void Llave::InicioValor()
+{
+	num = 1;
 }
 void Llave::Moviendo(float x,float y,float l) {
 	

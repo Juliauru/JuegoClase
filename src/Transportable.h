@@ -3,14 +3,15 @@
 #include "Personaje.h"
 class Transportable:public Movil
 {
-public:
+protected:
+	bool tocando; //Está la caja teniendo contacto con el personaje??
 	bool trans; //Se está transportando??
+public:
 	Transportable(Vector pos, float l);
 	~Transportable();
 	void CambiaEstado();
 	virtual void Moviendo(float x, float y, float l) {};
-protected:	
-	bool tocando; //Está la caja teniendo contacto con el personaje??
+	friend class Interaccion;
 
 };
 

@@ -10,6 +10,7 @@ private:
 	Box *lista[CAJASMAX];
 public:
 	ListaCajas();
+
 	~ListaCajas();
 
 	void Set_ncajas(int num);
@@ -29,6 +30,7 @@ public:
 	void DestruirContenido();
 
 	void Caida(Plataforma p);
+
 	void Rebote(Escenario e);
 	
 	friend class Interaccion;

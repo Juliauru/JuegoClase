@@ -67,6 +67,7 @@ void CoordinadorPang::Tecla(unsigned char key)
 		}
 			if (key == 's' || key == 'S'){
 				estado=INICIO;
+				mundo.Destruye();
 		}
 	}
 	else if (estado == TRANSICION) {
@@ -159,9 +160,9 @@ void CoordinadorPang::Dibuja()
 	{
 		mundo.Dibuja();
 		ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
-		ETSIDI::printxy("JUEGO PAUSADO", 6, mundo.escenario.p_ojo_y+2);
-		ETSIDI::printxy("Presione -P- para continuar", 6, mundo.escenario.p_ojo_y);
-		ETSIDI::printxy("Presione -S- para salir", 6, mundo.escenario.p_ojo_y-1);
+		ETSIDI::printxy("JUEGO PAUSADO", 6, mundo.GetEscenarioAltura()+2);
+		ETSIDI::printxy("Presione -P- para continuar", 6, mundo.GetEscenarioAltura());
+		ETSIDI::printxy("Presione -S- para salir", 6, mundo.GetEscenarioAltura()-1);
 	}
 	else if (estado == TRANSICION)
 	{

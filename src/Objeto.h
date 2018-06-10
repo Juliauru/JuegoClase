@@ -11,6 +11,6 @@ protected:
 public:
 	Vector & getPosicion();
 	Tono& getColor();
-	void SetPosicion(float x, float y);
+	void SetPos(float x, float y);
 };
 

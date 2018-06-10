@@ -11,7 +11,9 @@ class Interaccion
 {
 public:
 	Interaccion();
+
 	~Interaccion();
+
 	static bool Contacto(Movil &m, Plataforma p);
 
 	static bool Contacto(Personaje &pers, Plataforma p);
@@ -29,8 +31,6 @@ public:
 	static void Rebote(Movil &m, Escenario &e);
 
 	static void Rebote(Enemigo &ene, Escenario e);
-
-	//static void Rebote(Enemigo &ene, Plataforma &p);
 
 	static void Coger(Personaje &p, Transportable &c);
 

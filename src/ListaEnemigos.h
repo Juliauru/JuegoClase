@@ -16,6 +16,7 @@ private:
 
 public:
 	ListaEnemigos();
+
 	~ListaEnemigos();
 
 	void CreaEnemigos(const char *fich);

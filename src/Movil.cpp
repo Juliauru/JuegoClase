@@ -28,6 +28,13 @@ void Movil::Mueve(float t) {
 		velocidad = velocidad + aceleracion * t;
 	}
 }
+void Movil::SetVel(float vx, float vy)
+{
+
+	velocidad.x = vx;
+	velocidad.y = vy;
+	
+}
 Vector& Movil::getVelocidad() {
 	return velocidad;
 }

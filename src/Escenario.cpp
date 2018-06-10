@@ -18,6 +18,7 @@ void Escenario::DestruirContenido()
 	}
 	Plataforma::set_nplataformas(0);
 }
+
 Escenario::Escenario()
 {
 	p_ojo_y = 8.0f;

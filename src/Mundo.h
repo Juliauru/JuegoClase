@@ -18,8 +18,9 @@ private:
 	int nivel;
 	int texto;
 	time_t tiempo;
-public:
 	Escenario escenario;
+public:
+
 	Mundo() { texto = 0; };
 	bool GetOportunidad();
 	void SetOportunidad(Personaje p);
@@ -33,4 +34,5 @@ public:
 	void TeclaEspecial2(unsigned char key);
 	bool CargarNivel();
 	void DibujaFrase(int num, float y, float inc);
+	float GetEscenarioAltura();
 	};

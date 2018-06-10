@@ -35,8 +35,8 @@ bool Interaccion::Contacto(Enemigo &ene, Plataforma p) { //arreglar con polimorf
 	if (dif <= 0.0f)
 	{
 		//cout << "OK" << endl;
-		float xmin = p.posicion.x+0.01;
-		float xmax = p.limite.x-0.01;
+		float xmin = ((float)p.posicion.x)+0.01f;
+		float xmax = ((float)p.limite.x)-0.01f;
 		if (ene.posicion.x >= xmax) ene.velocidad.x = -ene.velocidad.x;
 		if (ene.posicion.x <= xmin) ene.velocidad.x = -ene.velocidad.x;
 	}
@@ -48,12 +48,14 @@ bool Interaccion::Contacto(Movil &m, Plataforma p) { //Creo que no es necesario
 	float dif = p.Distancia(m.posicion, &dir) - m.Long_caracteristica;
 	return(Interaccion::ComprobarDistanciaPlataforma(m, p, dif, dir));
 }
+
 bool Interaccion::Contacto(Movil &m, Transportable c) {
 	Plataforma p((c.getPosicion().x - (c.Long_caracteristica)), (c.getPosicion().y + (c.Long_caracteristica)), (c.getPosicion().x + (c.Long_caracteristica)), (c.getPosicion().y + (c.Long_caracteristica)));
 	Vector dir;
 	float dif = p.Distancia(m.posicion, &dir) - m.Long_caracteristica;
 	return(Interaccion::ComprobarDistanciaPlataforma(m, p, dif, dir));
 }
+
 void Interaccion::Contacto(Enemigo &e, ListaCajas c) {
 	for (int i = 0; i < c.n_cajas; i++) {
 		Interaccion::Contacto(e, *c.lista[i]);
@@ -142,7 +144,7 @@ void Interaccion::Rebote(Movil &m, Escenario &e) //Intentar hacer poco a poco, n
 	if (m.posicion.x >= xmax) m.posicion.x = xmax;
 	if (m.posicion.x <= xmin) m.posicion.x = xmin;
 	if (m.posicion.y > (8 + e.p_ojo_y))
-		if (e.GetSizeY() >= (16 + e.p_ojo_y))/// (JULIA LEEME :) -> Si se cambia el 8 hay que cambiarlo tambien en el metodo dibuja vidas de personaje <-
+		if (e.GetSizeY() >= (16 + e.p_ojo_y))
 			e.p_ojo_y = e.p_ojo_y + ALTURA;
 		else
 			e.p_ojo_y = e.GetSizeY() - ALTURA;

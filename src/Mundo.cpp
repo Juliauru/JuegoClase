@@ -107,7 +107,7 @@ void Mundo::Tecla(unsigned char key)
 		personaje.Salto();
 		break;
 	case 'v':
-		personaje.SetPosicion(4, 44);
+		personaje.SetPos(4, 44);
 		break;
 	}
 }
@@ -140,18 +140,18 @@ bool Mundo::CargarNivel()
 		enemigos.DestruirContenido();
 	}
 	nivel++;
-	personaje.SetPosicion(0.75,0.75);
+	personaje.SetPos(0.75,0.75);
 	personaje.SetVida(3);
 	texto = 0;
 	oportunidad = personaje.GetVida();
-	llave.num = 1;
+	llave.InicioValor();
 
 	if (nivel == 1)
 	{
 		//EL DE VERDAD
-		//llave.SetPosicion(1, 26+(llave.get_LCaract()));
+		llave.SetPos(1, 26+(llave.get_LCaract()));
 		//MAÑANA PARA RAQUEL
-		llave.SetPosicion(2, 40+ (llave.get_LCaract()));
+		//llave.SetPos(2, 40+ (llave.get_LCaract()));
 		escenario.setFichero("Plataformas.txt"); //Cambiará para cada nivel 	
 		enemigos.CreaEnemigos("Enemigos1.txt");
 		cajas.CreaCajas("Cajas.txt");
@@ -201,4 +201,9 @@ void Mundo::DibujaFrase(int i, float y, float inc) {
 	}
 	if (time(NULL) <= tiempo + 2)
 		ETSIDI::printxy(fich, 5, escenario.p_ojo_y + 1,3.5);
+}
+
+float Mundo::GetEscenarioAltura()
+{
+	return escenario.p_ojo_y;
 }
