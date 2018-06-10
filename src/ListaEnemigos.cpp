@@ -40,13 +40,7 @@ void ListaEnemigos::CreaEnemigos(const char *fich)
 			lista[i] = new Enemigo(aux);
 			if(tipo == true)
 			lista[i] = new EnemigoD(aux);
-			
-			if ((rand() % 2) == 0) {
-				lista[i]->getVelocidad().setValor(2.0f, 0.0f);
-			}
-			else
-				lista[i]->getVelocidad().setValor(-2.0f, 0.0f);
-			i++;
+						i++;
 			numero++;
 		} 
 	}

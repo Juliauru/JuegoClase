@@ -34,6 +34,14 @@ bool Interaccion::Contacto(Enemigo &ene, Plataforma p) { //arreglar con polimorf
 	float dif = p.Distancia(ene.posicion, &dir) - ene.Long_caracteristica;
 	if (dif <= 0.0f)
 	{
+		if (ene.first_time == true) {
+			if ((rand() % 2) == 0) {
+				ene.getVelocidad().setValor(2.0f, 0.0f);
+			}
+			else
+				ene.getVelocidad().setValor(-2.0f, 0.0f);
+			ene.first_time = false;
+		}
 		//cout << "OK" << endl;
 		float xmin = ((float)p.posicion.x)+0.01f;
 		float xmax = ((float)p.limite.x)-0.01f;
@@ -129,8 +137,12 @@ void Interaccion::Rebote(Personaje  &p, Enemigo &e,ListaCajas c,Llave &llave)
 {
 	//bool t=Interaccion::Tocando(p, e);
 	if ((p.posicion.x + (p.Long_caracteristica) > e.posicion.x - e.Long_caracteristica) && (p.posicion.y - (p.Long_caracteristica) >= e.posicion.y - e.Long_caracteristica) && (p.posicion.y - (p.Long_caracteristica) < e.posicion.y) && (p.posicion.x - (p.Long_caracteristica) < e.posicion.x + e.Long_caracteristica)) {
-	c.Coger(p);
-	Interaccion::Coger(p,llave);
+	//c.Coger(p);
+		
+		c.Coger(p);
+		p.transportando = false;
+		llave.trans = false;
+	//Interaccion::Coger(p,llave);
 	p.vida -= 1;
 	p.posicion.x = p.Long_caracteristica;
 	p.posicion.y = p.Long_caracteristica;

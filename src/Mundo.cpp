@@ -153,7 +153,7 @@ bool Mundo::CargarNivel()
 		//MAÑANA PARA RAQUEL
 		//llave.SetPos(2, 40+ (llave.get_LCaract()));
 		escenario.setFichero("Plataformas.txt"); //Cambiará para cada nivel 	
-		enemigos.CreaEnemigos("Enemigos1.txt");
+		enemigos.CreaEnemigos("EnemigosDesdeElPrincipio.txt");
 		cajas.CreaCajas("Cajas.txt");
 	}
 	if (nivel == 2)

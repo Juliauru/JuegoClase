@@ -3,13 +3,17 @@
 #include "Movil.h"
 #include "Escenario.h"
 #include "Interaccion.h"
+using ETSIDI::SpriteSequence;
 class Enemigo :public Movil
 {
+private:
+	bool first_time;
+	SpriteSequence en1;
 
 public:
 	Enemigo(Vector pos);
 	~Enemigo();
-	void Dibuja();
+	virtual void Dibuja();
 	//void setAltura(float a);
 	//void Caida(float t);
 	//void Mueve(float t);

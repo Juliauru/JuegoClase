@@ -15,11 +15,7 @@ ListaCajas::ListaCajas() :Box({0.0f,0.0f})
 }
 	
 
-ListaCajas::~ListaCajas()
-{
-	
-	
-}
+ListaCajas::~ListaCajas(){}
 
 void ListaCajas::Set_ncajas(int num)
 {

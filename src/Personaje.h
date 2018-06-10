@@ -12,6 +12,7 @@ private:
 	static int puntuacion;
 	static int vida;
 	bool transportando;	
+	ETSIDI::SpriteSequence pers;
 public:	
 	Personaje();
 	~Personaje();	

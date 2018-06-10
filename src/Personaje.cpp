@@ -9,12 +9,15 @@ using namespace std;
 
 int Personaje::vida = 3;
 int Personaje::puntuacion = 0;
-Personaje::Personaje() : Movil({ 0.75f,0.75f }, { 0.0f,0.0f }, { 0.0f,-10.0f }, TAMANIO)
+Personaje::Personaje() : Movil({ 0.75f,0.75f }, { 0.0f,0.0f }, { 0.0f,-10.0f }, TAMANIO),pers("Textures/Jugador_burned.png",9)
 {
 	for (int i = 0; i < 3; i++) {
 		sVida[i] = new Sprite("Textures/vida.png");
 	}
-
+	pers.setCenter(posicion.x, posicion.y);
+	pers.setPos(posicion.x - 0.5, posicion.y - 0.5);
+	pers.setSize(1.5, 1.5);
+	pers.setState(0);
 	transportando = false;
 }
 Personaje::~Personaje()
@@ -22,10 +25,22 @@ Personaje::~Personaje()
 }
 void Personaje::Dibuja()
 {
-	glColor3b(120, 40, 30);
+	glPushMatrix();
+	glTranslated(posicion.x, posicion.y, 1.5);
+	glColor3f(1.0f, 1.0f, 1.0f);
+	pers.draw();
+	pers.loop();
+	glPopMatrix();
+	if (velocidad.x == 0)
+		pers.setState(4);
+	if (velocidad.x > 0)
+		pers.setState(3);
+	if (velocidad.x < 0)
+		pers.setState(5);
+	/*glColor3b(120, 40, 30);
 	glTranslatef(posicion.x, posicion.y, 1.5);
 	glutSolidSphere((Long_caracteristica), 20, 30);
-	glTranslatef(-posicion.x, -posicion.y, -1.5);
+	glTranslatef(-posicion.x, -posicion.y, -1.5);*/
 }
 void Personaje::DibujaVidas(float y,float inc)
 {
