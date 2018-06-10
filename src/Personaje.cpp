@@ -9,13 +9,13 @@ using namespace std;
 
 int Personaje::vida = 3;
 int Personaje::puntuacion = 0;
-Personaje::Personaje() : Movil({ 0.75f,0.75f }, { 0.0f,0.0f }, { 0.0f,-10.0f }, TAMANIO),pers("Textures/Jugador_burned.png",9)
+Personaje::Personaje() : Movil({ 0.75f,0.75f }, { 0.0f,0.0f }, { 0.0f,-10.0f }, TAMANIO),pers("Textures/Kirby 7_burned.png",4)
 {
 	for (int i = 0; i < 3; i++) {
 		sVida[i] = new Sprite("Textures/vida.png");
 	}
 	pers.setCenter(posicion.x, posicion.y);
-	pers.setPos(posicion.x - 0.5, posicion.y - 0.5);
+	pers.setPos(posicion.x - 0.7, posicion.y - 0.75);
 	pers.setSize(1.5, 1.5);
 	pers.setState(0);
 	transportando = false;
@@ -26,17 +26,20 @@ Personaje::~Personaje()
 void Personaje::Dibuja()
 {
 	glPushMatrix();
-	glTranslated(posicion.x, posicion.y, 1.5);
+	glTranslated(posicion.x, posicion.y, 2);
 	glColor3f(1.0f, 1.0f, 1.0f);
 	pers.draw();
 	pers.loop();
 	glPopMatrix();
 	if (velocidad.x == 0)
-		pers.setState(4);
-	if (velocidad.x > 0)
 		pers.setState(3);
+	if (velocidad.x > 0)
+		pers.setState(1);
 	if (velocidad.x < 0)
-		pers.setState(5);
+		pers.setState(0);
+	if (velocidad.y != 0) {
+		pers.setState(2);
+	}
 	/*glColor3b(120, 40, 30);
 	glTranslatef(posicion.x, posicion.y, 1.5);
 	glutSolidSphere((Long_caracteristica), 20, 30);

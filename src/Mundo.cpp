@@ -55,9 +55,9 @@ void Mundo::Mueve() {
 	enemigos.Choque(cajas);
 	enemigos.Eliminar(enemigos.Contacto(cajas),true);
 	SetOportunidad(personaje);
-	Interaccion::Contacto(personaje, llave);
+	//Interaccion::Contacto(personaje, llave);
 	Interaccion::Mover(personaje, llave);
-	enemigos.Choque(llave);
+	//enemigos.Choque(llave);
 	Interaccion::EncuentroFinal(llave, escenario);
 
 }
@@ -158,12 +158,14 @@ bool Mundo::CargarNivel()
 	}
 	if (nivel == 2)
 	{
+		llave.SetPos(1, 26 + (llave.get_LCaract()));
 		escenario.setFichero("Plataformas2.txt"); //Cambiará para cada nivel 	
 		enemigos.CreaEnemigos("EnemigosDesdeElPrincipio2.txt");
 		cajas.CreaCajas("Cajas2.txt");
 	}
 	if (nivel == 3)
 	{
+		llave.SetPos(1, 26 + (llave.get_LCaract()));
 		escenario.setFichero("Plataformas3.txt"); //Cambiará para cada nivel 	
 		enemigos.CreaEnemigos("EnemigosDesdeElPrincipio3.txt");
 		cajas.CreaCajas("Cajas3.txt");

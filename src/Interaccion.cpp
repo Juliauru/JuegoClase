@@ -57,7 +57,7 @@ bool Interaccion::Contacto(Movil &m, Plataforma p) { //Creo que no es necesario
 	return(Interaccion::ComprobarDistanciaPlataforma(m, p, dif, dir));
 }
 
-bool Interaccion::Contacto(Movil &m, Transportable c) {
+bool Interaccion::Contacto(Movil &m, Box c) {
 	Plataforma p((c.getPosicion().x - (c.Long_caracteristica)), (c.getPosicion().y + (c.Long_caracteristica)), (c.getPosicion().x + (c.Long_caracteristica)), (c.getPosicion().y + (c.Long_caracteristica)));
 	Vector dir;
 	float dif = p.Distancia(m.posicion, &dir) - m.Long_caracteristica;
@@ -180,7 +180,6 @@ void Interaccion::Mover(Personaje &p, Transportable &c) {
 	
 	if (c.trans == false) {
 		if (r >= dist && fabsf(p.posicion.y-c.posicion.y)<0.1) {
-			p.velocidad.x = 0;
 			punt->Moviendo(p.posicion.x, p.posicion.y, p.Long_caracteristica);
 		}
 	}

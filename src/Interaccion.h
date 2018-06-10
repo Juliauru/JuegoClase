@@ -20,7 +20,7 @@ public:
 
 	static bool Contacto(Enemigo &enem, Plataforma p);
 
-	static bool Contacto(Movil &m, Transportable c);
+	static bool Contacto(Movil &m, Box c);
 
 	static void Contacto(Enemigo &e, ListaCajas c);													  
 
