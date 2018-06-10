@@ -9,8 +9,8 @@ EnemigoD::EnemigoD(Vector pos) :Enemigo(pos), en2("Textures/Enemigo_burned2.png"
 {
 	getColor().SetColor(145, 145, 37);
 	en2.setCenter(posicion.x, posicion.y);
-	en2.setPos(posicion.x - 0.5, posicion.y - 0.5);
-	en2.setSize(1.5, 1.5);
+	en2.setPos(posicion.x - 0.5, posicion.y - 0.4);
+	en2.setSize(1, 1);
 	en2.setState(0);
 }
 

@@ -165,7 +165,7 @@ bool Mundo::CargarNivel()
 	}
 	if (nivel == 3)
 	{
-		llave.SetPos(1, 26 + (llave.get_LCaract()));
+		llave.SetPos(18, 45 + (llave.get_LCaract()));
 		escenario.setFichero("Plataformas3.txt"); //Cambiará para cada nivel 	
 		enemigos.CreaEnemigos("EnemigosDesdeElPrincipio3.txt");
 		cajas.CreaCajas("Cajas3.txt");

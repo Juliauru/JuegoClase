@@ -7,8 +7,8 @@
 Enemigo::Enemigo(Vector pos):Movil(pos, {0.0f,0.0f}, { 0.0f,-3.0f }, TAMANIO/1.5f), en1("Textures/Enemigo_burned.png", 2)
 {	
 	en1.setCenter(posicion.x, posicion.y);
-	en1.setPos(posicion.x - 0.5, posicion.y - 0.5);
-	en1.setSize(1.25, 1.25);
+	en1.setPos(posicion.x - 0.5, posicion.y - 0.4);
+	en1.setSize(1, 1);
 	en1.setState(0);
 	getColor().SetColor(0, 40, 30);
 	first_time = true;

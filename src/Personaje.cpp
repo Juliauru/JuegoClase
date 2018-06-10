@@ -9,7 +9,7 @@ using namespace std;
 
 int Personaje::vida = 3;
 int Personaje::puntuacion = 0;
-Personaje::Personaje() : Movil({ 0.75f,0.75f }, { 0.0f,0.0f }, { 0.0f,-10.0f }, TAMANIO),pers("Textures/Kirby 7_burned.png",4)
+Personaje::Personaje() : Movil({ 0.75f,0.75f }, { 0.0f,0.0f }, { 0.0f,-10.0f }, TAMANIO),pers("Textures/Kirby8_burned.png",4)
 {
 	for (int i = 0; i < 3; i++) {
 		sVida[i] = new Sprite("Textures/vida.png");
