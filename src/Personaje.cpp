@@ -48,7 +48,7 @@ void Personaje::Dibuja()
 void Personaje::DibujaVidas(float y,float inc)
 {
 	//sVida= new Sprite("Textures/vida.png");
-	float l = 1.5, plus = inc-7.5;
+	float l = 1.5, plus = inc-ALTURA-0.5;
 	for (int i = 0; i < vida; i++) {
 		sVida[i]->setCenter(((TAMANIO / 3) + l), (((int)y / 3) + plus)-1);
 		sVida[i]->setPos(((TAMANIO / 3) + l-0.5) , (((int)y / 3) + plus)-1.5);
@@ -76,5 +76,18 @@ void Personaje::Salto() { //Poner límtes al salto
 void Personaje::CambiaEstado() {
 	if (transportando == true) transportando = false;
 	else transportando = true;
+}
+void Personaje::Rebote_escenario(float &posOJO, float xmax, float xmin) {
+	Movil::Rebote_escenario(posOJO, xmax, xmin);
+	if (posicion.y > (ALTURA + posOJO))
+		if ( 50 >= (ALTURA * 2 + posOJO))
+			posOJO = posOJO + ALTURA;
+		else
+			posOJO = 50 - ALTURA;
+	if (posicion.y <(posOJO - ALTURA))
+		if (0 >= (posOJO - ALTURA * 2))
+			posOJO = posOJO - ALTURA;
+		else
+			posOJO = ALTURA;
 }
 

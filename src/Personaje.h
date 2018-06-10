@@ -23,6 +23,7 @@ public:
 	static int GetPuntuacion() { return puntuacion; }
 	void SetVida(int num) {vida = num;}
 	void CambiaEstado();
+	void Rebote_escenario(float &posOJO, float xmax, float xmin);
 	friend class Interaccion;
 	friend class EnemigoD;
 };

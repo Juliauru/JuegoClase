@@ -21,6 +21,8 @@ public:
 	//Vector2D& getVelocidad();
 	//PARA PROBAR FUNCIONAMIENTO
 	virtual int EnemEliminado();
+	void Rebote_escenario(float &posOJO, float xmax, float xmin);
+	float Rebote_plat(float dis, float xmax, float xmin);
 	friend class Interaccion;
 };
 

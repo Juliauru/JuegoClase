@@ -12,65 +12,44 @@ Interaccion::~Interaccion()
 }
 bool Interaccion::Contacto(Personaje &pers, Plataforma p) { 
 	Vector dir;
+	float dis = p.Distancia(pers.posicion, &dir);
 	float dif;
 	if (pers.transportando == false) {
-		dif = p.Distancia(pers.posicion, &dir) - pers.Long_caracteristica;
+		dif = dis - pers.Long_caracteristica;
 	}
 	if (pers.transportando == true) {
 		if (pers.velocidad.y <= 0)
-			dif = p.Distancia(pers.posicion, &dir) - pers.Long_caracteristica;
+			dif = dis - pers.Long_caracteristica;
 			
 		if (pers.velocidad.y > 0) {
 			Vector aux;
 			aux.setValor(pers.posicion.x, pers.posicion.y + 2 * TAMANIO);
 			dif = p.Distancia(aux, &dir) - pers.Long_caracteristica;
-			
 		}
 	}
-	return(Interaccion::ComprobarDistanciaPlataforma(pers, p, dif, dir));
+	return(Interaccion::ComprobarDistanciaPlataforma(pers, dif, dir));
 	}
-bool Interaccion::Contacto(Enemigo &ene, Plataforma p) { //arreglar con polimorfismo creo 
+bool Interaccion::Contacto(Movil &m, Plataforma p) { 
+	Movil *mov = &m;
 	Vector dir;
-	float dif = p.Distancia(ene.posicion, &dir) - ene.Long_caracteristica;
-	if (dif <= 0.0f)
-	{
-		if (ene.first_time == true) {
-			if ((rand() % 2) == 0) {
-				ene.getVelocidad().setValor(2.0f, 0.0f);
-			}
-			else
-				ene.getVelocidad().setValor(-2.0f, 0.0f);
-			ene.first_time = false;
-		}
-		//cout << "OK" << endl;
-		float xmin = ((float)p.posicion.x)+0.01f;
-		float xmax = ((float)p.limite.x)-0.01f;
-		if (ene.posicion.x >= xmax) ene.velocidad.x = -ene.velocidad.x;
-		if (ene.posicion.x <= xmin) ene.velocidad.x = -ene.velocidad.x;
-	}
-	return(Interaccion::ComprobarDistanciaPlataforma(ene, p, dif, dir));
-	}
-
-bool Interaccion::Contacto(Movil &m, Plataforma p) { //Creo que no es necesario
-	Vector dir;
-	float dif = p.Distancia(m.posicion, &dir) - m.Long_caracteristica;
-	return(Interaccion::ComprobarDistanciaPlataforma(m, p, dif, dir));
+	float dif;
+	float dis = p.Distancia(m.posicion, &dir);
+	float xmin = ((float)p.posicion.x) + 0.01f;
+	float xmax = ((float)p.limite.x)-0.01f;
+	dif=mov->Rebote_plat(dis, xmax, xmin);
+	return(Interaccion::ComprobarDistanciaPlataforma(m,dif, dir));
 }
 
 bool Interaccion::Contacto(Movil &m, Box c) {
 	Plataforma p((c.getPosicion().x - (c.Long_caracteristica)), (c.getPosicion().y + (c.Long_caracteristica)), (c.getPosicion().x + (c.Long_caracteristica)), (c.getPosicion().y + (c.Long_caracteristica)));
 	Vector dir;
 	float dif = p.Distancia(m.posicion, &dir) - m.Long_caracteristica;
-	return(Interaccion::ComprobarDistanciaPlataforma(m, p, dif, dir));
+	return(Interaccion::ComprobarDistanciaPlataforma(m,dif, dir));
 }
 
 void Interaccion::Contacto(Enemigo &e, ListaCajas c) {
 	for (int i = 0; i < c.n_cajas; i++) {
 		Interaccion::Contacto(e, *c.lista[i]);
-	/*	Plataforma p((c.lista[i]->posicion.x - (c.lista[i]->Long_caracteristica)), (c.lista[i]->posicion.y + (c.lista[i]->Long_caracteristica)), (c.lista[i]->posicion.x + (c.Long_caracteristica)), (c.lista[i]->posicion.y + (c.lista[i]->Long_caracteristica)));
-		Vector dir;
-		float dif = p.Distancia(e.posicion, &dir) - e.Long_caracteristica;
-	    Interaccion::ComprobarDistanciaPlataforma(e, p, dif, dir);*/
 	}
 }
 
@@ -78,15 +57,9 @@ void Interaccion::Contacto(Enemigo &e, ListaCajas c) {
 
 void Interaccion::Rebote(Enemigo & e, Enemigo & e1) //Intentos fallidos
 {
-	/*if (e.posicion.x == e1.posicion.x && e.posicion.y == e1.posicion.y) {
-		e.velocidad.x = -e.velocidad.x;
-		e1.velocidad.x = -e1.velocidad.x;
-	}*/
 	if (e.posicion.y == e1.posicion.y) {
 		Vector dir;
-		//float dist = fabsf(e.posicion.x - e1.posicion.x);+
 		float dist = e.Distancia(e1.posicion,&dir);
-		//if (dist == 0)dist = 0.0001f; intento para que se separaran las que vibran, but no
 		float r = e.Long_caracteristica + e1.Long_caracteristica;
 		if (dist<=r) {
 			if (dist > e.Long_caracteristica*1.5) {
@@ -103,14 +76,6 @@ void Interaccion::Rebote(Enemigo & e, Enemigo & e1) //Intentos fallidos
 				
 			}
 			else {
-				/*if (e.velocidad.x < 0)
-					e.velocidad.x =  2.5;
-				else
-					e.velocidad.x = - 2.5;
-				if (e1.velocidad.x < 0)
-					e1.velocidad.x = ;
-				else
-					e1.velocidad.x = - 4;*/
 				if (e.velocidad.x < 0) {
 					e.posicion.x = e.posicion.x + e.Long_caracteristica * 2;
 					e.velocidad.x = 2.0f;
@@ -122,11 +87,7 @@ void Interaccion::Rebote(Enemigo & e, Enemigo & e1) //Intentos fallidos
 					e1.velocidad.x = 2.0f;
 					e.velocidad.x = -2.0f;
 				}
-				/*if (e1.velocidad.x < 0)
-
-					e1.posicion.x = e1.posicion.x + e.Long_caracteristica;
-				else if (e1.velocidad.x > 0)
-					e1.posicion.x = e1.posicion.x - e.Long_caracteristica;*/
+				
 			}
 		}
 
@@ -149,29 +110,14 @@ void Interaccion::Rebote(Personaje  &p, Enemigo &e,ListaCajas c,Llave &llave)
 	}
 }
 
-void Interaccion::Rebote(Movil &m, Escenario &e) //Intentar hacer poco a poco, no se como quedará
+void Interaccion::Rebote(Movil &m, Escenario &e) 
 {
+	Movil *mov=&m;
 	float xmin = e.limites[3].posicion.x+ m.Long_caracteristica;
 	float xmax = e.limites[3].limite.x- m.Long_caracteristica;
-	if (m.posicion.x >= xmax) m.posicion.x = xmax;
-	if (m.posicion.x <= xmin) m.posicion.x = xmin;
-	if (m.posicion.y > (8 + e.p_ojo_y))
-		if (e.GetSizeY() >= (16 + e.p_ojo_y))
-			e.p_ojo_y = e.p_ojo_y + ALTURA;
-		else
-			e.p_ojo_y = e.GetSizeY() - ALTURA;
-	if (m.posicion.y <(e.p_ojo_y-ALTURA))
-		if(0>=(e.p_ojo_y-ALTURA*2))
-			e.p_ojo_y = e.p_ojo_y - ALTURA;
-		else 
-			e.p_ojo_y = ALTURA;
+	mov->Rebote_escenario(e.p_ojo_y, xmax, xmin);	
 }
-void Interaccion::Rebote(Enemigo &ene, Escenario e) {
-	float xmin = e.limites[3].posicion.x + ene.Long_caracteristica; 
-	float xmax = e.limites[3].limite.x - ene.Long_caracteristica;
-	if (ene.posicion.x >= xmax) ene.velocidad.x = -ene.velocidad.x;
-	if (ene.posicion.x <= xmin) ene.velocidad.x = -ene.velocidad.x;
-}
+
 void Interaccion::Mover(Personaje &p, Transportable &c) {
 	Transportable *punt=&c;
 	Vector dir;
@@ -228,7 +174,6 @@ bool Interaccion::Colision(Enemigo e, Personaje p)
 {
 	if (p.posicion.x <= (e.posicion.x + p.Long_caracteristica) && p.posicion.x >= (e.posicion.x - p.Long_caracteristica) && p.posicion.y <= (e.posicion.y + e.Long_caracteristica + p.Long_caracteristica)&& p.posicion.y > (e.posicion.y + e.Long_caracteristica + p.Long_caracteristica/2)) {
 		Personaje::puntuacion = Personaje::puntuacion + 100;
-		//cout << Personaje::puntuacion << endl;
 		return true;
 	}
 	return false;
@@ -265,7 +210,7 @@ bool Interaccion::Tocando(Personaje &p, Movil &m) {
 		return true;
 	return false;
 }
-bool Interaccion::ComprobarDistanciaPlataforma(Movil &m, Plataforma p,float dif,Vector dir) {
+bool Interaccion::ComprobarDistanciaPlataforma(Movil &m,float dif,Vector dir) {
 	if (dif <= 0.0f) {
 		if (m.velocidad.y <= 0) {
 			m.velocidad.y = 0;
@@ -278,7 +223,6 @@ bool Interaccion::ComprobarDistanciaPlataforma(Movil &m, Plataforma p,float dif,
 
 		return true;
 	}
-
 	return false;
 }
 bool Interaccion::Colision(Enemigo &e, Transportable &c)
@@ -311,7 +255,7 @@ bool Interaccion::Colision(Enemigo &e, ListaCajas c) {
 	}
 	return false;
 }
-	
+
 
 
 

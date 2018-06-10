@@ -49,6 +49,28 @@ void Enemigo::Dibuja()
 //		Long_caracteristica = a;
 //	}
 //}
+void Enemigo::Rebote_escenario(float &posOJO, float xmax, float xmin) {
+	if (posicion.x >= xmax) velocidad.x = -velocidad.x;
+	if (posicion.x <= xmin) velocidad.x = -velocidad.x;
+}
+float Enemigo::Rebote_plat(float dis, float xmax, float xmin) {
+	float dif;
+	dif=Movil::Rebote_plat(dis,xmax,xmin);
+	if (dif <= 0.0f)
+	{
+		if (first_time == true) {
+			if ((rand() % 2) == 0) {
+				velocidad.setValor(2.0f, 0.0f);
+			}
+			else
+				velocidad.setValor(-2.0f, 0.0f);
+			first_time = false;
+		}
+		float no;
+		Enemigo::Rebote_escenario(no, xmax, xmin);
+		return dif;
+	}
+}
 
 
 

@@ -50,3 +50,11 @@ float Movil::Distancia(Vector centro, Vector *direccion) {
 	*direccion = dir;
 	return distancia;
 }
+void Movil::Rebote_escenario(float &posOJO, float xmax, float xmin) {
+	if (posicion.x >= xmax) posicion.x = xmax;
+	if (posicion.x <= xmin) posicion.x = xmin;
+}
+float Movil::Rebote_plat(float dis, float xmax, float xmin) {
+	float dif = dis - Long_caracteristica;
+	return dif;
+}

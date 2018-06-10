@@ -9,7 +9,7 @@ protected:
 	float Long_caracteristica;
 	float posinicial;
 	float vinicial;
-	Movil(Vector pos, Vector vel, Vector ac, float l);
+	Movil(Vector pos, Vector vel=0, Vector ac=0, float l=0);
 	~Movil();
 public:	
 	void virtual Mueve(float t);
@@ -18,6 +18,8 @@ public:
 	Vector& getAceleracion();
 	float get_LCaract();
 	float Distancia(Vector centro, Vector *direccion);
+	virtual void Rebote_escenario(float &posOJO,float xmax,float xmin);
+	virtual float Rebote_plat(float dir, float xmax, float xmin);
 	friend class Interaccion;
 };
 
