@@ -34,21 +34,8 @@ void Enemigo::Dibuja()
 	else
 		en1.setState(1);
 
-	/*glColor3b(getColor().rojo, getColor().verde, getColor().azul);
-	glTranslatef(posicion.x, posicion.y, 1.5);
-	glutSolidSphere((Long_caracteristica), 20, 30);
-	glTranslatef(-posicion.x, -posicion.y, -1.5);*/
 }
 
-//void Enemigo::setAltura(float a) //ESTA FUNCION LA ELIMINARIA PARA NO PODER VARIAR EL TAMAÑO O NO LA USARIA EN MUNDO
-//{
-//	if (a<0.01) {
-//		Long_caracteristica = 0.25;
-//	}
-//	else {
-//		Long_caracteristica = a;
-//	}
-//}
 void Enemigo::Rebote_escenario(float &posOJO, float xmax, float xmin) {
 	if (posicion.x >= xmax) velocidad.x = -velocidad.x;
 	if (posicion.x <= xmin) velocidad.x = -velocidad.x;

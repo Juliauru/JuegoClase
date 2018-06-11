@@ -8,16 +8,12 @@ using namespace std;
 ListaEnemigos::ListaEnemigos():Enemigo({0.0f,0.0f})
 {
 	numero = 0;
-	/*for (int i = 0; i < MAX_ENEMIGOS; i++) {
-		lista[i] = 0;
-	}*/
+
 
 }
 ListaEnemigos::~ListaEnemigos()
 {
-	/*for (int i = 0; i < numero; i++) {
-		delete lista[i];
-	}*/
+
 }
 
 void ListaEnemigos::CreaEnemigos(const char *fich)
@@ -26,12 +22,12 @@ void ListaEnemigos::CreaEnemigos(const char *fich)
 	strcpy(f, fich);
 	int  i = 0;
 	int x, y;	
-	bool tipo=false;
-	ifstream fichero(f); //"EnemigosDesdeElPrincipio.txt"
+	bool tipo=false; //Si es false el enemigo es normal, si es true el enemigo tiene algún tipo de bonus
+	ifstream fichero(f); 
 	if (!fichero)
 		cout << "No se puede abrir el fichero" << endl;
 	else {
-		while (!fichero.eof() && i <MAX_ENEMIGOS) {
+		while (!fichero.eof() && i <MAX_ENEMIGOS) { //Lectura del fichero para inicializar los enemigos
 			fichero >> tipo;
 			fichero >> x;
 			fichero >> y;
@@ -77,7 +73,7 @@ void ListaEnemigos::Mueve(float t)
 	}
 }
 
-void ListaEnemigos::Rebote() {
+void ListaEnemigos::Rebote() { //Comprueba enemigo a enemigo si chocan entre ellos y si chocan la función de interacción soluciona
 	for (int i = 0; i < numero; i++) {
 		for (int j = i + 1; j <= numero - 1; j++) {
 			Interaccion::Rebote(*(lista[i]), *(lista[j]));

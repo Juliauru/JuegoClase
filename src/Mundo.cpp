@@ -11,8 +11,6 @@ using namespace std;
 void Mundo::Dibuja()
 {
 	escenario.Reorientar();
-	//aqui es donde hay que poner el codigo de dibujo
-	//dibujo del suelo
 	glEnable(GL_LIGHTING);
 	escenario.Dibuja();
 	personaje.Dibuja();
@@ -25,7 +23,7 @@ void Mundo::Dibuja()
 	glEnable(GL_LIGHTING);
 }
 
-void Mundo::Destruye()
+void Mundo::Destruye()  //Elimina los objetos reservados en memoria
 {
 	escenario.DestruirContenido();
 	cajas.DestruirContenido();
@@ -55,27 +53,23 @@ void Mundo::Mueve() {
 	enemigos.Choque(cajas);
 	enemigos.Eliminar(enemigos.Contacto(cajas),true);
 	SetOportunidad(personaje);
-	//Interaccion::Contacto(personaje, llave);
 	Interaccion::Mover(personaje, llave);
-	//enemigos.Choque(llave);
 	Interaccion::EncuentroFinal(llave, escenario);
 
 }
 void Mundo::Inicializa()
 {
-	//llave.num = 1;
 	nivel = 0;
 	texto = 0;
 	fich = new char[2];
 	strcpy(fich, " ");
 	time(&tiempo);
-	//personaje.SetVida(3);
 	oportunidad = personaje.GetVida();
 	CargarNivel();
 
 }
 
-bool Mundo::GetOportunidad()
+bool Mundo::GetOportunidad() //Si no hay oportunidades el juego se termina
 {
 	if (oportunidad <= 0) {
 		return true;
@@ -85,12 +79,12 @@ bool Mundo::GetOportunidad()
 	}
 }
 
-void Mundo::SetOportunidad(Personaje p)
+void Mundo::SetOportunidad(Personaje p) //Asocia las oportunidades de poder pasarse el juego con las vidas del personaje
 {
 	oportunidad = p.GetVida();
 }
 
-bool Mundo::GetLlave()
+bool Mundo::GetLlave() //Informa de cuando no hay llave en el nivel, lo cuál significaría que se ha superado el nivel con éxito
 {
 	if (llave.ValorLlave() == 0) {
 		return true;
@@ -134,7 +128,7 @@ void Mundo::TeclaEspecial2(unsigned char key) {
 }
 bool Mundo::CargarNivel()
 {
-	if (nivel > 0) {
+	if (nivel > 0) { //Cuando ya haya un nivel dibujado y se termine, al cargar el siguiente nivel entrará aquí para borrar los objetos reservados en memoria
 		escenario.DestruirContenido();
 		cajas.DestruirContenido();
 		enemigos.DestruirContenido();
@@ -148,26 +142,25 @@ bool Mundo::CargarNivel()
 
 	if (nivel == 1)
 	{
-		//EL DE VERDAD
+
 		llave.SetPos(1, 26+(llave.get_LCaract()));
-		//MAÑANA PARA RAQUEL
-		//llave.SetPos(2, 40+ (llave.get_LCaract()));
-		escenario.setFichero("Plataformas.txt"); //Cambiará para cada nivel 	
-		enemigos.CreaEnemigos("EnemigosDesdeElPrincipio.txt");
+		escenario.setFichero("Plataformas.txt");	
+		enemigos.CreaEnemigos("Enemigos1.txt");
 		cajas.CreaCajas("Cajas.txt");
+
 	}
 	if (nivel == 2)
 	{
-		llave.SetPos(1, 26 + (llave.get_LCaract()));
-		escenario.setFichero("Plataformas2.txt"); //Cambiará para cada nivel 	
-		enemigos.CreaEnemigos("EnemigosDesdeElPrincipio2.txt");
+		llave.SetPos(17, 18 + (llave.get_LCaract()));
+		escenario.setFichero("Plataformas2.txt"); 	
+		enemigos.CreaEnemigos("Enemigos2.txt");
 		cajas.CreaCajas("Cajas2.txt");
 	}
 	if (nivel == 3)
 	{
 		llave.SetPos(18, 45 + (llave.get_LCaract()));
-		escenario.setFichero("Plataformas3.txt"); //Cambiará para cada nivel 	
-		enemigos.CreaEnemigos("EnemigosDesdeElPrincipio3.txt");
+		escenario.setFichero("Plataformas3.txt"); 	
+		enemigos.CreaEnemigos("Enemigos3.txt");
 		cajas.CreaCajas("Cajas3.txt");
 	}
 	if (nivel <= 3)
@@ -205,7 +198,7 @@ void Mundo::DibujaFrase(int i, float y, float inc) {
 		ETSIDI::printxy(fich, 5, escenario.p_ojo_y + 1,3.5);
 }
 
-float Mundo::GetEscenarioAltura()
+float Mundo::GetEscenarioAltura() //Devuelve la posición del ojo en y del escenario
 {
 	return escenario.p_ojo_y;
 }

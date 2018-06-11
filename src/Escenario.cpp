@@ -23,12 +23,7 @@ Escenario::Escenario()
 {
 	p_ojo_y = 8.0f;
 	f = 0;
-	/*puerta.x = 6;
-	puerta.y = 42;*/
-	/*Plataforma::set_nplataformas(0);
-	for (int i = 0; i < MAX_PLATAFORMAS; i++) {
-		plat[i] = 0;
-	}*/
+
 }
 void Escenario::setFichero(const char* fich) {
 	int n, l, i = 0;
@@ -62,7 +57,7 @@ void Escenario::setFichero(const char* fich) {
 			fichero >> x;
 			i++;
 		}
-		puerta.x = x + l / 2;
+		puerta.x = x + l / 2; //Asocia las coordenadas de la puerta final con la posicion de la ultima plataforma escrita en el fichero
 		puerta.y = y;
 	}
 	fichero.close();
@@ -78,7 +73,7 @@ void Escenario::Dibuja() {
 	glTexCoord2d(0, 1); glVertex3d(vertices[2].x, vertices[2].y, 0);
 	glTexCoord2d(0, 0); glVertex3d(vertices[3].x, vertices[3].y, 0);
 	glEnd();
-	//NUEVO
+	//Puerta final
 	glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("Textures/Puerta.png").id);
 	glBegin(GL_POLYGON);
 	glColor3f(1, 1, 1);
@@ -86,11 +81,8 @@ void Escenario::Dibuja() {
 	glTexCoord2d(1, 1); glVertex3d(puerta.x+1, puerta.y, 1);
 	glTexCoord2d(0, 1); glVertex3d(puerta.x-1, puerta.y, 1);
 	glTexCoord2d(0, 0); glVertex3d(puerta.x-1, puerta.y+2, 1);
-	//glTexCoord2d(1, 0); glVertex3d(15, 4, 1);
-	//glTexCoord2d(1, 1); glVertex3d(15, 2, 1);
-	//glTexCoord2d(0, 1); glVertex3d(13,2, 1);
-	//glTexCoord2d(0, 0); glVertex3d(13 , 4, 1);
 	glEnd();
+	//Puerta inicial
 	glBegin(GL_POLYGON);
 	glColor3f(1, 1, 1);
 	glTexCoord2d(1, 0); glVertex3d(2, 2, 1);

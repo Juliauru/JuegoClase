@@ -29,7 +29,7 @@ bool Interaccion::Contacto(Personaje &pers, Plataforma p) {
 	}
 	return(Interaccion::ComprobarDistanciaPlataforma(pers, dif, dir));
 	}
-bool Interaccion::Contacto(Movil &m, Plataforma p) { 
+bool Interaccion::Contacto(Movil &m, Plataforma p) { //Comprobación de si un objeto móvil está tocando o no a una plataforma
 	Movil *mov = &m;
 	Vector dir;
 	float dif;
@@ -40,14 +40,14 @@ bool Interaccion::Contacto(Movil &m, Plataforma p) {
 	return(Interaccion::ComprobarDistanciaPlataforma(m,dif, dir));
 }
 
-bool Interaccion::Contacto(Movil &m, Box c) {
+bool Interaccion::Contacto(Movil &m, Box c) { //Comprobación de si un objeto móvil está tocando o no una caja
 	Plataforma p((c.getPosicion().x - (c.Long_caracteristica)), (c.getPosicion().y + (c.Long_caracteristica)), (c.getPosicion().x + (c.Long_caracteristica)), (c.getPosicion().y + (c.Long_caracteristica)));
 	Vector dir;
 	float dif = p.Distancia(m.posicion, &dir) - m.Long_caracteristica;
 	return(Interaccion::ComprobarDistanciaPlataforma(m,dif, dir));
 }
 
-void Interaccion::Contacto(Enemigo &e, ListaCajas c) {
+void Interaccion::Contacto(Enemigo &e, ListaCajas c) { //Comprueba si un enemigo se está tocando con alguna de las cajas del nivel
 	for (int i = 0; i < c.n_cajas; i++) {
 		Interaccion::Contacto(e, *c.lista[i]);
 	}
@@ -55,7 +55,7 @@ void Interaccion::Contacto(Enemigo &e, ListaCajas c) {
 
 
 
-void Interaccion::Rebote(Enemigo & e, Enemigo & e1) //Intentos fallidos
+void Interaccion::Rebote(Enemigo & e, Enemigo & e1) //Resolución del encuentro entre dos enemigos
 {
 	if (e.posicion.y == e1.posicion.y) {
 		Vector dir;
@@ -136,7 +136,7 @@ void Interaccion::Mover(Personaje &p, Transportable &c) {
 	}
 }
 
-void Interaccion::Mover(Transportable &caja1, Transportable &caja2, Personaje &p) //Se han quitado los /2, no compila por eso 
+void Interaccion::Mover(Transportable &caja1, Transportable &caja2, Personaje &p)
 {
 	bool t = Tocando(p, caja1);
 	bool s = Tocando(p, caja2);
@@ -170,7 +170,7 @@ void Interaccion::Mover(Transportable &caja1, Transportable &caja2, Personaje &p
 		}
 	}
 }
-bool Interaccion::Colision(Enemigo e, Personaje p)
+bool Interaccion::Colision(Enemigo e, Personaje p) //Si el personaje salta sobre el enemigo suma puntuación y además devuelve un true para poder utilizar en una función para eliminar el enemigo
 {
 	if (p.posicion.x <= (e.posicion.x + p.Long_caracteristica) && p.posicion.x >= (e.posicion.x - p.Long_caracteristica) && p.posicion.y <= (e.posicion.y + e.Long_caracteristica + p.Long_caracteristica)&& p.posicion.y > (e.posicion.y + e.Long_caracteristica + p.Long_caracteristica/2)) {
 		Personaje::puntuacion = Personaje::puntuacion + 100;
@@ -191,7 +191,7 @@ bool Interaccion::Choque(ListaCajas c, Enemigo &e)
 	return false;
 }
 
-void Interaccion::Coger(Personaje &p, Transportable &c) {
+void Interaccion::Coger(Personaje &p, Transportable &c) { //Realiza la acción de coger un objeto movil transportable
 	bool t = Tocando(p, c);
 	if (t == true && fabsf(p.velocidad.y)==0) {
 		c.CambiaEstado();
