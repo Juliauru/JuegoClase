@@ -4,14 +4,11 @@
 #include <iostream>
 #include <fstream>
 
-
+//Generalización de las funciones individuales para un conjunto de cajas
 using namespace std;
 ListaCajas::ListaCajas() :Box({0.0f,0.0f})
 {
 	n_cajas = 0;
-	/*for (int i = 0; i < CAJASMAX; i++) {
-		lista[i] = 0;
-	}*/
 }
 	
 
@@ -33,15 +30,10 @@ void ListaCajas::CreaCajas(const char *fich)
 	strcpy(f, fich);
 	int n, i = 0;
 	float x, y;
-	ifstream fichero(f); //"Cajas.txt"
+	ifstream fichero(f);
 	if (!fichero)
 		cout << "No se puede abrir el fichero" << endl;
 	else {
-		/*while (!fichero.eof()) {
-			fichero >> x;
-			fichero >> y;
-			n++;
-		}*/ ///Si en vez de tener que meter numero de cajas quiero que cuente el numero de lineas del fichero NO ESTA BIEN IMPLEMENTADO
 		fichero >> n;
 		if (n > CAJASMAX) {
 			cout << "Error" << endl;
@@ -56,11 +48,6 @@ void ListaCajas::CreaCajas(const char *fich)
 			lista[i] = new Box(aux);
 			i++;
 		}
-		/*if (i < n_cajas) {
-			for (i; i < n_cajas; i++) {
-				lista[i] = 0;
-			}
-		}*/ //IDEA si se reservan más memorias que numero de plataformas existan, poner ese puntero a 0 para que no se ejecute nada raro
 	}
 	fichero.close();
 }

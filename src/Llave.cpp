@@ -26,7 +26,7 @@ void Llave::Dibuja()
 	sprite.draw();
 	glPopMatrix();
 }
-void Llave::InicioValor()
+void Llave::InicioValor() //Valor que depende del nivel
 {
 	num = 1;
 }

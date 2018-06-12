@@ -36,11 +36,11 @@ void Enemigo::Dibuja()
 
 }
 
-void Enemigo::Rebote_escenario(float &posOJO, float xmax, float xmin) {
+void Enemigo::Rebote_escenario(float &posOJO, float xmax, float xmin) { //Función polimórfica que se utiliza dentro de la clase Interacción
 	if (posicion.x >= xmax) velocidad.x = -velocidad.x;
 	if (posicion.x <= xmin) velocidad.x = -velocidad.x;
 }
-float Enemigo::Rebote_plat(float dis, float xmax, float xmin) {
+float Enemigo::Rebote_plat(float dis, float xmax, float xmin) {//Función polimórfica que se utiliza dentro de la clase Interacción
 	float dif;
 	dif=Movil::Rebote_plat(dis,xmax,xmin);
 	if (dif <= 0.0f)

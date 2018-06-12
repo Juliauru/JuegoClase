@@ -10,7 +10,7 @@ Transportable::~Transportable()
 {
 }
 
-void Transportable::CambiaEstado()
+void Transportable::CambiaEstado() //Cambia de estar libre a estar controlada por el personaje y al revés
 {
 		if (trans == true) trans = false;
 		else trans = true;

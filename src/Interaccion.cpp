@@ -10,7 +10,8 @@ Interaccion::Interaccion()
 Interaccion::~Interaccion()
 {
 }
-bool Interaccion::Contacto(Personaje &pers, Plataforma p) { 
+bool Interaccion::Contacto(Personaje &pers, Plataforma p) {  //Función que relaciona el choque del personaje con la plataforma, no se utliza polimorfismo en su interior, por que depende de las dimensiones de lo que lleve
+	//Esto se muestra en el bool transportando
 	Vector dir;
 	float dis = p.Distancia(pers.posicion, &dir);
 	float dif;
@@ -29,7 +30,7 @@ bool Interaccion::Contacto(Personaje &pers, Plataforma p) {
 	}
 	return(Interaccion::ComprobarDistanciaPlataforma(pers, dif, dir));
 	}
-bool Interaccion::Contacto(Movil &m, Plataforma p) { //Comprobación de si un objeto móvil está tocando o no a una plataforma
+bool Interaccion::Contacto(Movil &m, Plataforma p) { //Comprobación de si un objeto móvil está tocando o no a una plataforma y actuación en consecuencia
 	Movil *mov = &m;
 	Vector dir;
 	float dif;
@@ -93,8 +94,7 @@ void Interaccion::Rebote(Enemigo & e, Enemigo & e1) //Resolución del encuentro e
 
 	}
 }
-
-void Interaccion::Rebote(Personaje  &p, Enemigo &e,ListaCajas c,Llave &llave)
+void Interaccion::Rebote(Personaje  &p, Enemigo &e,ListaCajas c,Llave &llave) //Muerte del personaje, dejando lo que se transporte en la posicion que estaba y restando una vida 
 {
 	if ((p.posicion.x + (p.Long_caracteristica) > e.posicion.x - e.Long_caracteristica) && (p.posicion.y - (p.Long_caracteristica) >= e.posicion.y - e.Long_caracteristica) && (p.posicion.y - (p.Long_caracteristica) < e.posicion.y) && (p.posicion.x - (p.Long_caracteristica) < e.posicion.x + e.Long_caracteristica)) {
 		c.Coger(p);
@@ -106,7 +106,7 @@ void Interaccion::Rebote(Personaje  &p, Enemigo &e,ListaCajas c,Llave &llave)
 	}
 }
 
-void Interaccion::Rebote(Movil &m, Escenario &e) 
+void Interaccion::Rebote(Movil &m, Escenario &e) //Rebote de cualquier objeto con el escenario (limites del juego)
 {
 	Movil *mov=&m;
 	float xmin = e.limites[3].posicion.x+ m.Long_caracteristica;
@@ -114,7 +114,7 @@ void Interaccion::Rebote(Movil &m, Escenario &e)
 	mov->Rebote_escenario(e.p_ojo_y, xmax, xmin);	
 }
 
-void Interaccion::Mover(Personaje &p, Transportable &c) {
+void Interaccion::Mover(Personaje &p, Transportable &c) { //Movimiento de una caja o llave con el personaje cuando se está transportando
 	Transportable *punt=&c;
 	Vector dir;
 	float dist = p.Distancia(c.posicion, &dir);	
@@ -132,7 +132,7 @@ void Interaccion::Mover(Personaje &p, Transportable &c) {
 	}
 }
 
-void Interaccion::Mover(Transportable &caja1, Transportable &caja2, Personaje &p)
+void Interaccion::Mover(Transportable &caja1, Transportable &caja2, Personaje &p) //Movimiento consecutivo de dos cajas al estar en contacto y ser una de ellas empujada por el personaje
 {
 	bool t = Tocando(p, caja1);
 	bool s = Tocando(p, caja2);
@@ -169,13 +169,13 @@ void Interaccion::Mover(Transportable &caja1, Transportable &caja2, Personaje &p
 bool Interaccion::Colision(Enemigo e, Personaje p) //Si el personaje salta sobre el enemigo suma puntuación y además devuelve un true para poder utilizar en una función para eliminar el enemigo
 {
 	if (p.posicion.x <= (e.posicion.x + p.Long_caracteristica) && p.posicion.x >= (e.posicion.x - p.Long_caracteristica) && p.posicion.y <= (e.posicion.y + e.Long_caracteristica + p.Long_caracteristica)&& p.posicion.y > (e.posicion.y + e.Long_caracteristica + p.Long_caracteristica/2)) {
-		Personaje::puntuacion = Personaje::puntuacion + 100;
+		Personaje::SetPuntuacion(100, 0);
 		return true;
 	}
 	return false;
 }
 
-bool Interaccion::Choque(ListaCajas c, Enemigo &e)
+bool Interaccion::Choque(ListaCajas c, Enemigo &e) // Evita que los enemigos se queden atrapados dentro de las cajas
 {
 	for (int i = 0; i < c.n_cajas; i++) {
 		float dist = fabsf(c.lista[i]->posicion.x - e.posicion.x);
@@ -198,7 +198,7 @@ void Interaccion::Coger(Personaje &p, Transportable &c) { //Realiza la acción de
 	}
 }
 
-bool Interaccion::Tocando(Personaje &p, Movil &m) { 
+bool Interaccion::Tocando(Personaje &p, Movil &m) {  //Devuelve si existe contacto entre un personaje y cualquier otro objeto movil
 	Vector dir;
 	float dist = p.Distancia(m.posicion, &dir);
 	float r = p.Long_caracteristica + m.Long_caracteristica;
@@ -206,7 +206,7 @@ bool Interaccion::Tocando(Personaje &p, Movil &m) {
 		return true;
 	return false;
 }
-bool Interaccion::ComprobarDistanciaPlataforma(Movil &m,float dif,Vector dir) {
+bool Interaccion::ComprobarDistanciaPlataforma(Movil &m,float dif,Vector dir) { //Distancia
 	if (dif <= 0.0f) {
 		if (m.velocidad.y <= 0) {
 			m.velocidad.y = 0;
@@ -221,7 +221,7 @@ bool Interaccion::ComprobarDistanciaPlataforma(Movil &m,float dif,Vector dir) {
 	}
 	return false;
 }
-bool Interaccion::Colision(Enemigo &e, Transportable &c)
+bool Interaccion::Colision(Enemigo &e, Transportable &c) // Evita que los enemigos se queden atrapados dentro de las cajas
 {
 	float dist;
 	float r;
@@ -237,7 +237,7 @@ bool Interaccion::Colision(Enemigo &e, Transportable &c)
 		}
 		return false;
 	}
-void Interaccion::EncuentroFinal(Llave & l, Escenario e)
+void Interaccion::EncuentroFinal(Llave & l, Escenario e) //Fin del nivel, cuando la llave está en la puerta
 {
 	if (l.posicion.x<e.puerta.x + 0.5 && l.posicion.x>e.puerta.x - 0.5&&l.posicion.y >= e.puerta.y&&l.posicion.y < e.puerta.y+1.5){
 		l.num = 0;

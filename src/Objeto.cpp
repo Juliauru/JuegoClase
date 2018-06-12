@@ -1,7 +1,5 @@
 #include "Objeto.h"
 
-
-
 Objeto::Objeto(Vector v):posicion(v){}
 Objeto::~Objeto()
 {

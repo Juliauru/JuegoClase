@@ -41,7 +41,7 @@ void Box::Dibuja()
 	glEnable(GL_LIGHT0);
 	glEnable(GL_LIGHTING);
 }
-void Box::Moviendo(float x, float y, float l) {
+void Box::Moviendo(float x, float y, float l) { //Función polimórfica que se utiliza dentro de la clase interacción
 	if (posicion.x > x) {
 		posicion.x = x + l + Long_caracteristica;
 		posicion.y = y;

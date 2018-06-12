@@ -5,7 +5,7 @@
 class ListaCajas:public Box
 {
 private:
-	char *f;
+	char *f; //Fichero desde el que se leen las posiciones iniciales
 	int n_cajas;
 	Box *lista[CAJASMAX];
 public:

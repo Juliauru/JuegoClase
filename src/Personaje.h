@@ -4,27 +4,27 @@
 #include "Constantes.h"
 #include "ETSIDI.h"
 using ETSIDI::Sprite;
-class Personaje:public Movil
+class Personaje :public Movil
 {
 private:
-	Sprite *sVida[3];
+	Sprite * sVida[3];
 	//Longitud característica radio esfera, hasta que tengamos una altura, luego cambiar
 	static int puntuacion;
 	static int vida;
-	bool transportando;	
+	bool transportando;
 	ETSIDI::SpriteSequence pers;
-public:	
+public:
 	Personaje();
-	~Personaje();	
+	~Personaje();
 	void Dibuja();
-	void DibujaVidas(float y,float inc);
+	void DibujaVidas(float y, float inc);
 	void Salto();
-	static int GetVida() {return vida;}
+	static int GetVida() { return vida; }
 	static int GetPuntuacion() { return puntuacion; }
-	void SetVida(int num) {vida = num;}
+	static void SetPuntuacion(int suma, bool poner_cero);
+	static void SetVida(int num) { vida = num; }
 	void CambiaEstado();
 	void Rebote_escenario(float &posOJO, float xmax, float xmin);
 	friend class Interaccion;
-	friend class EnemigoD;
 };
 

@@ -1,5 +1,5 @@
 #include "Tono.h"
-
+//Ya no es util, pero existe por si no se meten texturas
 
 
 Tono::Tono()

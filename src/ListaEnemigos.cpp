@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fstream>
 using namespace std;
+//Generalización de las funciones individuales para el conjunto de enemigos
 ListaEnemigos::ListaEnemigos():Enemigo({0.0f,0.0f})
 {
 	numero = 0;

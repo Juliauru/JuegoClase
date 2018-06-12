@@ -32,7 +32,7 @@ void Escenario::setFichero(const char* fich) {
 	char caracter2[10];
 	f = new char[strlen(fich)];
 	strcpy(f, fich);
-	ifstream fichero(f);//"Plataformas.txt"
+	ifstream fichero(f);
 	if (!fichero)
 		cout << "No se puede abrir el fichero" << endl;
 	else {

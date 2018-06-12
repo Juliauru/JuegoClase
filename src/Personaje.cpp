@@ -40,14 +40,10 @@ void Personaje::Dibuja()
 	if (velocidad.y != 0) {
 		pers.setState(2);
 	}
-	/*glColor3b(120, 40, 30);
-	glTranslatef(posicion.x, posicion.y, 1.5);
-	glutSolidSphere((Long_caracteristica), 20, 30);
-	glTranslatef(-posicion.x, -posicion.y, -1.5);*/
+
 }
-void Personaje::DibujaVidas(float y,float inc)
+void Personaje::DibujaVidas(float y,float inc) //Dibuja por pantalla los Sprites de las vidas en forma de corazón y los puntos
 {
-	//sVida= new Sprite("Textures/vida.png");
 	float l = 1.5, plus = inc-ALTURA+0.5;
 	for (int i = 0; i < vida; i++) {
 		sVida[i]->setCenter(((TAMANIO / 3) + l), (((int)y / 3) + plus)-1);
@@ -67,17 +63,17 @@ void Personaje::DibujaVidas(float y,float inc)
 	ETSIDI::printxy(punt, 19, (((int)y / 3) + plus) - 0.5, 3.5);
 }
 
-void Personaje::Salto() { //Poner límtes al salto
+void Personaje::Salto() { //Salto del personaje
 	if (fabsf(velocidad.y) < 0.1 && velocidad.y >= 0) {
 		vinicial = velocidad.y = POTENCIA_SALTO;
 		posinicial = posicion.y;
 	}
 }
-void Personaje::CambiaEstado() {
+void Personaje::CambiaEstado() { //Cambia de llevar algo a no llevarlo
 	if (transportando == true) transportando = false;
 	else transportando = true;
 }
-void Personaje::Rebote_escenario(float &posOJO, float xmax, float xmin) {
+void Personaje::Rebote_escenario(float &posOJO, float xmax, float xmin) { //Función virtual llamada en Interacción
 	Movil::Rebote_escenario(posOJO, xmax, xmin);
 	if (posicion.y > (ALTURA + posOJO))
 		if ( 50 >= (ALTURA * 2 + posOJO))
@@ -89,5 +85,10 @@ void Personaje::Rebote_escenario(float &posOJO, float xmax, float xmin) {
 			posOJO = posOJO - ALTURA;
 		else
 			posOJO = ALTURA;
+}
+void Personaje::SetPuntuacion(int suma, bool poner_cero) {
+	puntuacion += suma;
+	if (poner_cero == true)
+		puntuacion = 0;
 }
 

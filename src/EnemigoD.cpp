@@ -16,18 +16,18 @@ EnemigoD::EnemigoD(Vector pos) :Enemigo(pos), en2("Textures/Enemigo_burned2.png"
 
 
 EnemigoD::~EnemigoD(){}
-int EnemigoD::EnemEliminado() {
+int EnemigoD::EnemEliminado() { //Función polimórfica que hace que este tipo de enemigos sea especial, y da ventajas cuando lo matas
 	int i = lanzaDado(4, 1);
-	if (i == 1 && Personaje::vida < 3) {
-		Personaje::vida++;
+	if (i == 1 && Personaje::GetVida() < 3) {
+		Personaje::SetVida(Personaje::GetVida() + 1);
 	}
-	else if (i == 1 && Personaje::vida >= 3) {
+	else if (i == 1 && Personaje::GetVida() >= 3) {
 		i = 4;
 	}
 	if (i == 2) {
-		Personaje::puntuacion = Personaje::puntuacion + 500;
+		Personaje::SetPuntuacion(500, 0);
 	}
-	return i;// 1-vida, 2-puntos, 3-nada
+	return i;// 1-vida, 2-puntos, 3-nada, 4-Todas las vidas cargadas
 }
 void EnemigoD::Dibuja(){
 	glPushMatrix();

@@ -28,6 +28,7 @@ void Mundo::Destruye()  //Elimina los objetos reservados en memoria
 	escenario.DestruirContenido();
 	cajas.DestruirContenido();
 	enemigos.DestruirContenido();
+	Personaje::SetPuntuacion(0, 1);
 }
 
 void Mundo::Mueve() {
@@ -49,7 +50,7 @@ void Mundo::Mueve() {
 	cajas.Contacto(personaje);
 	cajas.Mover(personaje,llave);
 	cajas.Rebote(escenario);
-	texto=enemigos.Eliminar(enemigos.Colision(personaje));
+	texto=enemigos.Eliminar(enemigos.Colision(personaje)); //La función enemigos devuelve un int que corresponde al mensaje que hay que mostrar por pantalla.
 	enemigos.Choque(cajas);
 	enemigos.Eliminar(enemigos.Contacto(cajas),true);
 	SetOportunidad(personaje);
@@ -100,7 +101,7 @@ void Mundo::Tecla(unsigned char key)
 	case 32:
 		personaje.Salto();
 		break;
-	case 'v':
+	case 'v': //Atajo para facilitar la corrección del profesor, pero que después será eliminado
 		switch (nivel) {
 		case 1:
 			personaje.SetPos(4, 44);
@@ -116,7 +117,7 @@ void Mundo::Tecla(unsigned char key)
 		break;
 	}
 }
-void Mundo::TeclaEspecial(bool izq, bool der, bool coge)
+void Mundo::TeclaEspecial(bool izq, bool der, bool coge) //Se utilizan flags para que sea más rapida la ejecución del cóigo
 {
 	if (izq == true) personaje.getVelocidad().x = -2.5;
 	if (der == true) personaje.getVelocidad().x = 2.5;
@@ -178,7 +179,7 @@ bool Mundo::CargarNivel()
 		return true;
 	return false;
 }
-void Mundo::DibujaFrase(int i, float y, float inc) {
+void Mundo::DibujaFrase(int i, float y, float inc) { //Escribe encima del juego un pequeño mensaje, sobre lo que ha ocurrido al matar a un enemigo especial
 
 	ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
 	switch (i) {

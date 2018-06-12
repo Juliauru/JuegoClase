@@ -15,7 +15,7 @@ Movil::Movil(Vector pos, Vector vel, Vector ac, float l) :Objeto(pos),
 Movil::~Movil()
 {
 }
-void Movil::Mueve(float t) {
+void Movil::Mueve(float t) { //Movimiento general de todos los objetos móviles
 	if(vinicial*vinicial + 2 * aceleracion.y*(posicion.y - posinicial)>0){ 
 		velocidad.y = sqrt(vinicial*vinicial + 2 * aceleracion.y*(posicion.y - posinicial));
 		posicion = posicion + velocidad*t;		
@@ -50,7 +50,7 @@ float Movil::Distancia(Vector centro, Vector *direccion) {
 	*direccion = dir;
 	return distancia;
 }
-void Movil::Rebote_escenario(float &posOJO, float xmax, float xmin) {
+void Movil::Rebote_escenario(float &posOJO, float xmax, float xmin) { //Funciones polimórficas de más alto nivel
 	if (posicion.x >= xmax) posicion.x = xmax;
 	if (posicion.x <= xmin) posicion.x = xmin;
 }

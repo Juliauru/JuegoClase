@@ -10,7 +10,7 @@
 class ListaEnemigos :public Enemigo
 {
 private:
-	char *f;
+	char *f; //Fichero desde el que se leen las posiciones iniciales
 	Enemigo *lista[MAX_ENEMIGOS];
 	int numero;
 
