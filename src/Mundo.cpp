@@ -101,7 +101,18 @@ void Mundo::Tecla(unsigned char key)
 		personaje.Salto();
 		break;
 	case 'v':
-		personaje.SetPos(4, 44);
+		switch (nivel) {
+		case 1:
+			personaje.SetPos(4, 44);
+			break;
+		case 2:
+			personaje.SetPos(5, 43);
+			break;
+		case 3:
+			personaje.SetPos(15, 46);
+			break;
+		}
+		
 		break;
 	}
 }

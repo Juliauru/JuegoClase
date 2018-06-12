@@ -50,6 +50,7 @@ void CoordinadorPang::Tecla(unsigned char key)
 		}
 		if (key == 's'|| key == 'S')
 			exit(0);
+	
 		
 	}
 	else if (estado == FIN)
@@ -57,9 +58,7 @@ void CoordinadorPang::Tecla(unsigned char key)
 		if (key == 'c'|| key == 'C')
 	
 			estado = INICIO;
-			
-			
-			
+			mundo.Destruye();	
 	}
 	else if(estado == PAUSE) {
 		if (key == 'p' || key == 'P') {
@@ -128,7 +127,6 @@ void CoordinadorPang::Dibuja()
 	}
 	else if (estado == GAMEOVER)
 	{
-		//mundo.Dibuja();
 		gluLookAt(0, 7.5, 30, // posicion del ojo
 			0.0, 7.5, 0.0, // hacia que punto mira (0,7.5,0)
 			0.0, 1.0, 0.0); // definimos hacia arriba (eje Y)
@@ -151,10 +149,23 @@ void CoordinadorPang::Dibuja()
 	}
 	else if (estado == FIN)
 	{
-		mundo.Dibuja();
-		ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
-		ETSIDI::printxy("ENHORABUENA, ¡Has triunfado!", 5, 10);
-		ETSIDI::printxy("Pulsa -C- para continuar", 5, 9);
+		//CODIGO PARA PINTAR UNA PANTALLA NEGRA CON LETRAS
+		gluLookAt(0, 7.5, 30, // posicion del ojo
+			0.0, 7.5, 0.0, // hacia que punto mira (0,7.5,0)
+			0.0, 1.0, 0.0); // definimos hacia arriba (eje Y)
+		glEnable(GL_TEXTURE_2D);
+		glDisable(GL_LIGHTING);
+		glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("Textures/finJuego.png").id);
+		glBegin(GL_POLYGON);
+		glColor3f(1, 1, 1);
+		glTexCoord2d(1, 0); glVertex3d(15, 19, 1);
+		glTexCoord2d(1, 1); glVertex3d(15, -4, 1);
+		glTexCoord2d(0, 1); glVertex3d(-15, -4, 1);
+		glTexCoord2d(0, 0); glVertex3d(-15, 19, 1);
+		glEnd();
+		glDisable(GL_TEXTURE_2D);
+		glEnable(GL_LIGHT0);
+		glEnable(GL_LIGHTING);
 	}
 	else if (estado == PAUSE)
 	{
