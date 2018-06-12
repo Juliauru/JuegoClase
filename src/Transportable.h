@@ -10,7 +10,7 @@ public:
 	Transportable(Vector pos, float l);
 	~Transportable();
 	void CambiaEstado();
-	virtual void Moviendo(float x, float y, float l) {};
+	virtual void Moviendo(float x, float y, float l)=0;
 	friend class Interaccion;
 
 };

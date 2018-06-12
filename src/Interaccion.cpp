@@ -96,17 +96,13 @@ void Interaccion::Rebote(Enemigo & e, Enemigo & e1) //Resolución del encuentro e
 
 void Interaccion::Rebote(Personaje  &p, Enemigo &e,ListaCajas c,Llave &llave)
 {
-	//bool t=Interaccion::Tocando(p, e);
 	if ((p.posicion.x + (p.Long_caracteristica) > e.posicion.x - e.Long_caracteristica) && (p.posicion.y - (p.Long_caracteristica) >= e.posicion.y - e.Long_caracteristica) && (p.posicion.y - (p.Long_caracteristica) < e.posicion.y) && (p.posicion.x - (p.Long_caracteristica) < e.posicion.x + e.Long_caracteristica)) {
-	//c.Coger(p);
-		
 		c.Coger(p);
 		p.transportando = false;
-		llave.trans = false;
-	//Interaccion::Coger(p,llave);
+		llave.trans = false;	
 	p.vida -= 1;
 	p.posicion.x = p.Long_caracteristica;
-	p.posicion.y = p.Long_caracteristica;
+	p.posicion.y = 2.5f;
 	}
 }
 
@@ -193,7 +189,7 @@ bool Interaccion::Choque(ListaCajas c, Enemigo &e)
 
 void Interaccion::Coger(Personaje &p, Transportable &c) { //Realiza la acción de coger un objeto movil transportable
 	bool t = Tocando(p, c);
-	if (t == true && fabsf(p.velocidad.y)==0) {
+	if (t == true && fabsf(p.velocidad.y)<0.02f) {
 		c.CambiaEstado();
 		p.CambiaEstado();
 		if (c.trans == false) {

@@ -48,7 +48,7 @@ void Personaje::Dibuja()
 void Personaje::DibujaVidas(float y,float inc)
 {
 	//sVida= new Sprite("Textures/vida.png");
-	float l = 1.5, plus = inc-ALTURA-0.5;
+	float l = 1.5, plus = inc-ALTURA+0.5;
 	for (int i = 0; i < vida; i++) {
 		sVida[i]->setCenter(((TAMANIO / 3) + l), (((int)y / 3) + plus)-1);
 		sVida[i]->setPos(((TAMANIO / 3) + l-0.5) , (((int)y / 3) + plus)-1.5);
